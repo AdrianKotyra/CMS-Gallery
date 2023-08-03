@@ -96,23 +96,33 @@ function select_and_display_categories_posts() {
         echo "<td>$post_tags</td>";
         echo "<td>$post_content</td>";
         echo "<td>$post_date</td>";
+        echo "<td><a href='post.php?source=edit_posts&post_id={$post_id}'>EDIT</a></td>";
+        echo "<td><a href='post.php?delete_post={$post_id}'>DELETE</a></td>";
         echo"</tr>";
 
-
+        // DELETE posts
+        if(isset($_GET["delete_post"])) {
+            $post_to_be_deleted = $_GET["delete_post"];
+            $query = "DELETE from posts WHERE post_id={$post_to_be_deleted}";
+            $delete_post = mysqli_query($connection, $query);
+            header("location:post.php");
+        }
 
 
 
     }
-
-
-
-
-
-
-
-
-
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 

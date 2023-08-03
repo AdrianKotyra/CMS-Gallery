@@ -29,6 +29,9 @@
             <!-- /.row -->
 
             </div>
+
+
+
             <?php
 
                 if(isset($_GET["source"])) {
@@ -43,8 +46,8 @@
                     include "./includes/add_posts.php";
                     break;
 
-                    case '37';
-                    echo "37";
+                    case 'edit_posts';
+                    include "./includes/edit_posts.php";
                     break;
 
 
