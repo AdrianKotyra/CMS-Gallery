@@ -86,6 +86,9 @@ function select_and_display_categories_posts() {
         $post_tags = $row["post_tags"];
         $post_status = $row["post_status"];
 
+
+        
+
         echo"<tr>";
         echo "<td>$post_id</td>";
         echo "<td>$post_author</td>";
@@ -112,6 +115,9 @@ function select_and_display_categories_posts() {
 
     }
 }
+
+
+
 
 
 
