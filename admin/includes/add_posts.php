@@ -17,28 +17,35 @@
     </div> -->
 
     <div class="form-group">
-        <label for="post_category">Category</label>  <br>
-            <select name="post_category" id="">
-                <?php
-                    global $connection;
+        <label for="title">Post Title</label>
+        <input type="text" class="form-control" name="title">
+    </div>
 
-                    $query ="SELECT * from categories";
-                    $select_category = mysqli_query($connection, $query);
-                    while($row = mysqli_fetch_assoc($select_category)) {
-                        $category_title = $row["category_title"];
-                        $category_id = $row["category_id"];
+    <div class="form-group">
+       <label for="category">Category</label>
+       <select name="post_category" id="">
 
+            <?php
 
-                        echo "<option value='$category_id'>{$category_title}</option>";
-                    }
+                $query = "SELECT * FROM categories";
+                $select_categories = mysqli_query($connection,$query);
 
 
 
-                ?>
+                while($row = mysqli_fetch_assoc($select_categories )) {
+                    $cat_id = $row['category_id'];
+                    $cat_title = $row['category_title'];
 
 
+                    echo "<option value='$cat_id'>{$cat_title}</option>";
 
-            </select>
+
+                }
+
+            ?>
+
+
+       </select>
 
     </div>
 

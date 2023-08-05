@@ -87,13 +87,26 @@ function select_and_display_categories_posts() {
         $post_status = $row["post_status"];
 
 
-        
+
 
         echo"<tr>";
         echo "<td>$post_id</td>";
         echo "<td>$post_author</td>";
         echo "<td>$post_title</td>";
-        echo "<td>$post_category_id</td>";
+
+
+        // SELECT some categories using post id
+        global $connection;
+        $query = "SELECT * FROM categories where category_id={$post_category_id}";
+        $categories = mysqli_query($connection, $query);
+        while($row = mysqli_fetch_assoc($categories)) {
+            $cat_title = $row["category_title"];
+
+
+
+        }
+        
+        echo "<td>{$cat_title}</td>";
         echo "<td>$$post_status</td>";
         echo "<td><img width=100 height=100 src='../img/$post_image'></td>";
         echo "<td>$post_tags</td>";
