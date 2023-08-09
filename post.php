@@ -62,35 +62,94 @@
 
             </div>          <!-- Blog Comments -->
             <?php include "includes/sidebar.php" ?>
-     
+
         </div>
         <hr>
 
         <!-- Posted Comments -->
 
-        <!-- Comment -->
+
+        <?php
+            if(isset($_POST["create_comment"])) {
+
+                $comment_id_unique = $_GET["p_id"];
+                $comment_content = $_POST["comment_content"];
+                $comment_author = $_POST["comment_author"];
+                $comment_email = $_POST["comment_email"];
+                $query = "INSERT INTO `comments`(`comment_post_id`, `comment_author`, `comment_email`, `comment_content`, `comment_date`) VALUES ('$comment_id_unique','$comment_author', '$comment_email' , '$comment_content' , now())";
+                $create_comment_query = mysqli_query($connection, $query);
+
+
+
+
+
+            }
+
+
+        ?>
+
+
+
+        <!-- Comment form-->
         <div class="well">
             <h4>Leave a Comment:</h4>
-            <form role="form">
+            <form method="POST" role="form">
                 <div class="form-group">
-                    <textarea class="form-control" rows="3"></textarea>
+                    <label for="comment_author">Author</label>
+                    <input type="text" class="form-control" name="comment_author">
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <div class="form-group">
+                    <label for="comment_email">Email</label>
+                    <input type="text" class="form-control" name="comment_email">
+                </div>
+                <div class="form-group">
+                    <textarea name="comment_content" class="form-control" rows="3"></textarea>
+                </div>
+                <button type="submit" name="create_comment" class="btn btn-primary">Submit</button>
             </form>
         </div>
-        <div class="media">
-            <a class="pull-left" href="#">
-                <img class="media-object" src="http://placehold.it/64x64" alt="">
-            </a>
-            <div class="media-body">
-                <h4 class="media-heading">Start Bootstrap
-                    <small>August 25, 2014 at 9:30 PM</small>
-                </h4>
-                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-            </div>
-        </div>
 
-        <!-- Comment -->
+
+
+        <!-- SELECT COMMENTS -->
+        <?php
+            if(isset($_GET["p_id"])) {
+                $post_id = $_GET["p_id"];
+                $query = "SELECT * FROM comments where comment_id = {$post_id}";
+
+                $select_comment_query = mysqli_query($connection, $query);
+                while($row = mysqli_fetch_assoc($select_comment_query)) {
+                    $comment_author_data = $row["comment_author"];
+                    $comment_date_data = $row["comment_date"];
+                    $comment_content_data = $row["comment_content"];
+
+
+
+
+                    ?>
+
+
+
+            <div class="media">
+                        <a class="pull-left" href="#">
+                            <img class="media-object" src="http://placehold.it/64x64" alt="">
+                        </a>
+                        <div class="media-body">
+                            <h4 class="media-heading"> <?php echo "$comment_author_data"?>
+                                <small><?php echo "$comment_date_data"?></small>
+                            </h4>
+                            <?php echo "$comment_content_data"?>
+                        </div>
+            </div>
+
+
+        <?php } }?>
+
+
+
+
+
+        <!-- Comment to be displayed-->
         <div class="media">
             <a class="pull-left" href="#">
                 <img class="media-object" src="http://placehold.it/64x64" alt="">

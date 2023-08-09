@@ -71,6 +71,69 @@ function select_categories() {
 
 }
 
+
+function select_and_display_comments() {
+    global $connection;
+
+    $query = "SELECT * from comments";
+    $select_comment_query = mysqli_query($connection, $query);
+    while($row = mysqli_fetch_assoc($select_comment_query)) {
+        $comment_id = $row["comment_id"];
+        $comment_post_id = $row["comment_post_id"];
+        $comment_author = $row["comment_author"];
+        $comment_email = $row["comment_email"];
+        $comment_content = $row["comment_content"];
+        $comment_status = $row["comment_status"];
+        $comment_date = $row["comment_date"];
+        $comment_id_unique = $row["comment_post_id"];
+
+
+
+        echo"<tr>";
+        echo "<td>$comment_id</td>";
+        echo "<td>$comment_author</td>";
+        echo "<td>$comment_content</td>";
+
+
+
+        echo "<td>{$comment_email}</td>";
+        if(isset($_GET["source"])) {
+            $source = $_GET["source"];
+
+        }
+        else {
+            $source = "";
+        }
+        switch($source) {
+            case 'approve';
+            echo  "<td> approved </td>";
+            break;
+
+            case 'unapprove';
+            echo  "<td> unapproved </td>";
+            break;
+
+
+            default:  echo  "<td> awaiting  </td>";
+            break;
+
+
+
+
+        }
+
+        echo "<td><a href='../post.php?p_id=$comment_id_unique'>here</td>";
+
+        echo "<td><a href='comments.php?source=approve&comment_id={$comment_id}'>Approve</a></td>";
+        echo "<td><a href='comments.php?source=unapprove&comment_id={$comment_id}'>Unapprove</a></td>";
+        echo "<td>$comment_date</td>";
+
+        echo "<td><a href='comments.php?source=edit_comment&comment_id={$comment_id}'>EDIT</a></td>";
+        echo "<td><a href='comments.php?delete_comment={$comment_id}'>DELETE</a></td>";
+        echo"</tr>";
+    }}
+
+
 function select_and_display_categories_posts() {
     global $connection;
     $query = "SELECT * from posts";
@@ -105,7 +168,7 @@ function select_and_display_categories_posts() {
 
 
         }
-        
+
         echo "<td>{$cat_title}</td>";
         echo "<td>$$post_status</td>";
         echo "<td><img width=100 height=100 src='../img/$post_image'></td>";
@@ -129,9 +192,18 @@ function select_and_display_categories_posts() {
     }
 }
 
+ // DELETE comments
+function delete_comments() {
+    global $connection;
 
 
-
+    if(isset($_GET["delete_comment"])) {
+        $post_to_be_deleted = $_GET["delete_comment"];
+        $query = "DELETE from comments WHERE comment_id={$post_to_be_deleted}";
+        $delete_comment = mysqli_query($connection, $query);
+        header("location:comments.php");
+    }
+}
 
 
 
