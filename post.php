@@ -110,75 +110,39 @@
         </div>
 
 
-
-        <!-- SELECT COMMENTS -->
         <?php
-            if(isset($_GET["p_id"])) {
-                $post_id = $_GET["p_id"];
-                $query = "SELECT * FROM comments where comment_id = {$post_id}";
-
-                $select_comment_query = mysqli_query($connection, $query);
-                while($row = mysqli_fetch_assoc($select_comment_query)) {
-                    $comment_author_data = $row["comment_author"];
-                    $comment_date_data = $row["comment_date"];
-                    $comment_content_data = $row["comment_content"];
-
-
-
-
-                    ?>
-
-
-
-            <div class="media">
-                        <a class="pull-left" href="#">
-                            <img class="media-object" src="http://placehold.it/64x64" alt="">
-                        </a>
-                        <div class="media-body">
-                            <h4 class="media-heading"> <?php echo "$comment_author_data"?>
-                                <small><?php echo "$comment_date_data"?></small>
-                            </h4>
-                            <?php echo "$comment_content_data"?>
-                        </div>
-            </div>
-
-
-        <?php } }?>
+            $query = "SELECT * from comments where comment_post_id={$post_id} AND comment_status = 'approved' ORDER BY comment_id DESC";
+            $query_select_comments = mysqli_query($connection, $query);
+            while($row = mysqli_fetch_array($query_select_comments)) {
+                $comment_author_data = $row["comment_author"];
+                $comment_date_data = $row["comment_date"];
+                $comment_content_data = $row["comment_content"];
+               
 
 
 
 
 
-        <!-- Comment to be displayed-->
+
+
+        ?>
+        <!-- SELECT COMMENTS -->
+
+
+
+
         <div class="media">
             <a class="pull-left" href="#">
                 <img class="media-object" src="http://placehold.it/64x64" alt="">
             </a>
             <div class="media-body">
-                <h4 class="media-heading">Start Bootstrap
-                    <small>August 25, 2014 at 9:30 PM</small>
+                <h4 class="media-heading"> <?php echo "$comment_author_data"?>
+                    <small><?php echo "$comment_date_data"?></small>
                 </h4>
-                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                <!-- Nested Comment -->
-                <div class="media">
-                    <a class="pull-left" href="#">
-                        <img class="media-object" src="http://placehold.it/64x64" alt="">
-                    </a>
-                    <div class="media-body">
-                        <h4 class="media-heading">Nested Start Bootstrap
-                            <small>August 25, 2014 at 9:30 PM</small>
-                        </h4>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                    </div>
-                </div>
-                <!-- End Nested Comment -->
+                <?php echo "$comment_content_data"?>
             </div>
         </div>
-
-
-
-        <div>
-
+        <?php }?>
 
 
 
@@ -194,23 +158,22 @@
 
 
 
-            <div>
-
-                <!-- Pager -->
-                <ul class="pager">
-                    <li class="previous">
-                        <a href="#">&larr; Older</a>
-                    </li>
-                    <li class="next">
-                        <a href="#">Newer &rarr;</a>
-                    </li>
-                </ul>
-
-            </div>
 
 
-        </div>
-        <!-- /.row -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         <hr>
 

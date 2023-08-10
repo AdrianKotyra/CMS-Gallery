@@ -89,6 +89,7 @@ function select_and_display_comments() {
 
 
 
+
         echo"<tr>";
         echo "<td>$comment_id</td>";
         echo "<td>$comment_author</td>";
@@ -97,35 +98,58 @@ function select_and_display_comments() {
 
 
         echo "<td>{$comment_email}</td>";
-        if(isset($_GET["source"])) {
-            $source = $_GET["source"];
-
-        }
-        else {
-            $source = "";
-        }
-        switch($source) {
-            case 'approve';
-            echo  "<td> approved </td>";
-            break;
-
-            case 'unapprove';
-            echo  "<td> unapproved </td>";
-            break;
-
-
-            default:  echo  "<td> awaiting  </td>";
-            break;
-
-
+        // SELECT POST BY ID AND GET NAME
+        $query_post_id = "SELECT * FROM posts where post_id={$comment_id_unique}";
+        $select_post_query = mysqli_query($connection, $query_post_id);
+        while($row = mysqli_fetch_assoc($select_post_query)) {
+            $post_name = $row["post_title"];
 
 
         }
 
-        echo "<td><a href='../post.php?p_id=$comment_id_unique'>here</td>";
+        // SELECT COMMENT BY ID AND CHANGE STATUS
+        if(isset($_GET["approve"])) {
+            $comment_status_id = $_GET["approve"];
+            $query_update_comment = "UPDATE comments SET comment_status= 'approved' where comment_id={$comment_status_id}";
+            $update_comment_query = mysqli_query($connection, $query_update_comment);
+            header("Location: comments.php");
 
-        echo "<td><a href='comments.php?source=approve&comment_id={$comment_id}'>Approve</a></td>";
-        echo "<td><a href='comments.php?source=unapprove&comment_id={$comment_id}'>Unapprove</a></td>";
+        }
+        if(isset($_GET["unapprove"])) {
+            $comment_status_id = $_GET["unapprove"];
+            $query_update_comment = "UPDATE comments SET comment_status= 'unapproved' where comment_id={$comment_status_id}";
+            $update_comment_query = mysqli_query($connection, $query_update_comment);
+            header("Location: comments.php");
+
+        }
+      
+
+
+        // else {
+        //     $source = "";
+        // }
+        // switch($source) {
+        //     case 'approve';
+        //     echo  "<td> approved </td>";
+        //     break;
+
+        //     case 'unapprove';
+        //     echo  "<td> unapproved </td>";
+        //     break;
+
+
+        //     default:  echo  "<td> awaiting  </td>";
+        //     break;
+
+
+
+
+        // }
+        echo  "<td> $comment_status</td>";
+        echo "<td><a href='../post.php?p_id=$comment_id_unique'>$post_name</td>";
+
+        echo "<td><a href='comments.php?approve={$comment_id}'>Approve</a></td>";
+        echo "<td><a href='comments.php?unapprove={$comment_id}'>Unapprove</a></td>";
         echo "<td>$comment_date</td>";
 
         echo "<td><a href='comments.php?source=edit_comment&comment_id={$comment_id}'>EDIT</a></td>";
