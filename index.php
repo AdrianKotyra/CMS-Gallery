@@ -18,7 +18,7 @@
 
                 <?php
 
-                    $query = "SELECT * FROM `posts`";
+                    $query = "SELECT * FROM posts";
                     $select_posts = mysqli_query($connection, $query);
                     while($row = mysqli_fetch_assoc($select_posts)) {
                         $post_id = $row["post_id"];
@@ -26,15 +26,22 @@
                         $post_author = $row["post_author"];
                         $post_date = $row["post_date"];
                         $post_content = substr($row["post_content"],0, 50);
-                        $post_image =  $row["post_image"]
+                        $post_image =  $row["post_image"];
+                        $post_status =  $row["post_status"];
+
+                        if($post_status !== "published") {
+                            echo "";
+                        }
+                        else {
+
 
                         ?>
 
 
-                        <h1 class="page-header">
+                        <!-- <h1 class="page-header">
                         Page Heading
                             <small>Secondary Text</small>
-                        </h1>
+                        </h1> -->
 
                         <!-- First Blog Post -->
                         <h2>
@@ -57,7 +64,8 @@
 
 
 
-                   <?php } ?>
+
+                    <?php }  }?>
 
 
 

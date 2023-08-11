@@ -16,10 +16,7 @@
         <input type="text" class="form-control" name="Post_Category_Id">
     </div> -->
 
-    <div class="form-group">
-        <label for="title">Post Title</label>
-        <input type="text" class="form-control" name="title">
-    </div>
+
 
     <div class="form-group">
        <label for="category">Category</label>
@@ -57,13 +54,20 @@
         <input type="text" class="form-control" name="post_author">
     </div>
 
-    <div class="form-group">
+    <!-- <div class="form-group">
         <label for="Post_Status">Post Status</label>
         <input type="text" class="form-control" name="Post_Status">
+    </div> -->
+
+
+    <div class="form-group">
+       <label for="Post_Status">Post Status</label>
+       <select name="Post_Status" id="">
+            <option value='published'>published</option>
+            <option value='unpublished'>unpublished</option>
+        </select>
+
     </div>
-
-
-
 
 
 

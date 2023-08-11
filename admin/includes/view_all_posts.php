@@ -11,7 +11,8 @@
                         <th>Status</th>
                         <th>Image</th>
                         <th>Tags</th>
-                        <th>Comments</th>
+                        <th>Comment content</th>
+                        <th>Comment counts</th>
                         <th>Date</th>
                         <th>Delete</th>
                         <th>Edit</th>

@@ -79,6 +79,10 @@
                 $query = "INSERT INTO `comments`(`comment_post_id`, `comment_author`, `comment_email`, `comment_content`, `comment_date`) VALUES ('$comment_id_unique','$comment_author', '$comment_email' , '$comment_content' , now())";
                 $create_comment_query = mysqli_query($connection, $query);
 
+                // select certain post by given id and increment comment count
+                $query_update = "UPDATE posts SET post_comment_count={post_comment_count+1} where post_id = {$comment_id_unique}";
+                $select_post_query = mysqli_query($connection, $query_update);
+
 
 
 
@@ -117,7 +121,7 @@
                 $comment_author_data = $row["comment_author"];
                 $comment_date_data = $row["comment_date"];
                 $comment_content_data = $row["comment_content"];
-               
+
 
 
 

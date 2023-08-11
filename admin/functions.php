@@ -122,7 +122,7 @@ function select_and_display_comments() {
             header("Location: comments.php");
 
         }
-      
+
 
 
         // else {
@@ -172,6 +172,7 @@ function select_and_display_categories_posts() {
         $post_content = $row["post_content"];
         $post_tags = $row["post_tags"];
         $post_status = $row["post_status"];
+        $post_comment_count = $row["post_comment_count"];
 
 
 
@@ -198,6 +199,11 @@ function select_and_display_categories_posts() {
         echo "<td><img width=100 height=100 src='../img/$post_image'></td>";
         echo "<td>$post_tags</td>";
         echo "<td>$post_content</td>";
+
+
+        echo "<td>$post_comment_count</td>";
+
+
         echo "<td>$post_date</td>";
         echo "<td><a href='post.php?source=edit_posts&post_id={$post_id}'>EDIT</a></td>";
         echo "<td><a href='post.php?delete_post={$post_id}'>DELETE</a></td>";
