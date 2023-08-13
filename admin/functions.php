@@ -252,7 +252,7 @@ function select_and_display_users() {
         $user_image = $row["user_image"];
         $user_role = $row["user_role"];
         $user_randSalt = $row["randSalt"];
-
+        $user_status = $row["user_status"];
 
         echo"<tr>";
         echo "<td>$user_id</td>";
@@ -261,17 +261,34 @@ function select_and_display_users() {
         echo "<td>$user_firstname</td>";
         echo "<td>$user_lastname</td>";
         echo "<td>$user_email</td>";
-        echo "<td>$user_image</td>";
+        echo "<td><img width=100 height=100 src='../img/$user_image'></td>";
         echo "<td>$user_role</td>";
-        echo "<td>$user_randSalt</td>";
-        echo "<td><a href='users.php?edit_user={$user_id}'>EDIT</a></td>";
+        if(isset($_GET["approve"])) {
+            $user_status_id = $_GET["approve"];
+            $query_update_user = "UPDATE users SET user_status= 'approved' where user_id={$user_status_id}";
+            $update_user_query = mysqli_query($connection, $query_update_user);
+            header("Location: users.php");
+
+        }
+        if(isset($_GET["unapprove"])) {
+            $user_status_id = $_GET["unapprove"];
+            $query_update_user = "UPDATE users SET user_status= 'unapproved' where user_id={$user_status_id}";
+            $update_user_query = mysqli_query($connection, $query_update_user);
+            header("Location: users.php");
+
+        }
+
+        echo "<td>$user_status</td>";
+        echo "<td><a href='users.php?approve={$user_id}'>approve</a></td>";
+        echo "<td><a href='users.php?unapprove={$user_id}'>unapprove</a></td>";
+        echo "<td><a href='users.php?source=edit_user&user_id={$user_id}'>EDIT</a></td>";
         echo "<td><a href='users.php?delete_user={$user_id}'>DELETE</a></td>";
         echo"</tr>";
 
 
         if(isset($_GET["delete_user"])) {
             $user_to_be_deleted = $_GET["delete_user"];
-            $query = "DELETE from users WHERE user_id={$user_id}";
+            $query = "DELETE from users WHERE user_id={$user_to_be_deleted}";
             $delete_user = mysqli_query($connection, $query);
             header("location:users.php");
         }

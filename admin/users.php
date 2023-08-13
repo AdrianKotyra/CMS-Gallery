@@ -46,7 +46,7 @@
                     include "./includes/add_users.php";
                     break;
 
-                    case 'edit_users';
+                    case 'edit_user';
                     include "./includes/edit_users.php";
                     break;
 
@@ -66,7 +66,7 @@
             ?>
 
             <?php
-               
+
 
 
 

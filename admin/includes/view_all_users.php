@@ -9,7 +9,9 @@
                         <th>Email</th>
                         <th>Image</th>
                         <th>Role</th>
-                        <th>randSalt</th>
+                        <th>Status</th>
+                        <th>Approve</th>
+                        <th>Unaprove</th>
                         <th>Edit</th>
                         <th>Delete</th>
 

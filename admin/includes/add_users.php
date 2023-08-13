@@ -13,7 +13,7 @@
 
     <div class="form-group">
         <label for="user_password">User Password</label>
-        <input type="text" class="form-control" name="user_password">
+        <input type="password" class="form-control" name="user_password">
     </div>
 
 
@@ -43,7 +43,7 @@
 
     <div class="form-group">
        <label for="user_role">User Role</label>
-       <select name="Post_Status" id="">
+       <select name="user_role" id="">
             <option value='Admin'>Admin</option>
             <option value='Subscriber'>Subscriber</option>
         </select>
@@ -96,9 +96,9 @@
         move_uploaded_file($post_image_temp, "../img/$post_image" );
 
 
-        $query = "INSERT INTO users(user_firstname, user_lastname, user_role,user_namee,user_email,user_password) ";
+        $query = "INSERT INTO users(user_firstname, user_lastname, user_role,user_namee,user_email,user_password, user_image) ";
 
-        $query .= "VALUES('{$user_firstname}','{$user_lastname}','{$user_role}','{$user_name}','{$user_email}', '{$user_password}') ";
+        $query .= "VALUES('{$user_firstname}','{$user_lastname}','{$user_role}','{$user_name}','{$user_email}', '{$user_password}', '{$post_image}') ";
 
 
 
