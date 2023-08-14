@@ -55,6 +55,16 @@
         $user_role           =  $_POST['user_role'];
 
 
+        if(empty($post_image)) {
+
+            $query = "SELECT * FROM users WHERE user_id = $user_id_to_be_edited ";
+            $select_image = mysqli_query($connection,$query);
+
+            while($row = mysqli_fetch_array($select_image)) {
+
+            $post_image = $row['user_image'];
+
+        }
 
         $query_update = "UPDATE users SET ";
         $query_update .="user_namee  = '{$user_name}', ";
@@ -70,17 +80,7 @@
 
         move_uploaded_file($post_image_temp, "../img/$post_image");
 
-        if(empty($post_image)) {
-
-            $query = "SELECT * FROM users WHERE user_id = $user_id_to_be_edited ";
-            $select_image = mysqli_query($connection,$query);
-
-            while($row = mysqli_fetch_array($select_image)) {
-
-            $user_image = $row['post_image'];
-
-        }
-
+        echo '<h2 class="text-center">User have been updated</h2>';
 
 
 
@@ -157,7 +157,7 @@
     </div>
 
     <div class="form-group">
-        <input class="btn btn-primary" type="submit" name="edit_user" value="Edit User">
+        <input class="btn btn-primary" type="submit" name="edit_user" value="Update User">
     </div>
 
 </form>

@@ -40,6 +40,10 @@
         global $connection;
         $post_id_to_be_edited = $_GET["post_id"];
     }
+
+
+
+
     if(isset($_POST["edit_post"])) {
 
         $post_author         =  $_POST['post_author'];
@@ -51,6 +55,16 @@
         $post_tags           =  $_POST['post_tags'];
         $post_category_id    =  $_POST['post_category'];
 
+        if(empty($post_image)) {
+
+            $query = "SELECT * FROM posts WHERE post_id = $post_id_to_be_edited ";
+            $select_image = mysqli_query($connection,$query);
+
+            while($row = mysqli_fetch_array($select_image)) {
+
+            $post_image = $row['post_image'];
+
+        }
 
         $query_update = "UPDATE posts SET ";
         $query_update .="post_title  = '{$post_title}', ";
@@ -67,16 +81,9 @@
 
         move_uploaded_file($post_image_temp, "../img/$post_image");
 
-        if(empty($post_image)) {
 
-            $query = "SELECT * FROM posts WHERE post_id = $post_id_to_be_edited ";
-            $select_image = mysqli_query($connection,$query);
+       
 
-            while($row = mysqli_fetch_array($select_image)) {
-
-            $post_image = $row['post_image'];
-
-        }
 
 
 

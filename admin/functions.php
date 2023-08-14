@@ -125,27 +125,12 @@ function select_and_display_comments() {
 
 
 
-        // else {
-        //     $source = "";
-        // }
-        // switch($source) {
-        //     case 'approve';
-        //     echo  "<td> approved </td>";
-        //     break;
-
-        //     case 'unapprove';
-        //     echo  "<td> unapproved </td>";
-        //     break;
-
-
-        //     default:  echo  "<td> awaiting  </td>";
-        //     break;
-
-
-
-
-        // }
+      
         echo  "<td> $comment_status</td>";
+        // if post doesnt exist ignore
+        if(!isset($post_name)){
+            $post_name = '';
+        }
         echo "<td><a href='../post.php?p_id=$comment_id_unique'>$post_name</td>";
 
         echo "<td><a href='comments.php?approve={$comment_id}'>Approve</a></td>";
