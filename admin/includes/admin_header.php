@@ -1,8 +1,32 @@
+<?php include "../includes/head.php"?>
+<?php include "functions.php"?>
+
+<?php session_start(); ?>
 <?php ob_start(); ?>
 
 
-<?php include "../includes/head.php"?>
-<?php include "functions.php"?>
+
+
+
+
+
+
+<?php
+  if(isset($_SESSION["fetched_user_role"])) {
+    $_SESSION["fetched_user_role"];
+    if($_SESSION["fetched_user_role"]!=="Admin") {
+        header("Location: ../index.php");
+    }
+
+
+
+
+  }
+
+
+
+
+?>
 
 <head>
 
@@ -19,7 +43,7 @@
     <link href="css/sb-admin.css" rel="stylesheet">
 
 
-   
+
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <?php include "admin_footer.php" ?>
 

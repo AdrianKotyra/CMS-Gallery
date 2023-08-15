@@ -125,7 +125,7 @@ function select_and_display_comments() {
 
 
 
-      
+
         echo  "<td> $comment_status</td>";
         // if post doesnt exist ignore
         if(!isset($post_name)){
