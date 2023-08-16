@@ -1,3 +1,9 @@
+
+
+
+
+
+
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -22,7 +28,8 @@
                         </li>
 
                         <li>
-                            <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="index.php?logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <?php logout_user()?>
                         </li>
                     </ul>
                 </li>

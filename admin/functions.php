@@ -47,7 +47,19 @@ function delete_category() {
     }
 }
 
+function logout_user() {
+    if(isset($_GET["logout"])) {
+        header("location:./index.php");
+        $_SESSION["fetched_password"] =  "";
+        $_SESSION["fetched_login"] =  "";
+        $_SESSION["fetched_id"] =  "";
+        $_SESSION["fetched_firstname"] =  "";
+        $_SESSION["fetched_last_name"] =  "";
+        $_SESSION["fetched_user_role"] =  "";
 
+    }
+
+}
 function select_categories() {
     global $connection;
     if(isset($_GET['update_cat'])) {

@@ -1,3 +1,6 @@
+
+<?php ob_start(); ?>
+
 <head>
 
     <meta charset="utf-8">
@@ -7,12 +10,13 @@
     <meta name="author" content="">
 
     <title>CMS</title>
-    <link rel="stylesheet" href="../css/stylesheet.css">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link  href="./css/stylesheet.css" rel="stylesheet" >
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
 
 
     <link href="css/blog-home.css" rel="stylesheet">
     <?php include "dataBase.php";?>
+    <?php include "functions_main.php"?>
 
 
 

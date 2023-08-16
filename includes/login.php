@@ -26,7 +26,7 @@
        if($login !==$fetched_login||$password!==$fetched_password) {
         header("Location:../index.php");
        }
-       else if ($login ==$fetched_login||$password==$fetched_password) {
+       else if ($login ==$fetched_login&&$password==$fetched_password) {
         $_SESSION["fetched_password"] =  $fetched_password;
         $_SESSION["fetched_login"] =  $fetched_login;
         $_SESSION["fetched_id"] =  $fetched_id;

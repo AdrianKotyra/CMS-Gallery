@@ -1,7 +1,7 @@
 <?php include "../includes/head.php"?>
 <?php include "functions.php"?>
 
-<?php session_start(); ?>
+
 <?php ob_start(); ?>
 
 

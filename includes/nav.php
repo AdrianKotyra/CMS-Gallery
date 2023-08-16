@@ -1,4 +1,5 @@
 
+
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 <div class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -32,14 +33,20 @@
 
 
             ?>
+            <?php include "includes/login_container.php" ?>
+
+
 
 
         </ul>
+
     </div>
+
     <!-- /.navbar-collapse -->
 </div>
 <!-- /.container -->
 </nav>
+
 
 
 
