@@ -1,6 +1,7 @@
 <?php include "dataBase.php";?>
+<?php include "functions_main.php";?>
 <?php session_start(); ?>
-
+<?php start_session_default(); ?>
 
 <?php
     if(isset($_POST["login"])) {

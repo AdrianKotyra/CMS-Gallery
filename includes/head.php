@@ -1,6 +1,7 @@
 
 <?php ob_start(); ?>
 
+
 <head>
 
     <meta charset="utf-8">
@@ -17,7 +18,7 @@
     <link href="css/blog-home.css" rel="stylesheet">
     <?php include "dataBase.php";?>
     <?php include "functions_main.php"?>
-
+    
 
 
 </head>

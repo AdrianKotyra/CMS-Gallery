@@ -1,6 +1,6 @@
 
-
-
+<!--
+SELECT USER BY USING FETCHED NAME FROM INDEX LOGIN FORM -->
 <?php
     global $connection;
     $fetched_login = $_SESSION['fetched_login'];
@@ -27,6 +27,79 @@
 
 
 
+
+
+
+
+<!-- --------Update user profile---------- -->
+<?php
+ if(isset($_POST["edit_user"])) {
+
+    $user_name         =  $_POST['user_name'];
+    $user_password          =  $_POST['user_password'];
+    $user_firstname         =  $_POST['user_firstname'];
+    $user_lastname         =  $_POST['user_lastname'];
+    $user_email        =  $_POST['user_email'];
+    $post_image          =  $_FILES['image']['name'];
+    $post_image_temp     =  $_FILES['image']['tmp_name'];
+    $user_role           =  $_POST['user_role'];
+
+
+    if(empty($post_image)) {
+
+        $query = "SELECT * FROM users WHERE user_id = $user_id ";
+        $select_image = mysqli_query($connection,$query);
+
+        while($row = mysqli_fetch_array($select_image)) {
+
+        $post_image = $row['user_image'];
+
+        }
+    }
+
+    $query_update = "UPDATE users SET ";
+    $query_update .="user_namee  = '{$user_name}', ";
+    $query_update .="user_password = '{$user_password}', ";
+    $query_update .="user_firstname = '{$user_firstname}', ";
+    $query_update .="user_lastname = '{$user_lastname}', ";
+    $query_update .="user_email   = '{$user_email}', ";
+    $query_update .="user_role= '{$user_role}', ";
+    $query_update .="user_image  = '{$post_image}' ";
+    $query_update .= "WHERE user_id = {$user_id} ";
+
+    $update_user= mysqli_query($connection,$query_update);
+
+    move_uploaded_file($post_image_temp, "../img/$post_image");
+
+    echo "<h2 class='text-center'> User have been updated</h2>"
+
+
+
+?>
+
+
+
+<!-- UPDATE SESSION LOGIN DETAILS -->
+<?php
+    $query = "SELECT * FROM users WHERE user_namee = '{$user_name}'";
+    $select_user_query = mysqli_query($connection, $query);
+    while($row = mysqli_fetch_array($select_user_query)) {
+        $fetched_password = $row["user_password"];
+        $fetched_login = $row["user_namee"];
+        $fetched_id = $row["user_id"];
+        $fetched_firstname = $row["user_firstname"];
+        $fetched_last_name = $row["user_lastname"];
+        $fetched_user_role = $row["user_role"];
+
+        $_SESSION["fetched_password"] =  $fetched_password;
+        $_SESSION["fetched_login"] =  $fetched_login;
+        $_SESSION["fetched_firstname"] =  $fetched_firstname;
+        $_SESSION["fetched_last_name"] =  $fetched_last_name;
+        $_SESSION["fetched_user_role"] =  $fetched_user_role;
+
+    }
+}
+?>
 
 
 <form action="" method="post" enctype="multipart/form-data">
@@ -85,56 +158,3 @@
     </div>
 
 </form>
-<!-- --------Update user profile---------- -->
-<?php
- if(isset($_POST["edit_user"])) {
-
-    $user_name         =  $_POST['user_name'];
-    $user_password          =  $_POST['user_password'];
-    $user_firstname         =  $_POST['user_firstname'];
-    $user_lastname         =  $_POST['user_lastname'];
-    $user_email        =  $_POST['user_email'];
-    $post_image          =  $_FILES['image']['name'];
-    $post_image_temp     =  $_FILES['image']['tmp_name'];
-    $user_role           =  $_POST['user_role'];
-
-
-    if(empty($post_image)) {
-
-        $query = "SELECT * FROM users WHERE user_id = $user_id ";
-        $select_image = mysqli_query($connection,$query);
-
-        while($row = mysqli_fetch_array($select_image)) {
-
-        $post_image = $row['user_image'];
-
-    }
-
-    $query_update = "UPDATE users SET ";
-    $query_update .="user_namee  = '{$user_name}', ";
-    $query_update .="user_password = '{$user_password}', ";
-    $query_update .="user_firstname = '{$user_firstname}', ";
-    $query_update .="user_lastname = '{$user_lastname}', ";
-    $query_update .="user_email   = '{$user_email}', ";
-    $query_update .="user_role= '{$user_role}', ";
-    $query_update .="user_image  = '{$post_image}' ";
-    $query_update .= "WHERE user_id = {$user_id} ";
-
-    $update_user= mysqli_query($connection,$query_update);
-
-    move_uploaded_file($post_image_temp, "../img/$post_image");
-
-    echo '<h2 class="text-center">User have been updated</h2>';
-
-
-
-
-
-
-
-
-
-    }
-
-}
-?>

@@ -55,6 +55,7 @@
         $user_role           =  $_POST['user_role'];
 
 
+
         if(empty($post_image)) {
 
             $query = "SELECT * FROM users WHERE user_id = $user_id_to_be_edited ";
@@ -64,7 +65,9 @@
 
             $post_image = $row['user_image'];
 
+            }
         }
+
 
         $query_update = "UPDATE users SET ";
         $query_update .="user_namee  = '{$user_name}', ";
@@ -90,8 +93,6 @@
 
 
 
-        }
-
     }
 
 
@@ -100,9 +101,30 @@
 
 
 
+
+
 ?>
+<!-- UPDATE SESSION LOGIN DETAILS -->
+<?php
+    $query = "SELECT * FROM users WHERE user_namee = '{$user_name}'";
+    $select_user_query = mysqli_query($connection, $query);
+    while($row = mysqli_fetch_array($select_user_query)) {
+        $fetched_password = $row["user_password"];
+        $fetched_login = $row["user_namee"];
+        $fetched_id = $row["user_id"];
+        $fetched_firstname = $row["user_firstname"];
+        $fetched_last_name = $row["user_lastname"];
+        $fetched_user_role = $row["user_role"];
 
+        $_SESSION["fetched_password"] =  $fetched_password;
+        $_SESSION["fetched_login"] =  $fetched_login;
+        $_SESSION["fetched_firstname"] =  $fetched_firstname;
+        $_SESSION["fetched_last_name"] =  $fetched_last_name;
+        $_SESSION["fetched_user_role"] =  $fetched_user_role;
 
+    }
+
+?>
 
 
 <form action="" method="post" enctype="multipart/form-data">
