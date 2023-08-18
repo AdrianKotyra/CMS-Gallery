@@ -1,21 +1,21 @@
 
 
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-inverse navbar-fixed-top " role="navigation">
 <div class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="index.php">HOME</a>
-    </div>
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
+    <div class="navbar-header ">
 
+        <a class="navbar-brand " href="index.php">HOME</a>
+        <a class="navbar-brand" href='admin/index.php'>ADMIN</a>
+        <div class="navbar-brand" >   <?php include "includes/login_container.php" ?></div>
+
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+
+      <li class="dropdown" >
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Categories
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
             <?php
                 $query = "SELECT * FROM categories";
                 $query_select_category = mysqli_query($connection, $query);
@@ -27,24 +27,21 @@
 
 
                 }
-                echo "<li><a href='admin/index.php'>ADMIN</a> </li>";
 
 
 
-
-            ?>
-            <?php include "includes/login_container.php" ?>
-
-
-
+                ?>
 
         </ul>
+      </li>
 
-    </div>
+    </ul>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+
 
     <!-- /.navbar-collapse -->
 </div>
-<!-- /.container -->
+
 </nav>
 
 

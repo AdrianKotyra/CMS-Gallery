@@ -30,7 +30,7 @@
                     </div>
                 </div>
                 <!-- /.row -->
-
+                <?php include "includes/admin_widgets.php" ?>
             </div>
             <!-- /.container-fluid -->
 

@@ -71,8 +71,8 @@ SELECT USER BY USING FETCHED NAME FROM INDEX LOGIN FORM -->
 
     move_uploaded_file($post_image_temp, "../img/$post_image");
 
-    echo "<h2 class='text-center'> User have been updated</h2>"
-
+    echo "<h2 class='text-center'> User have been updated</h2>";
+}
 
 
 ?>
@@ -98,7 +98,6 @@ SELECT USER BY USING FETCHED NAME FROM INDEX LOGIN FORM -->
         $_SESSION["fetched_user_role"] =  $fetched_user_role;
 
     }
-}
 ?>
 
 
