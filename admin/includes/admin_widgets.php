@@ -120,6 +120,24 @@
     </div>
 </div>
                 <!-- /.row -->
+
+
+    <?php
+        // SELECT UNPUBLISHED POSTS
+        $query = "SELECT * FROM posts where post_status= 'unpublished'";
+        $select_all_unpublished_posts = mysqli_query($connection, $query);
+        $unpublished_post_counts = mysqli_num_rows($select_all_unpublished_posts);
+        // SELECT UNAPPROVED COMMENTS
+        $query = "SELECT * FROM comments where comment_status!= 'approved'";
+        $select_all_unapproved_comments = mysqli_query($connection, $query);
+        $unapproved_comments_counts = mysqli_num_rows($select_all_unapproved_comments);
+        // SELECT All SUBSCRIBERS
+        $query = "SELECT * FROM users where user_role= 'Subscriber'";
+        $select_all_Subscribers = mysqli_query($connection, $query);
+        $subscribers_counts = mysqli_num_rows($select_all_Subscribers);
+
+
+    ?>
 <div class="row">
 
     <script type="text/javascript">
@@ -128,11 +146,30 @@
 
         function drawChart() {
             var data = google.visualization.arrayToDataTable([
-            ['Year', 'Sales', 'Expenses', 'Profit'],
-            ['2014', 1000, 400, 200],
-            ['2015', 1170, 460, 250],
-            ['2016', 660, 1120, 300],
-            ['2017', 1030, 540, 350]
+            ['Data', 'Count'],
+            <?php
+                $tables = ["Active posts", "Unpublished posts", "Comments", "Unapproved comments", "Users", "Subscribers", "Categories"];
+                $tables_count = [$post_counts, $unpublished_post_counts, $comments_counts, $unapproved_comments_counts, $users_counts, $subscribers_counts, $cats_counts];
+
+                for ($i=0; $i<count($tables); $i++ ) {
+                    echo "['{$tables[$i]}'" . ",". "{$tables_count[$i]}],";
+
+                }
+
+
+
+
+
+
+            ?>
+
+
+
+
+
+
+
+
             ]);
 
             var options = {

@@ -1,5 +1,43 @@
 
+<?php
 
+if(isset($_POST['create_post'])) {
+    echo '<h2 class="text-center">Post have been added</h2>';
+
+    $post_title        = $_POST['post_title'];
+    $post_user         = $_POST['post_author'];
+    $post_category_id  = $_POST['post_category'];
+    $post_status       = $_POST['Post_Status'];
+
+    $post_image        = $_FILES['image']['name'];
+    $post_image_temp   = $_FILES['image']['tmp_name'];
+
+
+    $post_tags         = $_POST['post_tags'];
+    $post_content      = $_POST['post_content'];
+    $post_date         = date('d-m-y');
+
+
+    move_uploaded_file($post_image_temp, "../img/$post_image" );
+
+
+    $query = "INSERT INTO posts(post_category_id, post_title, post_author, post_date, post_image, post_content, post_tags, post_status) ";
+
+    $query .= "VALUES({$post_category_id},'{$post_title}','{$post_user}',now(),'{$post_image}','{$post_content}','{$post_tags}','{$post_status}')";
+
+    $create_post_query = mysqli_query($connection, $query);
+
+
+}
+
+
+
+
+
+
+
+
+?>
 
 
 <form action="" method="post" enctype="multipart/form-data">
@@ -17,9 +55,9 @@
     </div> -->
 
 
-
+    <label for="category">Category</label>
     <div class="form-group">
-       <label for="category">Category</label>
+
        <select name="post_category" id="">
 
             <?php
@@ -59,9 +97,9 @@
         <input type="text" class="form-control" name="Post_Status">
     </div> -->
 
-
+    <label for="Post_Status">Post Status</label>
     <div class="form-group">
-       <label for="Post_Status">Post Status</label>
+
        <select name="Post_Status" id="">
             <option value='published'>published</option>
             <option value='unpublished'>unpublished</option>
@@ -85,8 +123,7 @@
 
     <div class="form-group">
         <label for="post_content">Post Content</label>
-        <textarea class="form-control "name="post_content" id="" cols="30" rows="10">
-        </textarea>
+        <textarea class="form-control "name="post_content" id="" cols="30" rows="10"></textarea>
     </div>
 
 
@@ -101,43 +138,3 @@
 
 
 
-<?php
-
-    if(isset($_POST['create_post'])) {
-
-        $post_title        = $_POST['post_title'];
-        $post_user         = $_POST['post_author'];
-        $post_category_id  = $_POST['post_category'];
-        $post_status       = $_POST['Post_Status'];
-
-        $post_image        = $_FILES['image']['name'];
-        $post_image_temp   = $_FILES['image']['tmp_name'];
-
-
-        $post_tags         = $_POST['post_tags'];
-        $post_content      = $_POST['post_content'];
-        $post_date         = date('d-m-y');
-
-
-        move_uploaded_file($post_image_temp, "../img/$post_image" );
-
-
-        $query = "INSERT INTO posts(post_category_id, post_title, post_author, post_date, post_image, post_content, post_tags, post_status) ";
-
-        $query .= "VALUES({$post_category_id},'{$post_title}','{$post_user}',now(),'{$post_image}','{$post_content}','{$post_tags}','{$post_status}')";
-
-        $create_post_query = mysqli_query($connection, $query);
-        echo $post_category_id;
-
-
-    }
-
-
-
-
-
-
-
-
-
-?>

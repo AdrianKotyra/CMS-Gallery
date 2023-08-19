@@ -1,5 +1,7 @@
 <?php
-if ($_SESSION["fetched_password"] !==  "" && $_SESSION["fetched_login"] !== "") {
+
+
+if (isset($_SESSION['fetched_password']) && !empty($_SESSION['fetched_login'])) {
 
 
     ?>
@@ -9,7 +11,7 @@ if ($_SESSION["fetched_password"] !==  "" && $_SESSION["fetched_login"] !== "") 
         <div href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?php display_login()?><b class="caret"></b></div>
         <ul class="dropdown-menu">
             <li>
-                <a href=""><i class="fa fa-fw fa-user"></i> Profile</a>
+                <a href="./admin/profile.php"><i class="fa fa-fw fa-user"></i> Profile</a>
             </li>
 
             <li>

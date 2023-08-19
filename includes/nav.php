@@ -10,6 +10,7 @@
         <div class="navbar-brand" >   <?php include "includes/login_container.php" ?></div>
 
     </div>
+
     <ul class="nav navbar-nav navbar-right">
 
       <li class="dropdown" >
@@ -36,6 +37,28 @@
       </li>
 
     </ul>
+    <div class="navbar-header ">
+      <!-- EDIT POST LINK DISPLAY ON NAV IF USER CLICK ON ANY POST -->
+      <?php
+        if(isset($_GET["p_id"])) {
+          $post_id = $_GET["p_id"];
+
+          echo "<a class='navbar-brand' href='admin/post.php?source=edit_posts&post_id=$post_id'>Edit Post </a>'";
+
+
+
+        }
+
+
+
+
+
+
+
+      ?>
+
+
+    </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
 
 

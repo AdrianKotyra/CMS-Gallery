@@ -1,6 +1,43 @@
 
 
+<?php
 
+if(isset($_POST['create_user'])) {
+    echo '<h2 class="text-center">User have been created</h2>';
+
+
+    $user_name        = $_POST['user_name'];
+    $user_password    = $_POST['user_password'];
+    $user_firstname   = $_POST['user_firstname'];
+    $user_lastname    = $_POST['user_lastname'];
+
+    $post_image        = $_FILES['image']['name'];
+    $post_image_temp   = $_FILES['image']['tmp_name'];
+
+
+    $user_email        = $_POST['user_email'];
+    $user_role         = $_POST['user_role'];
+
+
+
+    move_uploaded_file($post_image_temp, "../img/$post_image" );
+
+
+    $query = "INSERT INTO users(user_firstname, user_lastname, user_role,user_namee,user_email,user_password, user_image) ";
+
+    $query .= "VALUES('{$user_firstname}','{$user_lastname}','{$user_role}','{$user_name}','{$user_email}', '{$user_password}', '{$post_image}') ";
+
+
+
+    $create_user_query = mysqli_query($connection, $query);
+
+
+
+}
+
+
+
+?>
 
 <form action="" method="post" enctype="multipart/form-data">
 
@@ -75,45 +112,3 @@
 
 
 
-<?php
-
-    if(isset($_POST['create_user'])) {
-
-        $user_name        = $_POST['user_name'];
-        $user_password    = $_POST['user_password'];
-        $user_firstname   = $_POST['user_firstname'];
-        $user_lastname    = $_POST['user_lastname'];
-
-        $post_image        = $_FILES['image']['name'];
-        $post_image_temp   = $_FILES['image']['tmp_name'];
-
-
-        $user_email        = $_POST['user_email'];
-        $user_role         = $_POST['user_role'];
-
-
-
-        move_uploaded_file($post_image_temp, "../img/$post_image" );
-
-
-        $query = "INSERT INTO users(user_firstname, user_lastname, user_role,user_namee,user_email,user_password, user_image) ";
-
-        $query .= "VALUES('{$user_firstname}','{$user_lastname}','{$user_role}','{$user_name}','{$user_email}', '{$user_password}', '{$post_image}') ";
-
-
-
-        $create_user_query = mysqli_query($connection, $query);
-
-
-
-    }
-
-
-
-
-
-
-
-
-
-?>

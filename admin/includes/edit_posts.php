@@ -45,7 +45,7 @@
 
 
     if(isset($_POST["edit_post"])) {
-
+        echo '<h2 class="text-center">Post has been updated</h2>';
         $post_author         =  $_POST['post_author'];
         $post_title          =  $_POST['post_title'];
         $post_status         =  $_POST['Post_Status'];
@@ -82,7 +82,7 @@
         move_uploaded_file($post_image_temp, "../img/$post_image");
 
 
-       
+
 
 
 
@@ -149,10 +149,18 @@
         <label for="post_author">Post Author</label>
         <input type="text" class="form-control" name="post_author" value=<?php echo "$post_author"?>>
     </div>
-
     <div class="form-group">
-        <label for="Post_Status">Post Status</label>
-        <input type="text" class="form-control" name="Post_Status" value=<?php echo "$post_status"?>>
+        <select name="Post_Status" id="">
+
+
+
+            <option value='published'>published</option>";
+            <option value='unpublished'>unpublished</option>";
+
+
+
+        </select>
+
     </div>
 
 

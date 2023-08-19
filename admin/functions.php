@@ -192,7 +192,7 @@ function select_and_display_categories_posts() {
         }
 
         echo "<td>{$cat_title}</td>";
-        echo "<td>$$post_status</td>";
+        echo "<td>$post_status</td>";
         echo "<td><img width=100 height=100 src='../img/$post_image'></td>";
         echo "<td>$post_tags</td>";
         echo "<td>$post_content</td>";
