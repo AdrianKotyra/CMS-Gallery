@@ -5,7 +5,7 @@ if (isset($_SESSION['fetched_password']) && !empty($_SESSION['fetched_login'])) 
 
 
     ?>
-
+    
 
     <div class="dropdown cursor-pointer">
         <div href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?php display_login()?><b class="caret"></b></div>

@@ -48,7 +48,7 @@
                         <img class="img-responsive " src="img/<?php echo $post_image;?>" alt="">
                         <hr>
                         <p><?php echo $post_content ?></p>
-                        
+
 
                         <hr>
 
@@ -181,7 +181,7 @@
 
     </div>
     <!-- /.container -->
-
+            
 
     <?php include "includes/footer.php";
     ?>

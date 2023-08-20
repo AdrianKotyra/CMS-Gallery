@@ -152,8 +152,64 @@ function select_and_display_comments() {
         echo "<td><a href='comments.php?source=edit_comment&comment_id={$comment_id}'>EDIT</a></td>";
         echo "<td><a href='comments.php?delete_comment={$comment_id}'>DELETE</a></td>";
         echo"</tr>";
-    }}
+    }
+}
+function unpublish_post_by_selection() {
+    global $connection;
 
+    if(isset($_POST["checkBoxArray"]) && $_POST['select_post'] == 'unpublish_post') {
+
+        foreach($_POST["checkBoxArray"] as $checkBox) {
+            $query = "UPDATE posts SET post_status= 'Unpublished' WHERE post_id = {$checkBox}";
+            $update_post = mysqli_query($connection, $query);
+            header("location:post.php");
+
+        }
+
+
+    }
+
+
+
+}
+function publish_post_by_selection() {
+    global $connection;
+
+    if(isset($_POST["checkBoxArray"]) && $_POST['select_post'] == 'publish_post') {
+
+        foreach($_POST["checkBoxArray"] as $checkBox) {
+            $query = "UPDATE posts SET post_status= 'Published' WHERE post_id = {$checkBox}";
+            $update_post = mysqli_query($connection, $query);
+            header("location:post.php");
+
+        }
+
+
+    }
+
+
+
+}
+
+
+function delete_post_by_selection() {
+    global $connection;
+
+    if(isset($_POST["checkBoxArray"]) && $_POST['select_post'] == 'delete_post') {
+
+        foreach($_POST["checkBoxArray"] as $checkBox) {
+            $query = "DELETE from posts WHERE post_id={$checkBox}";
+            $delete_post = mysqli_query($connection, $query);
+            header("location:post.php");
+
+        }
+
+
+    }
+
+
+
+}
 
 function select_and_display_categories_posts() {
     global $connection;
@@ -175,6 +231,7 @@ function select_and_display_categories_posts() {
 
 
         echo"<tr>";
+        echo "<td><input class='checkBoxes' type='checkbox' id='post' name='checkBoxArray[]' value='$post_id'></td>";
         echo "<td>$post_id</td>";
         echo "<td>$post_author</td>";
         echo "<td>$post_title</td>";
