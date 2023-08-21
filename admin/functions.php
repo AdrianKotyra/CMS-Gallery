@@ -178,7 +178,7 @@ function publish_post_by_selection() {
     if(isset($_POST["checkBoxArray"]) && $_POST['select_post'] == 'publish_post') {
 
         foreach($_POST["checkBoxArray"] as $checkBox) {
-            $query = "UPDATE posts SET post_status= 'Published' WHERE post_id = {$checkBox}";
+            $query = "UPDATE posts SET post_status= 'published' WHERE post_id = {$checkBox}";
             $update_post = mysqli_query($connection, $query);
             header("location:post.php");
 
@@ -250,7 +250,7 @@ function select_and_display_categories_posts() {
 
         echo "<td>{$cat_title}</td>";
         echo "<td>$post_status</td>";
-        echo "<td><img width=100 height=100 src='../img/$post_image'></td>";
+        echo "<td> <a href='../post.php?p_id=$post_id'><img width=100 height=100 src='../img/$post_image'></a> </td>";
         echo "<td>$post_tags</td>";
         echo "<td>$post_content</td>";
 
@@ -261,6 +261,8 @@ function select_and_display_categories_posts() {
         echo "<td>$post_date</td>";
         echo "<td><a href='post.php?source=edit_posts&post_id={$post_id}'>EDIT</a></td>";
         echo "<td><a href='post.php?delete_post={$post_id}'>DELETE</a></td>";
+
+        echo "<td><a href='../post.php?p_id=$post_id'>View</a></td>";
         echo"</tr>";
 
         // DELETE posts

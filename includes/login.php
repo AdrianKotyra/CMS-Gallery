@@ -26,7 +26,7 @@
         }
 
        if($login !==$fetched_login||$password!==$fetched_password) {
-        header("Location:../index.php");
+        header("Location:../index.php?source=register_form");
        }
        else if ($login ==$fetched_login&&$password==$fetched_password) {
         $_SESSION["fetched_password"] =  $fetched_password;
@@ -36,9 +36,9 @@
         $_SESSION["fetched_last_name"] =  $fetched_last_name;
         $_SESSION["fetched_user_role"] =  $fetched_user_role;
 
+        
 
-
-        header("Location:../admin/index.php");
+        header("Location:../index.php?source=posts");
        }
 
 

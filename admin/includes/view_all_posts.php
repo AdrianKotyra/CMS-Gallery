@@ -38,6 +38,7 @@
                 <th>Date</th>
                 <th>Edit</th>
                 <th>Delete</th>
+                <th>view</th>
             </tr>
         </thead>
         <tbody>

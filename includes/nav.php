@@ -7,6 +7,7 @@
 
         <a class="navbar-brand " href="index.php">HOME</a>
         <a class="navbar-brand" href='admin/index.php'>ADMIN</a>
+        <a class="navbar-brand" href='index.php?source=register'>Sign Up</a>
         <div class="navbar-brand" >   <?php include "includes/login_container.php" ?></div>
 
     </div>
@@ -31,10 +32,15 @@
 
 
 
+
                 ?>
 
+
         </ul>
+
       </li>
+
+
 
     </ul>
     <div class="navbar-header ">

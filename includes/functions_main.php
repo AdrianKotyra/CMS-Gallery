@@ -5,7 +5,7 @@
 function start_session_default() {
     $_SESSION["fetched_password"] =  "";
     $_SESSION["fetched_login"] =  "";
-  
+
 }
 
 

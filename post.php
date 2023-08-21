@@ -65,6 +65,13 @@
         <!-- Posted Comments -->
 
 
+        <!-- empty fields assigned variables -->
+        <?php
+            $comment_author_field = "";
+            $comment_email_field = "";
+            $comment_content_field = "";
+
+        ?>
         <?php
             if(isset($_POST["create_comment"])) {
 
@@ -72,13 +79,32 @@
                 $comment_content = $_POST["comment_content"];
                 $comment_author = $_POST["comment_author"];
                 $comment_email = $_POST["comment_email"];
-                $query = "INSERT INTO `comments`(`comment_post_id`, `comment_author`, `comment_email`, `comment_content`, `comment_date`) VALUES ('$comment_id_unique','$comment_author', '$comment_email' , '$comment_content' , now())";
-                $create_comment_query = mysqli_query($connection, $query);
+                if(!empty($comment_author) && !empty($comment_email) && !empty($comment_content)) {
+                    $query = "INSERT INTO `comments`(`comment_post_id`, `comment_author`, `comment_email`, `comment_content`, `comment_date`) VALUES ('$comment_id_unique','$comment_author', '$comment_email' , '$comment_content' , now())";
+                    $create_comment_query = mysqli_query($connection, $query);
 
-                // select certain post by given id and increment comment count
-                $query_update = "UPDATE posts SET post_comment_count={post_comment_count+1} where post_id = {$comment_id_unique}";
-                $select_post_query = mysqli_query($connection, $query_update);
+                    // select certain post by given id and increment comment count
+                    $query_update = "UPDATE posts SET post_comment_count={post_comment_count+1} where post_id = {$comment_id_unique}";
+                    $select_post_query = mysqli_query($connection, $query_update);
 
+                }
+                else {
+                    global $comment_author_field;
+                    global $comment_email_field;
+                    global $comment_content_field;
+
+                    if(empty($comment_author)) {
+                        $comment_author_field = "This field can not be empty";
+                    }
+                    if(empty($comment_email)) {
+                        $comment_email_field = "This field can not be empty";
+                    }
+                    if(empty($comment_content)) {
+                        $comment_content_field = "This field can not be empty";
+                    }
+
+
+                }
 
 
 
@@ -96,14 +122,14 @@
             <form method="POST" role="form">
                 <div class="form-group">
                     <label for="comment_author">Author</label>
-                    <input type="text" class="form-control" name="comment_author">
+                    <input type="text" class="form-control" name="comment_author" placeholder="<?php echo $comment_author_field ?>">
                 </div>
                 <div class="form-group">
                     <label for="comment_email">Email</label>
-                    <input type="text" class="form-control" name="comment_email">
+                    <input type="text" class="form-control" name="comment_email" placeholder="<?php echo $comment_email_field ?>">
                 </div>
                 <div class="form-group">
-                    <textarea name="comment_content" class="form-control" rows="3"></textarea>
+                    <textarea name="comment_content" class="form-control" rows="3" placeholder="<?php echo $comment_content_field ?>"></textarea>
                 </div>
                 <button type="submit" name="create_comment" class="btn btn-primary">Submit</button>
             </form>
@@ -181,7 +207,7 @@
 
     </div>
     <!-- /.container -->
-            
+
 
     <?php include "includes/footer.php";
     ?>
