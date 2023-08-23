@@ -45,8 +45,39 @@
     <div class="control-group">
       <!-- Button -->
       <div class="controls">
-        <button class="btn btn-success">Register</button>
+        <button name="submit_registration" class="btn btn-success">Register</button>
       </div>
     </div>
   </fieldset>
 </form>
+
+<!-- GET user registration details -->
+<?php
+  if(isset($_POST["submit_registration"])) {
+    $login_name =$_POST["username"];
+    $email_name =$_POST["email"];
+    $password_name = $_POST["password"];
+
+    // encrypt info
+
+
+    $login_name =mysqli_real_escape_string($connection, $login_name);
+    $email_name =mysqli_real_escape_string($connection, $email_name);
+    $password_name =mysqli_real_escape_string($connection, $password_name);
+
+    $query = "SELECT randSalt from users";
+
+    $query_select_randSalt = mysqli_query($connection, $query);
+    while($row=mysqli_fetch_array($query_select_randSalt)) {
+      $randSalt =  $row["randSalt"];
+
+
+      
+    }
+
+
+  }
+
+
+
+?>

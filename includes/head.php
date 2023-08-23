@@ -10,12 +10,11 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-
-
     <title>CMS</title>
-    <link  href="./css/stylesheet.css" rel="stylesheet" >
-    <link href="./css/bootstrap.min.css" rel="stylesheet">
 
+
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/stylesheet.css" rel="stylesheet" >
 
     <link href="css/blog-home.css" rel="stylesheet">
     <?php include "dataBase.php";?>

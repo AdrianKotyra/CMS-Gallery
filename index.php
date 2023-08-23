@@ -4,7 +4,7 @@
 <?php include "includes/head.php";?>
 
 <body>
-
+    
     <!-- Navigation -->
     <?php include "includes/nav.php" ?>
 
