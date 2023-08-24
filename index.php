@@ -4,7 +4,9 @@
 <?php include "includes/head.php";?>
 
 <body>
-    
+
+
+
     <!-- Navigation -->
     <?php include "includes/nav.php" ?>
 
@@ -12,10 +14,9 @@
     <div class="container">
 
         <div class="row">
-
             <!-- Blog Entries Column -->
             <div class="col-md-8">
-                <?php if(isset($_GET["source"])) {
+            <?php if(isset($_GET["source"]) && $_SESSION['fetched_password'] && !empty($_SESSION['fetched_login'])) {
                     $source = $_GET["source"];
 
                     }
@@ -24,20 +25,29 @@
                     }
                     switch($source) {
 
-                        case 'posts';
+                        case 'posts' ;
                         include "includes/posts.php";
                         break;
 
 
-
-                        default:  include "includes/register_form.php";
+                        default: include "includes/register_form.php";
                         break;
+
+
+
+
+
+
+
 
 
 
 
                     }
                 ?>
+
+
+
 
 
 

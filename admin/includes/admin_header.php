@@ -38,7 +38,7 @@
 
   <title>CMS PROJECT</title>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-  <link rel="stylesheet" href="../../css/stylesheet.css">
+
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/sb-admin.css" rel="stylesheet">
 

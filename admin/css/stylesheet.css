@@ -1,0 +1,7 @@
+.nav_container {
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    background-color: rgb(50, 116, 116);
+    width: 100%;
+}

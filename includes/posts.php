@@ -36,7 +36,7 @@ while($row = mysqli_fetch_assoc($select_posts)) {
     <p><span class="glyphicon glyphicon-time"></span> Posted on <?php echo $post_date ?></p>
     <hr>
     <a href="post.php?p_id=<?php echo $post_id?>" >
-    <img class="img-responsive " src="img/<?php echo $post_image;?>" alt="">
+    <img class="img-responsive" src="img/<?php echo $post_image;?>" alt="">
     </a>
 
     <hr>
