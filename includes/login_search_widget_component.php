@@ -3,7 +3,7 @@
         <h4>login</h4>
         <form action="includes/login.php" method="post">
             <div class="form-group">
-                <input placeholder="username"name="username" type="text" class="form-control">
+                <input placeholder="username"name="username" type="text" class="form-control" >
 
 
             </div>

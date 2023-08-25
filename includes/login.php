@@ -36,8 +36,9 @@
         $_SESSION["fetched_last_name"] =  $fetched_last_name;
         $_SESSION["fetched_user_role"] =  $fetched_user_role;
 
-        
 
+
+        header("Location:login_search_widget_component.php");
         header("Location:../index.php?source=posts");
        }
 
@@ -46,8 +47,8 @@
 
 
 
-    }
 
+    }
 
 
 
