@@ -1,7 +1,68 @@
+
+
+
+
+
+
+
 <nav>
   <div class="nav-container">
     <div class="nav-links">
       <img class="hamb" src="icons/hamburger.svg" alt="">
+      <div class="nav_mobile">
+        <?php
+          if (!empty($_SESSION['fetched_login'])) {
+            $fetched_login = $_SESSION["fetched_login"];
+            $query = "SELECT * FROM users WHERE user_namee = '{$fetched_login}'";
+            $select_user_query = mysqli_query($connection, $query);
+            while($row = mysqli_fetch_array($select_user_query)) {
+              $fetched_status = $row["user_role"];
+              if ($fetched_status==="Admin") {
+                echo "<a class='nav-link' href='admin/index.php'>ADMIN</a>";
+              }
+
+            }
+          }
+
+
+
+        ?>
+        <a class="nav-link catButton fa fa-user">Category<b class="caret"></b>
+          <div class="cat_container">
+
+          <?php
+            $query = "SELECT * FROM categories";
+            $query_select_category = mysqli_query($connection, $query);
+            while($row =mysqli_fetch_assoc($query_select_category)) {
+                $category = $row["category_title"];
+
+
+                echo "<a class='mobile_cat_link'href='category.php?category='>{$category}</a>";
+
+
+            }
+
+
+
+
+          ?>
+
+          </div>
+
+
+
+
+
+        </a>
+
+
+
+
+
+
+      </div>
+
+
       <div class="nav-links-box">
         <a class="nav-link " href="index.php?source=posts">HOME</a>
           <?php
@@ -75,7 +136,7 @@
       </div>
     </div>
     <div class="nav-profile-container">
-      <div class="profile-box">
+
         <div class="profile-box-components">
           <div class="profile-box-component"  >
             <?php include "includes/login_container.php" ?>
@@ -86,7 +147,7 @@
           </div>
 
         </div>
-      </div>
+
     </div>
 
 
