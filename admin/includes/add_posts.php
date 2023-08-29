@@ -4,8 +4,12 @@
 if(isset($_POST['create_post'])) {
     echo '<h2 class="text-center">Post have been added</h2>';
 
+    $post_user =   $_SESSION["fetched_login"];
+
+
+
     $post_title        = $_POST['post_title'];
-    $post_user         = $_POST['post_author'];
+
     $post_category_id  = $_POST['post_category'];
     $post_status       = $_POST['Post_Status'];
 
@@ -86,11 +90,6 @@ if(isset($_POST['create_post'])) {
 
 
 
-
-    <div class="form-group">
-        <label for="post_author">Post Author</label>
-        <input type="text" class="form-control" name="post_author">
-    </div>
 
     <!-- <div class="form-group">
         <label for="Post_Status">Post Status</label>

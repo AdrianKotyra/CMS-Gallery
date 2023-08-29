@@ -9,6 +9,7 @@
   <div class="nav-container">
     <div class="nav-links">
       <img class="hamb" src="icons/hamburger.svg" alt="">
+      <!-- -------NAV MOBILE-------- -->
       <div class="nav_mobile">
         <?php
           if (!empty($_SESSION['fetched_login'])) {
@@ -62,7 +63,7 @@
 
       </div>
 
-
+      <!-- ----NAV WIDE SCREEN---- -->
       <div class="nav-links-box">
         <a class="nav-link " href="index.php?source=posts">HOME</a>
           <?php
@@ -83,7 +84,20 @@
 
           ?>
         </a>
+
         <a class="nav-link " href='index.php?source=register'>Sign Up</a>
+        <?php
+        $query = "SELECT * FROM users";
+        $query_select_users = mysqli_query($connection, $query);
+        while($row =mysqli_fetch_assoc($query_select_users)) {
+            $user_name = $row["user_namee"];
+            $user_password = $row["user_password"];
+          if ($_SESSION["fetched_password"] == $user_password  && $_SESSION["fetched_login"] == $user_name)
+          {
+
+
+
+        ?>
         <div class="nav-link">
           <div class="dropdown" style="cursor:pointer";>
             <div href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>Categories<b class="caret"></b></div>
@@ -93,9 +107,9 @@
                   $query_select_category = mysqli_query($connection, $query);
                   while($row =mysqli_fetch_assoc($query_select_category)) {
                       $category = $row["category_title"];
+                      $category_id = $row["category_id"];
 
-
-                      echo "<li><a href='category.php?category='>{$category}</a> </li>";
+                      echo "<li><a href='category.php?category={$category_id}'>{$category}</a> </li>";
 
 
                   }
@@ -111,6 +125,35 @@
 
 
         </div>
+        <?php }  } ?>
+
+       <?php
+        $query = "SELECT * FROM users";
+        $query_select_users = mysqli_query($connection, $query);
+        while($row =mysqli_fetch_assoc($query_select_users)) {
+            $user_name = $row["user_namee"];
+            $user_password = $row["user_password"];
+          if ($_SESSION["fetched_password"] == $user_password  && $_SESSION["fetched_login"] == $user_name)
+          {
+
+
+
+        ?>
+          <div class="nav-link">
+            <div class="dropdown" style="cursor:pointer";>
+              <div href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>Users<b class="caret"></b></div>
+              <ul class="dropdown-menu">
+                <li><a href='index.php?source=view_users'>See all Users</a> </li>";
+
+
+
+              </ul>
+            </div>
+
+          </div>
+        <?php }  } ?>
+
+
 
 
 

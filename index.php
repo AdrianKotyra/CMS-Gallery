@@ -14,7 +14,7 @@
     <div class="container">
 
         <div class="row">
-            <!-- Blog Entries Column -->
+
             <div class="col-md-8">
             <?php if(isset($_GET["source"]) && !empty($_SESSION['fetched_password']) && !empty($_SESSION['fetched_login'])) {
                     $source = $_GET["source"];
@@ -27,6 +27,10 @@
 
                         case 'posts' ;
                         include "includes/posts.php";
+                        break;
+
+                        case 'view_users' ;
+                        include "includes/all_users_view.php";
                         break;
 
 

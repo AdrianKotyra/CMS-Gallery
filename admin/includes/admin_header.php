@@ -9,21 +9,25 @@
 
 
 
-
+<!-- SEND BACK TO INDEX.PHP IF USER DONT HAVE NOT ADMIN -->
 
 <?php
   if(isset($_SESSION["fetched_user_role"])) {
     $_SESSION["fetched_user_role"];
     if($_SESSION["fetched_user_role"]!=="Admin") {
-        header("Location: ../index.php");
+        header("Location: ../index.php?source=posts");
     }
-
-
-
 
   }
 
 
+
+?>
+<!-- SEND BACK TO INDEX.PHP IF USER NOT LOGGED IN -->
+<?php
+  if($_SESSION["fetched_firstname"]=="" || empty($_SESSION['fetched_firstname'])) {
+    header("Location: ../index.php");
+  }
 
 
 ?>
@@ -40,6 +44,7 @@
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
   <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/stylesheet.css"rel="stylesheet">
   <link href="css/sb-admin.css" rel="stylesheet">
 
 

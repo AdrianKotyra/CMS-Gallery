@@ -1,6 +1,6 @@
 <!-- Blog Sidebar Widgets Column -->
 <div class="col-md-4">
-    <div class="view_profile_main">
+    <div class="view_profile_main  right_widget_nav">
         <?php
         if(isset($_GET["profile"])) {
             $profile = $_GET["profile"];

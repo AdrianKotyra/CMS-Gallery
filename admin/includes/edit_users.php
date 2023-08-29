@@ -21,7 +21,7 @@
             $user_role = $row["user_role"];
             $user_randSalt = $row["randSalt"];
             $user_status = $row["user_status"];
-
+            $user_description = $row["user_desc"];
 
 
         }
@@ -34,7 +34,7 @@
 
 ?>
 
-<!-- UPDATE  POST FROM FORM TO MYSQL -->
+<!-- UPDATE FROM FORM TO MYSQL -->
 
 <?php
 
@@ -53,7 +53,7 @@
         $post_image          =  $_FILES['image']['name'];
         $post_image_temp     =  $_FILES['image']['tmp_name'];
         $user_role           =  $_POST['user_role'];
-
+        $user_desc           =  $_POST['user_content'];
 
 
         if(empty($post_image)) {
@@ -76,7 +76,8 @@
         $query_update .="user_lastname = '{$user_lastname}', ";
         $query_update .="user_email   = '{$user_email}', ";
         $query_update .="user_role= '{$user_role}', ";
-        $query_update .="user_image  = '{$post_image}' ";
+        $query_update .="user_image  = '{$post_image}', ";
+        $query_update .="user_desc  = '{$user_desc}' ";
         $query_update .= "WHERE user_id = {$user_id_to_be_edited} ";
 
         $update_user= mysqli_query($connection,$query_update);
@@ -177,7 +178,10 @@
         </select>
 
     </div>
-
+    <div class="form-group">
+        <label for="user_content">User Description</label>
+        <textarea class="form-control "name="user_content" id="" cols="30" rows="10" placeholder="<?php echo "$user_description"?>"></textarea>
+    </div>
     <div class="form-group">
         <input class="btn btn-primary" type="submit" name="edit_user" value="Update User">
     </div>

@@ -119,6 +119,23 @@ function select_and_display_comments() {
 
         }
 
+
+        // $query = "SELECT * FROM users where user_namee='{$comment_author}'";
+
+        // $select_user = mysqli_query($connection, $query);
+
+        // while($row = mysqli_fetch_array($select_user)) {
+        //     $user_status = $row["user_status"];
+
+        // }
+        // if ($user_status=="Admin") {
+        //     $query_update_comment = "UPDATE comments SET comment_status= 'approved'where comment_id={$comment_id}";
+        //     $update_comment_query = mysqli_query($connection, $query_update_comment);
+        //     header("Location: comments.php");
+        // }
+
+
+
         // SELECT COMMENT BY ID AND CHANGE STATUS
         if(isset($_GET["approve"])) {
             $comment_status_id = $_GET["approve"];

@@ -10,22 +10,19 @@ if(isset($_POST['create_user'])) {
     $user_password    = $_POST['user_password'];
     $user_firstname   = $_POST['user_firstname'];
     $user_lastname    = $_POST['user_lastname'];
-
     $post_image        = $_FILES['image']['name'];
     $post_image_temp   = $_FILES['image']['tmp_name'];
-
-
     $user_email        = $_POST['user_email'];
     $user_role         = $_POST['user_role'];
-
+    $user_content  = $_POST['user_content'];
 
 
     move_uploaded_file($post_image_temp, "../img/$post_image" );
 
 
-    $query = "INSERT INTO users(user_firstname, user_lastname, user_role,user_namee,user_email,user_password, user_image) ";
+    $query = "INSERT INTO users(user_firstname, user_lastname, user_role,user_namee,user_email,user_password, user_image, user_desc) ";
 
-    $query .= "VALUES('{$user_firstname}','{$user_lastname}','{$user_role}','{$user_name}','{$user_email}', '{$user_password}', '{$post_image}') ";
+    $query .= "VALUES('{$user_firstname}','{$user_lastname}','{$user_role}','{$user_name}','{$user_email}', '{$user_password}', '{$post_image}', '{$user_content}') ";
 
 
 
@@ -86,7 +83,10 @@ if(isset($_POST['create_user'])) {
         </select>
 
     </div>
-
+    <div class="form-group">
+        <label for="user_content">User Description</label>
+        <textarea class="form-control "name="user_content" id="" cols="30" rows="10"></textarea>
+    </div>
     <div class="form-group">
         <input class="btn btn-primary" type="submit" name="create_user" value="Add User">
     </div>

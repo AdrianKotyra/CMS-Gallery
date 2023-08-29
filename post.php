@@ -54,153 +54,178 @@
 
 
 
-                   <?php }  } ?>
-
-            </div>          <!-- Blog Comments -->
-            <?php include "includes/sidebar.php" ?>
-
-        </div>
-        <hr>
-
-        <!-- Posted Comments -->
-
-
-        <!-- empty fields assigned variables -->
-        <?php
-            $comment_author_field = "";
-            $comment_email_field = "";
-            $comment_content_field = "";
-
-        ?>
-        <?php
-            if(isset($_POST["create_comment"])) {
-
-                $comment_id_unique = $_GET["p_id"];
-                $comment_content = $_POST["comment_content"];
-                $comment_author = $_POST["comment_author"];
-                $comment_email = $_POST["comment_email"];
-                if(!empty($comment_author) && !empty($comment_email) && !empty($comment_content)) {
-                    $query = "INSERT INTO `comments`(`comment_post_id`, `comment_author`, `comment_email`, `comment_content`, `comment_date`) VALUES ('$comment_id_unique','$comment_author', '$comment_email' , '$comment_content' , now())";
-                    $create_comment_query = mysqli_query($connection, $query);
-
-                    // select certain post by given id and increment comment count
-                    $query_update = "UPDATE posts SET post_comment_count={post_comment_count+1} where post_id = {$comment_id_unique}";
-                    $select_post_query = mysqli_query($connection, $query_update);
-
-                }
-                else {
-                    global $comment_author_field;
-                    global $comment_email_field;
-                    global $comment_content_field;
-
-                    if(empty($comment_author)) {
-                        $comment_author_field = "This field can not be empty";
-                    }
-                    if(empty($comment_email)) {
-                        $comment_email_field = "This field can not be empty";
-                    }
-                    if(empty($comment_content)) {
-                        $comment_content_field = "This field can not be empty";
-                    }
-
-
-                }
+                <?php }  } ?>
 
 
 
 
-            }
+                <?php
+                    $query = "SELECT * from comments where comment_post_id={$post_id} AND comment_status = 'approved' ORDER BY comment_id DESC";
+                    $query_select_comments = mysqli_query($connection, $query);
+                    while($row = mysqli_fetch_array($query_select_comments)) {
+                        $comment_author_data = $row["comment_author"];
+                        $comment_date_data = $row["comment_date"];
+                        $comment_content_data = $row["comment_content"];
+                        $comment_img = $row["comment_img"];
 
 
-        ?>
 
 
 
-        <!-- Comment form-->
-        <div class="well">
-            <h4>Leave a Comment:</h4>
-            <form method="POST" role="form">
-                <div class="form-group">
-                    <label for="comment_author">Author</label>
-                    <input type="text" class="form-control" name="comment_author" placeholder="<?php echo $comment_author_field ?>">
+
+
+                ?>
+                <!-- SELECT COMMENTS -->
+
+
+
+                <div class="media">
+                    <a class="pull-left" >
+
+                        <img width=140 height=140 class="media-object" src="./img/<?php echo "$comment_img"?>" alt="">
+                    </a>
+                    <div class="media-body">
+                        <h4 class="media-heading"> <?php echo "$comment_author_data"?>
+                            <small><?php echo "$comment_date_data"?></small>
+                        </h4>
+                        <?php echo "$comment_content_data"?>
+                    </div>
+
                 </div>
-                <div class="form-group">
-                    <label for="comment_email">Email</label>
-                    <input type="text" class="form-control" name="comment_email" placeholder="<?php echo $comment_email_field ?>">
+                <?php }?>
+
+
+
+
+
+
+                <hr>
+
+                <!-- Posted Comments -->
+
+
+                <!-- empty fields assigned variables -->
+                <?php
+                    $comment_author_field = "";
+                    $comment_email_field = "";
+                    $comment_content_field = "";
+
+                ?>
+                <?php
+                    if(isset($_POST["create_comment"])) {
+
+
+                        $fetched_login = $_SESSION["fetched_login"];
+                        $query = "SELECT * FROM users WHERE user_namee = '{$fetched_login}'";
+                        $select_user_query = mysqli_query($connection, $query);
+                        while ($row = mysqli_fetch_array($select_user_query)) {
+                            $user_image = $row["user_image"];
+
+                        }
+
+
+
+
+
+                        $comment_id_unique = $_GET["p_id"];
+                        $comment_content = $_POST["comment_content"];
+                        $comment_author = $_POST["comment_author"];
+                        $comment_email = $_POST["comment_email"];
+                        if(!empty($comment_author) && !empty($comment_email) && !empty($comment_content)) {
+                            $query = "INSERT INTO `comments`(`comment_post_id`, `comment_author`, `comment_email`, `comment_content`, `comment_date`, `comment_img`) VALUES ('$comment_id_unique','$comment_author', '$comment_email' , '$comment_content' , now(), '$user_image')";
+                            $create_comment_query = mysqli_query($connection, $query);
+
+                            // select certain post by given id and increment comment count
+                            $query_update = "UPDATE posts SET post_comment_count={post_comment_count+1} where post_id = {$comment_id_unique}";
+                            $select_post_query = mysqli_query($connection, $query_update);
+
+                        }
+                        else {
+                            global $comment_author_field;
+                            global $comment_email_field;
+                            global $comment_content_field;
+
+                            if(empty($comment_author)) {
+                                $comment_author_field = "This field can not be empty";
+                            }
+                            if(empty($comment_email)) {
+                                $comment_email_field = "This field can not be empty";
+                            }
+                            if(empty($comment_content)) {
+                                $comment_content_field = "This field can not be empty";
+                            }
+
+
+                        }
+
+
+
+
+                    }
+
+
+                ?>
+
+
+
+
+
+                <div class="well ">
+                    <h4>Leave a Comment:</h4>
+                    <form method="POST" role="form">
+                        <div class="form-group">
+                            <label for="comment_author">Author</label>
+                            <input type="text" class="form-control" name="comment_author" placeholder="<?php echo $comment_author_field ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="comment_email">Email</label>
+                            <input type="text" class="form-control" name="comment_email" placeholder="<?php echo $comment_email_field ?>">
+                        </div>
+                        <div class="form-group">
+                            <textarea name="comment_content" class="form-control" rows="3" placeholder="<?php echo $comment_content_field ?>"></textarea>
+                        </div>
+                        <button type="submit" name="create_comment" class="btn btn-primary">Submit</button>
+                    </form>
                 </div>
-                <div class="form-group">
-                    <textarea name="comment_content" class="form-control" rows="3" placeholder="<?php echo $comment_content_field ?>"></textarea>
-                </div>
-                <button type="submit" name="create_comment" class="btn btn-primary">Submit</button>
-            </form>
-        </div>
 
 
-        <?php
-            $query = "SELECT * from comments where comment_post_id={$post_id} AND comment_status = 'approved' ORDER BY comment_id DESC";
-            $query_select_comments = mysqli_query($connection, $query);
-            while($row = mysqli_fetch_array($query_select_comments)) {
-                $comment_author_data = $row["comment_author"];
-                $comment_date_data = $row["comment_date"];
-                $comment_content_data = $row["comment_content"];
-
-
-
-
-
-
-
-
-        ?>
-        <!-- SELECT COMMENTS -->
-
-
-
-
-        <div class="media">
-            <a class="pull-left" href="#">
-                <img class="media-object" src="http://placehold.it/64x64" alt="">
-            </a>
-            <div class="media-body">
-                <h4 class="media-heading"> <?php echo "$comment_author_data"?>
-                    <small><?php echo "$comment_date_data"?></small>
-                </h4>
-                <?php echo "$comment_content_data"?>
             </div>
+            <div>          <!-- Blog Comments -->
+                <?php include "includes/sidebar.php" ?>
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         </div>
-        <?php }?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         <hr>
 
 
