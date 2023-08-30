@@ -14,7 +14,7 @@
         <div class="row">
 
             <!-- Blog Entries Column -->
-            <div class="col-md-8">
+            <div class="col-md-12 ">
 
                 <?php
                 if(isset($_GET["p_id"])) {
@@ -41,11 +41,11 @@
                             <a href="#"><?php echo $post_title ?></a>
                         </h2>
                         <p class="lead">
-                            by <a href="index.php"><?php echo $post_author ?></a>
+                            by <a href="display_user_from_posts.php?user=<?php echo $post_author ?>"><?php echo $post_author ?></a>
                         </p>
                         <p><span class="glyphicon glyphicon-time"></span> Posted on <?php echo $post_date ?></p>
                         <hr>
-                        <img class="img-responsive " src="img/<?php echo $post_image;?>" alt="">
+                        <img class="img-responsive post_img" src="img/<?php echo $post_image;?>" alt="">
                         <hr>
                         <p><?php echo $post_content ?></p>
 
@@ -80,13 +80,13 @@
 
 
                 <div class="media">
-                    <a class="pull-left" >
-
+                    <a class="pull-left" href="display_user_from_posts.php?user=<?php echo $comment_author_data?>" >
                         <img width=140 height=140 class="media-object" src="./img/<?php echo "$comment_img"?>" alt="">
                     </a>
+
                     <div class="media-body">
-                        <h4 class="media-heading"> <?php echo "$comment_author_data"?>
-                            <small><?php echo "$comment_date_data"?></small>
+                  <h4 class="media-heading"> <a href="display_user_from_posts.php?user=<?php echo $comment_author_data?>"><?php echo $comment_author_data ?></a>
+                      <small><?php echo "$comment_date_data"?></small>
                         </h4>
                         <?php echo "$comment_content_data"?>
                     </div>
@@ -190,10 +190,7 @@
 
 
             </div>
-            <div>          <!-- Blog Comments -->
-                <?php include "includes/sidebar.php" ?>
 
-            </div>
 
 
 

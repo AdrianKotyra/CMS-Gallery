@@ -183,7 +183,7 @@
 
         <div class="profile-box-components">
           <div class="profile-box-component"  >
-            <?php include "includes/login_container.php" ?>
+            <?php include "login_container.php" ?>
 
           </div>
           <div class="profile-box-component"  >
