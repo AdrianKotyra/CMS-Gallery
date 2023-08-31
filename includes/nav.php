@@ -87,12 +87,8 @@
 
         <a class="nav-link " href='index.php?source=register'>Sign Up</a>
         <?php
-        $query = "SELECT * FROM users";
-        $query_select_users = mysqli_query($connection, $query);
-        while($row =mysqli_fetch_assoc($query_select_users)) {
-            $user_name = $row["user_namee"];
-            $user_password = $row["user_password"];
-          if ($_SESSION["fetched_password"] == $user_password  && $_SESSION["fetched_login"] == $user_name  && !empty($_SESSION['fetched_login'])) {
+
+          if (!empty($_SESSION['fetched_login'])) {
 
 
 
@@ -126,15 +122,11 @@
 
 
         </div>
-        <?php }  } ?>
+        <?php }   ?>
 
        <?php
-        $query = "SELECT * FROM users";
-        $query_select_users = mysqli_query($connection, $query);
-        while($row =mysqli_fetch_assoc($query_select_users)) {
-            $user_name = $row["user_namee"];
-            $user_password = $row["user_password"];
-          if ($_SESSION["fetched_password"] == $user_password  && $_SESSION["fetched_login"] == $user_name && !empty($_SESSION['fetched_login'])) {
+
+        if (!empty($_SESSION['fetched_login'])) {
 
 
 
@@ -152,7 +144,7 @@
             </div>
 
           </div>
-        <?php }  } ?>
+        <?php } ?>
 
 
 
@@ -161,14 +153,29 @@
 
 
         <?php
+
+
           if(isset($_GET["p_id"])) {
+            // CHECKING IF POST AUTHOR === USER LOGGED USING SESSION LOGIN NAME
             $post_id = $_GET["p_id"];
+            $query = "SELECT * FROM `posts` where post_id={$post_id}";
+            $select_posts = mysqli_query($connection, $query);
+            $row = mysqli_fetch_assoc($select_posts);
+            $post_author = $row["post_author"];
 
-            echo "<a class='nav-link' href='admin/post.php?source=edit_posts&post_id=$post_id'>Edit Post </a>";
+            $fetched_login = $_SESSION["fetched_login"];
+            if ($fetched_login===$post_author) {
 
+              echo "<a class='nav-link' href='./edit_post_user.php?post_id=$post_id'>Edit Post </a>";
+
+            }
 
 
           }
+
+
+
+
 
 
 

@@ -81,11 +81,11 @@
 
                 <div class="media">
                     <a class="pull-left" href="display_user_from_posts.php?user=<?php echo $comment_author_data?>" >
-                        <img width=140 height=140 class="media-object" src="./img/<?php echo "$comment_img"?>" alt="">
+                        <img width=140 height=140 class="media-object posts_images" src="./img/<?php echo "$comment_img"?>" alt="">
                     </a>
 
                     <div class="media-body">
-                  <h4 class="media-heading"> <a href="display_user_from_posts.php?user=<?php echo $comment_author_data?>"><?php echo $comment_author_data ?></a>
+                        <h4 class="media-heading"> <a href="display_user_from_posts.php?user=<?php echo $comment_author_data?>"><?php echo $comment_author_data ?></a>
                       <small><?php echo "$comment_date_data"?></small>
                         </h4>
                         <?php echo "$comment_content_data"?>

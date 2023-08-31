@@ -46,7 +46,7 @@
 
     if(isset($_POST["edit_post"])) {
         echo '<h2 class="text-center">Post has been updated</h2>';
-        $post_author         =  $_POST['post_author'];
+        $post_author         = $_SESSION['fetched_login'];
         $post_title          =  $_POST['post_title'];
         $post_status         =  $_POST['Post_Status'];
         $post_image          =  $_FILES['image']['name'];
@@ -62,7 +62,6 @@
 
             $row = mysqli_fetch_array($select_image);
             $post_image = $row['post_image'];
-
         }
 
 
@@ -79,7 +78,9 @@
 
         $update_post= mysqli_query($connection,$query_update);
 
-        move_uploaded_file($post_image_temp, "../img/$post_image");
+        move_uploaded_file($post_image_temp, "./img/$post_image");
+
+
 
 
 
@@ -95,8 +96,6 @@
 
 
     }
-
-
 
 
 
@@ -145,10 +144,7 @@
 
 
 
-    <div class="form-group">
-        <label for="post_author">Post Author</label>
-        <input type="text" class="form-control" name="post_author" value=<?php echo "$post_author"?>>
-    </div>
+
     <div class="form-group">
         <select name="Post_Status" id="">
 
@@ -171,7 +167,7 @@
 
     <div class="form-group">
 
-        <img width=200 src="../img/<?php echo"$post_image" ?>" alt="">
+        <img class="posts_img"src="./img/<?php echo"$post_image" ?>" alt="">
     </div>
     <div class="form-group">
         <label for="post_image">Post Image</label>
