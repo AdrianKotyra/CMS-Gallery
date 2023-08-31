@@ -7,12 +7,9 @@
         $select_user_query = mysqli_query($connection, $query);
         $row = mysqli_fetch_assoc($select_user_query);
         $user_img = $row["user_image"];
-        if ($user_img == '') {
-            echo "<a href='index.php?source=posts&profile=view'><img class='profile_img_main' style='width:40px; height:40px;display: inline-block; border-radius: 50%;' src='./icons/avatar-default.png'><a/>";
-        }
-        else {
-            echo "<a href='index.php?source=posts&profile=view'><img class='profile_img_main' style='width:40px; height:40px;display: inline-block; border-radius: 50%;' src='./img/$user_img'><a/>";
-        }
+
+        echo "<a href='index.php?source=posts&profile=view'><img class='profile_img_main' style='width:40px; height:40px;display: inline-block; border-radius: 50%;' src='./img/$user_img'><a/>";
+
 
 }
 

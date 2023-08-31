@@ -54,8 +54,11 @@
       $query_select_randSalt = mysqli_query($connection, $query);
       $row=mysqli_fetch_array($query_select_randSalt);
       $randSalt =  $row["randSalt"];
-      $query_new_user = "INSERT INTO users(user_namee, user_password, user_firstname, user_lastname, user_email) ";
-      $query_new_user.= "VALUES('{$login_name}','{$password_name}','{$first_name}','{$second_name}','{$email_name}')";
+
+      $default_profile_img = "avatar-default.png";
+
+      $query_new_user = "INSERT INTO users(user_namee, user_password, user_firstname, user_lastname, user_email, user_image) ";
+      $query_new_user.= "VALUES('{$login_name}','{$password_name}','{$first_name}','{$second_name}','{$email_name}','{$default_profile_img}')";
       $query_create_new_user_registration = mysqli_query($connection, $query_new_user);
     }
 
