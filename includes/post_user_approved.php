@@ -2,8 +2,8 @@
 
 
 
-
-    $query = "SELECT * FROM posts ORDER BY post_id DESC";
+    $user_logged_in = $_SESSION['fetched_login'];
+    $query = "SELECT * FROM posts where post_author='{$user_logged_in}'";
     $select_posts = mysqli_query($connection, $query);
     while($row = mysqli_fetch_assoc($select_posts)) {
         $post_id = $row["post_id"];
@@ -14,22 +14,14 @@
         $post_image =  $row["post_image"];
         $post_status =  $row["post_status"];
 
-        if($post_status !== "published") {
-            echo "";
-        }
-        else {
 
 
         ?>
 
 
-    <!-- <h1 class="page-header">
-    Page Heading
-        <small>Secondary Text</small>
-    </h1> -->
 
-    <!-- First Blog Post -->
 
+        <!-- POST WAITING FOR APPROVAL STATE -->
     <h2>
         <a href="post.php?p_id=<?php echo $post_id?>"><?php echo $post_title ?></a>
     </h2>
@@ -39,7 +31,10 @@
     <p><span class="glyphicon glyphicon-time"></span> Posted on <?php echo $post_date ?></p>
     <hr>
     <a href="post.php?p_id=<?php echo $post_id?>" >
-    <img class="img-responsive posts_img" src="img/<?php echo $post_image;?>" alt="">
+
+            <img class="img-responsive posts_img " src="img/<?php echo $post_image;?>" alt="">
+
+
     </a>
 
     <hr>
@@ -51,4 +46,4 @@
 
 
 
-<?php }  }?>
+<?php }  ?>

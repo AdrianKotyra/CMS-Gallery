@@ -17,7 +17,7 @@
 
             <div class="col-md-8">
 
-            
+
 
             <?php if(isset($_GET["source"]) && !empty($_SESSION['fetched_password']) && !empty($_SESSION['fetched_login'])) {
                     $source = $_GET["source"];
@@ -29,7 +29,7 @@
                     switch($source) {
 
                         case 'posts' ;
-                        include "includes/posts.php";
+                        include "includes/posts_validation.php";
                         break;
 
                         case 'view_users' ;

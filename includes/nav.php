@@ -152,6 +152,31 @@
 
 
 
+
+
+
+        <?php
+
+          if (!empty($_SESSION['fetched_login'])) {
+
+
+
+
+            ?>
+              <div class="nav-link">
+                <div class="dropdown" style="cursor:pointer";>
+                  <div href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>Posts<b class="caret"></b></div>
+                  <ul class="dropdown-menu">
+                    <li><a href='add_post.php'>Add posts</a> </li>";
+
+
+
+                  </ul>
+                </div>
+
+              </div>
+        <?php } ?>
+
         <?php
 
 
@@ -174,32 +199,36 @@
           }
 
 
-
-
-
-
-
-
-
-
-
         ?>
+
+
+
+
+
       </div>
     </div>
     <div class="nav-profile-container">
 
-        <div class="profile-box-components">
-          <div class="profile-box-component"  >
-            <?php include "includes/login_container.php" ?>
+      <div class="profile-box-components">
+        <div class="profile-box-component"  >
+          <?php include "notification_user.php" ?>
 
-          </div>
-          <div class="profile-box-component"  >
-            <?php include "login_profile_img.php"?>
-          </div>
+        </div>
+        <div class="profile-box-component"  >
+          <?php include "includes/login_container.php" ?>
 
         </div>
 
+        <div class="profile-box-component"  >
+          <?php include "login_profile_img.php"?>
+        </div>
+
+
+
+      </div>
+
     </div>
+
 
 
 

@@ -1,4 +1,4 @@
-<link  href="./css/stylesheet.css" rel="stylesheet" >
+
 <?php
     if (!empty($_SESSION['fetched_login'])) {
         global $connection;

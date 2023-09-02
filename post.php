@@ -61,7 +61,7 @@
                 <!-- SELECT COMMENTS -->
                 <!-- comment approved or comment_author_role="Admin" display comment -->
                 <?php
-                    $query = "SELECT * from comments where comment_post_id={$post_id} AND comment_status = 'approved' or comment_author_role = 'Admin'  ORDER BY comment_id DESC";
+                    $query = "SELECT * from comments where comment_post_id={$post_id} AND comment_status = 'approved' ORDER BY comment_id DESC";
                     $query_select_comments = mysqli_query($connection, $query);
                     while($row = mysqli_fetch_array($query_select_comments)) {
                         $comment_author_data = $row["comment_author"];
@@ -114,7 +114,7 @@
                 <?php
                     if(isset($_POST["create_comment"])) {
 
-
+                        // if user is admin then comment status is approved so the post display straight away
                         $fetched_login = $_SESSION["fetched_login"];
                         $query = "SELECT * FROM users WHERE user_namee = '{$fetched_login}'";
                         $select_user_query = mysqli_query($connection, $query);
@@ -122,7 +122,12 @@
                             $user_image = $row["user_image"];
                             $user_role = $row["user_role"];
                         }
-
+                        if ($user_role=="Admin") {
+                            $comment_status = "Approved";
+                        }
+                        else {
+                            $comment_status = "";
+                        }
 
 
 
@@ -132,7 +137,7 @@
                         $comment_author = $_SESSION["fetched_login"];
 
                         if( !empty($comment_content)) {
-                            $query = "INSERT INTO `comments`(`comment_post_id`, `comment_author`, `comment_content`, `comment_date`, `comment_img`, `comment_author_role`) VALUES ('$comment_id_unique','$comment_author' , '$comment_content' , now(), '$user_image', '$user_role')";
+                            $query = "INSERT INTO `comments`(`comment_post_id`, `comment_author`, `comment_content`, `comment_date`, `comment_img`, `comment_status`) VALUES ('$comment_id_unique','$comment_author' , '$comment_content' , now(), '$user_image', '$comment_status')";
                             $create_comment_query = mysqli_query($connection, $query);
 
                             // select certain post by given id and increment comment count
@@ -164,17 +169,19 @@
 
 
 
+                    <div class="well col-md-6 ">
+                        <h4>Leave a Comment:</h4>
+                        <form method="POST" role="form">
+                            <div class="form-group">
+                                <textarea name="comment_content" class="form-control comment_field" rows="3" placeholder="<?php echo $comment_content_field ?>"></textarea>
+                            </div>
+                            <button type="submit" name="create_comment" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
 
 
-                <div class="well ">
-                    <h4>Leave a Comment:</h4>
-                    <form method="POST" role="form">
-                        <div class="form-group">
-                            <textarea name="comment_content" class="form-control" rows="3" placeholder="<?php echo $comment_content_field ?>"></textarea>
-                        </div>
-                        <button type="submit" name="create_comment" class="btn btn-primary">Submit</button>
-                    </form>
-                </div>
+
+
 
 
             </div>

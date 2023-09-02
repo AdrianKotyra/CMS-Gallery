@@ -52,3 +52,9 @@
 
 
 <?php }  }?>
+<?php
+    include("posts_user_approved_unapproved_switch.php");
+
+?>
+
+
