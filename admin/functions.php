@@ -175,7 +175,11 @@ function unpublish_post_by_selection() {
     global $connection;
 
     if(isset($_POST["checkBoxArray"]) && $_POST['select_post'] == 'unpublish_post') {
+        $post_user =   $_SESSION["fetched_login"];
+        $query = "SELECT * FROM users where user_namee = '{$post_user}'";
+        $query_update = "UPDATE posts SET posts_unapproved_count={posts_unapproved_count+1} where post_author = '{$post_user}'";
 
+        $select_post_query = mysqli_query($connection, $query_update);
         foreach($_POST["checkBoxArray"] as $checkBox) {
             $query = "UPDATE posts SET post_status= 'Unpublished' WHERE post_id = {$checkBox}";
             $update_post = mysqli_query($connection, $query);
@@ -195,6 +199,14 @@ function publish_post_by_selection() {
     if(isset($_POST["checkBoxArray"]) && $_POST['select_post'] == 'publish_post') {
 
         foreach($_POST["checkBoxArray"] as $checkBox) {
+
+            $post_user =   $_SESSION["fetched_login"];
+            $query = "SELECT * FROM users where user_namee = '{$post_user}'";
+
+            $query_update = "UPDATE posts SET posts_unapproved_count={posts_unapproved_count-1} where post_author = '{$post_user}'";
+            $select_post_query = mysqli_query($connection, $query_update);
+
+
             $query = "UPDATE posts SET post_status= 'published' WHERE post_id = {$checkBox}";
             $update_post = mysqli_query($connection, $query);
             header("location:post.php");

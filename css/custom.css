@@ -84,7 +84,7 @@
 
 }
 .profile-box-component {
-    padding-left: 15px;
+    padding-left: 25px;
     margin: auto;
 }
 .profile_img_main {
@@ -153,6 +153,24 @@ textarea {
     object-fit: cover;
 
 }
+.notification_cont {
+    position: relative;
+}
+.notification_text {
+    color: red;
+    font-size: 2rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+}
+.notification_img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 .comment_field {
     resize: none;
 }
@@ -173,7 +191,7 @@ textarea {
     filter: brightness(0.3);
 }
 .post_img {
-    width: 800px;
+    width: 1000px;
     height: 600px;
     object-fit: cover;
 

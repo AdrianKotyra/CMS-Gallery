@@ -121,8 +121,10 @@
                         while ($row = mysqli_fetch_array($select_user_query)) {
                             $user_image = $row["user_image"];
                             $user_role = $row["user_role"];
+                            $user_status = $row["user_status"];
                         }
-                        if ($user_role=="Admin") {
+                        // if user is admin or hes status is approved by admin comments are Approved.
+                        if ($user_role=="Admin" || $user_status=="approved") {
                             $comment_status = "Approved";
                         }
                         else {

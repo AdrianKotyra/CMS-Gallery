@@ -18,7 +18,6 @@
             <div class="col-md-8">
 
 
-
             <?php if(isset($_GET["source"]) && !empty($_SESSION['fetched_password']) && !empty($_SESSION['fetched_login'])) {
                     $source = $_GET["source"];
 
@@ -27,6 +26,9 @@
                         $source = "";
                     }
                     switch($source) {
+                        case 'view_profile' ;
+                        include "includes/view_profile_main.php";
+                        break;
 
                         case 'posts' ;
                         include "includes/posts_validation.php";

@@ -27,7 +27,7 @@ if (isset($_SESSION['fetched_password']) && !empty($_SESSION['fetched_login'])) 
             ?>
             <li>
 
-                <a href="index.php?source=posts&profile=view"><i class="fa fa-fw fa-user"></i> Profile</a>
+                <a href="index.php?source=view_profile"><i class="fa fa-fw fa-user"></i> Profile</a>
             </li>
 
 

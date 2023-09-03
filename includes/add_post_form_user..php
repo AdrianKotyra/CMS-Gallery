@@ -18,26 +18,26 @@ if(isset($_POST['create_post'])) {
 
     }
 
-    $query11 = "SELECT * FROM posts where post_author = '{$post_user}'";
-    $select_post = mysqli_query($connection, $query11);
-    $row = mysqli_fetch_assoc($select_post);
-    $post_unapproved_count = $row["posts_unapproved_count"];
+
 
 
 
     $post_title        = $_POST['post_title'];
 
     $post_category_id  = $_POST['post_category'];
+    $posts_unapproved_count = 0;
 
 
     // if user status is approved by admin to "approved" then post is visible;
     if ($user_status=="Approved" || $user_role=="Admin" ) {
         $post_status = "published";
+        $posts_unapproved_count = $posts_unapproved_count+0;
+
     }
     else {
+
         $post_status       = "unpublished";
-        $query_update = "UPDATE posts SET posts_unapproved_count={posts_unapproved_count+1} where post_author = '{$post_user}'";
-        $select_post_query = mysqli_query($connection, $query_update);
+        $posts_unapproved_count = $posts_unapproved_count+1;
 
     }
 
@@ -54,9 +54,9 @@ if(isset($_POST['create_post'])) {
     move_uploaded_file($post_image_temp, "./img/$post_image" );
 
 
-    $query = "INSERT INTO posts(post_category_id, post_title, post_author, post_date, post_image, post_content, post_tags, post_status) ";
+    $query = "INSERT INTO posts(post_category_id, post_title, post_author, post_date, post_image, post_content, post_tags, post_status, posts_unapproved_count) ";
 
-    $query .= "VALUES({$post_category_id},'{$post_title}','{$post_user}',now(),'{$post_image}','{$post_content}','{$post_tags}','{$post_status}')";
+    $query .= "VALUES({$post_category_id},'{$post_title}','{$post_user}',now(),'{$post_image}','{$post_content}','{$post_tags}','{$post_status}','{$posts_unapproved_count}')";
 
     $create_post_query = mysqli_query($connection, $query);
 

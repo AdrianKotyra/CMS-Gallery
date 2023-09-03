@@ -211,7 +211,32 @@
 
       <div class="profile-box-components">
         <div class="profile-box-component"  >
-          <?php include "notification_user.php" ?>
+          <?php
+            // checking if user is admin or normal user in order to display proper notifiation sign
+            if (!empty($_SESSION['fetched_login'])) {
+              $fetched_login = $_SESSION["fetched_login"];
+              $query = "SELECT * FROM users WHERE user_namee = '{$fetched_login}'";
+              $select_user_query = mysqli_query($connection, $query);
+              while($row = mysqli_fetch_array($select_user_query)) {
+                $fetched_status = $row["user_role"];
+                if ($fetched_status==="Admin") {
+                  include "notification_admin.php";
+
+                }
+                else {
+                  include "notification_user.php";
+                }
+
+
+
+              }
+            }
+
+
+
+
+
+          ?>
 
         </div>
         <div class="profile-box-component"  >
