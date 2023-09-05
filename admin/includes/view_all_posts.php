@@ -47,6 +47,7 @@
             <?php delete_post_by_selection();?>
             <?php publish_post_by_selection();?>
             <?php unpublish_post_by_selection();?>
+
         </tbody>
     </table>
 

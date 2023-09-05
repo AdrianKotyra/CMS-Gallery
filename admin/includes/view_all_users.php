@@ -19,7 +19,8 @@
                 </thead>
                 <tbody>
 
-                    <?php select_and_display_users()?>
+                    <?php select_and_display_users();?>
+
 
                 </tbody>
 </table>

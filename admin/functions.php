@@ -203,8 +203,9 @@ function publish_post_by_selection() {
             $post_user =   $_SESSION["fetched_login"];
             $query = "SELECT * FROM users where user_namee = '{$post_user}'";
 
-            $query_update = "UPDATE posts SET posts_unapproved_count={posts_unapproved_count-1} where post_author = '{$post_user}'";
+            $query_update = "UPDATE posts SET posts_unapproved_count={posts_unapproved_count-1} where post_status = 'to_be_verified'";
             $select_post_query = mysqli_query($connection, $query_update);
+
 
 
             $query = "UPDATE posts SET post_status= 'published' WHERE post_id = {$checkBox}";
@@ -239,6 +240,24 @@ function delete_post_by_selection() {
 
 
 }
+
+function delete_post_from_user() {
+    global $connection;
+    if(isset($_GET["delete"])) {
+        $post_delete_id = $_GET["delete"];
+
+        $query = "DELETE from posts WHERE post_id={$post_delete_id}";
+        $delete_post = mysqli_query($connection, $query);
+        header("location:post.php");
+    }
+}
+
+
+
+
+
+
+
 
 function select_and_display_categories_posts() {
     global $connection;
@@ -321,7 +340,18 @@ function delete_comments() {
 }
 // Delete users
 
+function change_user_post_to_unpublshed_based_on_status() {
+    global $connection;
+    // SELECT USER WITH STATUS UNAPPOROVED AND CHANGE THEIR POSTS TO UNPUBLISHED;
+    $query_select = "SELECT * from users where user_status= 'unapproved'";
+    $query_select_users_status_unapproved = mysqli_query($connection, $query_select);
+    while($row=mysqli_fetch_array($query_select_users_status_unapproved)) {
+        $users_unapproved_nicknames = $row["user_namee"];
+        echo "$users_unapproved_nicknames";
+        $query_update_post_byuser_status = "UPDATE posts SET post_status = 'Unpublished'  WHERE  post_author={$users_unapproved_nicknames}";
+    }
 
+}
 function select_and_display_users() {
     global $connection;
 
@@ -351,6 +381,7 @@ function select_and_display_users() {
         if(isset($_GET["approve"])) {
             $user_status_id = $_GET["approve"];
             $query_update_user = "UPDATE users SET user_status= 'approved' where user_id={$user_status_id}";
+
             $update_user_query = mysqli_query($connection, $query_update_user);
             header("Location: users.php");
 
@@ -359,9 +390,13 @@ function select_and_display_users() {
             $user_status_id = $_GET["unapprove"];
             $query_update_user = "UPDATE users SET user_status= 'unapproved' where user_id={$user_status_id}";
             $update_user_query = mysqli_query($connection, $query_update_user);
+
+
+            change_user_post_to_unpublshed_based_on_status();
             header("Location: users.php");
 
         }
+
 
         echo "<td>$user_status</td>";
         echo "<td><a href='users.php?approve={$user_id}'>approve</a></td>";

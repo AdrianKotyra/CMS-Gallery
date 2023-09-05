@@ -1,7 +1,7 @@
 <?php
 
 $user_logged_in = $_SESSION['fetched_login'];
-$query = "SELECT * FROM posts where post_author='{$user_logged_in}'";
+$query = "SELECT * FROM posts where post_author='{$user_logged_in}' ORDER BY post_id DESC";
 $select_posts = mysqli_query($connection, $query);
 while($row = mysqli_fetch_assoc($select_posts)) {
     $post_id = $row["post_id"];
@@ -12,7 +12,7 @@ while($row = mysqli_fetch_assoc($select_posts)) {
     $post_image =  $row["post_image"];
     $post_status =  $row["post_status"];
 
-    if ($post_status== "unpublished" || $post_status== "") {
+    if ($post_status== "to_be_verified" || $post_status== "") {
         include("post_user_unapproved.php");
 
 

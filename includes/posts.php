@@ -1,8 +1,6 @@
 <?php
 
 
-
-
     $query = "SELECT * FROM posts ORDER BY post_id DESC";
     $select_posts = mysqli_query($connection, $query);
     while($row = mysqli_fetch_assoc($select_posts)) {

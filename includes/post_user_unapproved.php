@@ -3,7 +3,7 @@
 
 
     $user_logged_in = $_SESSION['fetched_login'];
-    $query = "SELECT * FROM posts where post_author='{$user_logged_in}'";
+    $query = "SELECT * FROM posts where post_status='to_be_verified' ORDER BY post_id DESC";
     $select_posts = mysqli_query($connection, $query);
     while($row = mysqli_fetch_assoc($select_posts)) {
         $post_id = $row["post_id"];

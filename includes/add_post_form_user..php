@@ -29,14 +29,14 @@ if(isset($_POST['create_post'])) {
 
 
     // if user status is approved by admin to "approved" then post is visible;
-    if ($user_status=="Approved" || $user_role=="Admin" ) {
+    if ($user_status=="approved" || $user_role=="Admin" ) {
         $post_status = "published";
         $posts_unapproved_count = $posts_unapproved_count+0;
 
     }
     else {
 
-        $post_status       = "unpublished";
+        $post_status       = "to_be_verified";
         $posts_unapproved_count = $posts_unapproved_count+1;
 
     }

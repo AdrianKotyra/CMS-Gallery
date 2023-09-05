@@ -190,16 +190,32 @@
 
             $fetched_login = $_SESSION["fetched_login"];
             if ($fetched_login===$post_author) {
+            ?>
 
-              echo "<a class='nav-link' href='./edit_post_user.php?post_id=$post_id'>Edit Post </a>";
+              <div class="nav-link">
+                <div class="dropdown" style="cursor:pointer";>
+                  <div href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>Edit Post<b class="caret"></b></div>
+                  <ul class="dropdown-menu">
+                    <li><a class='nav-link' href='./edit_post_user.php?post_id=<?php echo $post_id?>'>Edit Post </a> </li>
+                    <li><a class='nav-link' href='./post.php?p_id=<?php echo $post_id?>&delete=post'>Delete Post </a> </li>
 
-            }
+
+                  </ul>
+                </div>
+
+              </div>
 
 
-          }
 
 
-        ?>
+
+
+
+
+
+
+
+            <?php }} ?>
 
 
 

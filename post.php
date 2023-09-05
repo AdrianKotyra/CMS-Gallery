@@ -16,6 +16,9 @@
             <!-- Blog Entries Column -->
             <div class="col-md-12 ">
 
+
+
+
                 <?php
                 if(isset($_GET["p_id"])) {
                     $post_id = $_GET["p_id"];
@@ -225,9 +228,16 @@
 
 
     </div>
-    <!-- /.container -->
+    <?php
+    if(isset( $_GET["delete"])) {
+     if(isset($_GET["p_id"]) && $_GET["delete"] == "post") {
+        $post_deleted = $_GET["p_id"];
 
-
+        $query = "DELETE from posts WHERE post_id={$post_deleted}";
+        $delete_post = mysqli_query($connection, $query);
+        header("location:index.php?source=posts");
+    }}
+    ?>
     <?php include "includes/footer.php";
     ?>
 
