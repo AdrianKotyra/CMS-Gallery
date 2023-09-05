@@ -72,3 +72,19 @@ const navMobileCategoriesOn = function() {
 navMobileCategoriesOn()
 catButton.addEventListener("click", navMobileCategoriesOn);
 
+displayEditComments()
+function displayEditComments() {
+    const edit_comment_field = document.querySelector(".edit_comment_textarea");
+    const content_comment = document.querySelector(".content_comment");
+    if (edit_comment_field.style.display=="none") {
+        edit_comment_field.style.display="block";
+        content_comment.style.display="none"
+    }
+    else {
+        edit_comment_field.style.display="none";
+        content_comment.style.display="block"
+    }
+
+}
+const selectEditCommentButton = document.querySelector(".edit_comment_button");
+selectEditCommentButton.addEventListener("click",displayEditComments);

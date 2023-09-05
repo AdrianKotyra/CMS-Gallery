@@ -11,7 +11,7 @@
     <!-- Page Content -->
     <div class="container">
 
-        <div class="row">
+        <div class="row post_container">
 
             <!-- Blog Entries Column -->
             <div class="col-md-12 ">
@@ -40,6 +40,8 @@
 
 
                         <!-- First Blog Post -->
+                          <!-- EDIT COMMENT -->
+
                         <h2>
                             <a href="#"><?php echo $post_title ?></a>
                         </h2>
@@ -50,6 +52,7 @@
                         <hr>
                         <img class="img-responsive post_img" src="img/<?php echo $post_image;?>" alt="">
                         <hr>
+
                         <p><?php echo $post_content ?></p>
 
 
@@ -71,7 +74,7 @@
                         $comment_date_data = $row["comment_date"];
                         $comment_content_data = $row["comment_content"];
                         $comment_img = $row["comment_img"];
-
+                        $comment_id =$row["comment_id"];
 
 
 
@@ -83,20 +86,55 @@
 
 
 
+
                 <div class="media">
+                <div class="dropdown edit_comment" style="cursor:pointer";>
+                  <div href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i><b class="caret"></b></div>
+                  <ul class="dropdown-menu">
+                    <li><a class='nav-link' href='./post.php?p_id=<?php echo $post_id?>&delete_comment=<?php echo $comment_id?>'>Delete comment  </a> </li>
+                    <li><a class='nav-link edit_comment_button'>Edit comment</a> </li>
+
+
+                  </ul>
+                </div>
                     <a class="pull-left" href="display_user_from_posts.php?user=<?php echo $comment_author_data?>" >
                         <img width=140 height=140 class="media-object posts_images" src="./img/<?php echo "$comment_img"?>" alt="">
                     </a>
 
                     <div class="media-body">
-                        <h4 class="media-heading"> <a href="display_user_from_posts.php?user=<?php echo $comment_author_data?>"><?php echo $comment_author_data ?></a>
-                      <small><?php echo "$comment_date_data"?></small>
-                        </h4>
-                        <?php echo "$comment_content_data"?>
-                    </div>
+                        <div class="date_and_drop_container">
+                            <h4 class="media-heading"> <a href="display_user_from_posts.php?user=<?php echo $comment_author_data?>"><?php echo $comment_author_data ?></a>
+                            <small><?php echo "$comment_date_data"?></small>
+
+
+                                </h4>
+
+                            </div>
+                        </div>
+                        <div class="edit_comment_textarea col-md-6">
+                            <h4>Edit Comment:</h4>
+                            <form method="POST" role="form" >
+                                <div class="form-group">
+                                    <textarea name="comment_content" class="form-control comment_field" rows="3" placeholder=<?php echo "$comment_content_data"?>></textarea>
+                                </div>
+                                <button type="submit" name="create_comment" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
+
+                        <p class='content_comment'><?php echo "$comment_content_data"?></p>
+
+
 
                 </div>
                 <?php }?>
+                <ul class="pager page_changer col-md-2">
+                    <li class="previous">
+                        <a href="#">&larr; Older</a>
+                    </li>
+                    <li class="next">
+                        <a href="#">Newer &rarr;</a>
+                    </li>
+                </ul>
 
 
 
@@ -174,15 +212,6 @@
 
 
 
-                    <div class="well col-md-6 ">
-                        <h4>Leave a Comment:</h4>
-                        <form method="POST" role="form">
-                            <div class="form-group">
-                                <textarea name="comment_content" class="form-control comment_field" rows="3" placeholder="<?php echo $comment_content_field ?>"></textarea>
-                            </div>
-                            <button type="submit" name="create_comment" class="btn btn-primary">Submit</button>
-                        </form>
-                    </div>
 
 
 
@@ -190,6 +219,16 @@
 
 
             </div>
+            <div class="well col-md-6 ">
+                <h4>Leave a Comment:</h4>
+                <form method="POST" role="form">
+                    <div class="form-group">
+                        <textarea name="comment_content" class="form-control comment_field" rows="3" placeholder="<?php echo $comment_content_field ?>"></textarea>
+                    </div>
+                    <button type="submit" name="create_comment" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+
 
 
 
@@ -228,9 +267,21 @@
 
 
     </div>
+
+
+    <!-- DELETE COMMENT -->
     <?php
-    if(isset( $_GET["delete"])) {
-     if(isset($_GET["p_id"]) && $_GET["delete"] == "post") {
+    if(isset( $_GET["delete_comment"])) {
+        $comment_deleted =$_GET["delete_comment"];
+        $query = "DELETE from comments WHERE comment_id={$comment_deleted}";
+        $delete_comment = mysqli_query($connection, $query);
+        header("location:post.php?p_id=$post_id");
+    }
+    ?>
+    <!-- DELETE POST -->
+    <?php
+    if(isset( $_GET["delete_post"])) {
+     if(isset($_GET["p_id"]) && $_GET["delete_post"] == "post") {
         $post_deleted = $_GET["p_id"];
 
         $query = "DELETE from posts WHERE post_id={$post_deleted}";
