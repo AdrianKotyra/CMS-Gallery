@@ -72,19 +72,28 @@ const navMobileCategoriesOn = function() {
 navMobileCategoriesOn()
 catButton.addEventListener("click", navMobileCategoriesOn);
 
-displayEditComments()
-function displayEditComments() {
-    const edit_comment_field = document.querySelector(".edit_comment_textarea");
-    const content_comment = document.querySelector(".content_comment");
-    if (edit_comment_field.style.display=="none") {
-        edit_comment_field.style.display="block";
-        content_comment.style.display="none"
-    }
-    else {
-        edit_comment_field.style.display="none";
-        content_comment.style.display="block"
-    }
 
+
+function displayEditComments(event) {
+    const commentContainer = event.target.closest(".media");
+    const editCommentField = commentContainer.querySelector(".edit_comment_textarea");
+    const contentComment = commentContainer.querySelector(".content_comment");
+
+    if (editCommentField.style.display === "none" || editCommentField.style.display === "") {
+        editCommentField.style.display = "block";
+        contentComment.style.display = "none";
+    } else {
+        editCommentField.style.display = "none";
+        contentComment.style.display = "block";
+    }
 }
-const selectEditCommentButton = document.querySelector(".edit_comment_button");
-selectEditCommentButton.addEventListener("click",displayEditComments);
+
+const selectEditCommentButtons = document.querySelectorAll(".edit_comment_button");
+
+for (let i = 0; i < selectEditCommentButtons.length; i++) {
+    selectEditCommentButtons[i].addEventListener("click", displayEditComments);
+}
+
+
+
+

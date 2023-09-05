@@ -111,18 +111,22 @@
 
                             </div>
                         </div>
-                        <div class="edit_comment_textarea col-md-6">
-                            <h4>Edit Comment:</h4>
-                            <form method="POST" role="form" >
-                                <div class="form-group">
-                                    <textarea name="comment_content" class="form-control comment_field" rows="3" placeholder=<?php echo "$comment_content_data"?>></textarea>
-                                </div>
-                                <button type="submit" name="create_comment" class="btn btn-primary">Submit</button>
-                            </form>
+                        <div>
+                            <div class="edit_comment_textarea col-md-6">
+                                <h4>Edit Comment:</h4>
+                                <form method="POST" role="form" >
+                                    <div class="form-group">
+                                        <textarea name="comment_content" class="form-control comment_field" rows="3" placeholder=<?php echo "$comment_content_data"?>></textarea>
+                                    </div>
+                                    <button type="submit" name="create_comment" class="btn btn-primary">Submit</button>
+                                </form>
+                            </div>
+
+                            <p class='content_comment'><?php echo "$comment_content_data"?></p>
+
+
+
                         </div>
-
-                        <p class='content_comment'><?php echo "$comment_content_data"?></p>
-
 
 
                 </div>
