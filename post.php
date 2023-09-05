@@ -88,22 +88,26 @@
 
 
                 <div class="media">
+                    <!-- checking if session login is equal to user comment and if true display option to edit comment  -->
+                <?php if($comment_author_data==$_SESSION["fetched_login"]) {
+                    ?>
                 <div class="dropdown edit_comment" style="cursor:pointer";>
-                  <div href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i><b class="caret"></b></div>
-                  <ul class="dropdown-menu">
+                  <div href="#" class="dropdown-toggle " data-toggle="dropdown"><i class="fa fa-user"></i><b class="caret"></b></div>
+                  <ul class="dropdown-menu edit_comment_menu">
                     <li><a class='nav-link' href='./post.php?p_id=<?php echo $post_id?>&delete_comment=<?php echo $comment_id?>'>Delete comment  </a> </li>
-                    <li><a class='nav-link edit_comment_button'>Edit comment</a> </li>
+                    <li><a class='nav-link edit_comment_button' >Edit comment</a> </li>
 
 
                   </ul>
                 </div>
+                <?php }?>
                     <a class="pull-left" href="display_user_from_posts.php?user=<?php echo $comment_author_data?>" >
                         <img width=140 height=140 class="media-object posts_images" src="./img/<?php echo "$comment_img"?>" alt="">
                     </a>
 
                     <div class="media-body">
                         <div class="date_and_drop_container">
-                            <h4 class="media-heading"> <a href="display_user_from_posts.php?user=<?php echo $comment_author_data?>"><?php echo $comment_author_data ?></a>
+                            <h4 class="media-heading name_date_plate"> <a href="display_user_from_posts.php?user=<?php echo $comment_author_data?>"><?php echo $comment_author_data ?></a>
                             <small><?php echo "$comment_date_data"?></small>
 
 
@@ -111,16 +115,19 @@
 
                             </div>
                         </div>
+
                         <div>
                             <div class="edit_comment_textarea col-md-6">
-                                <h4>Edit Comment:</h4>
+                                <h4><small> Edit Comment:</small></h4>
                                 <form method="POST" role="form" >
+                                    <textarea name="comment_id" class="form-control comment_field comment_id" rows="3"><?php echo "$comment_id"?></textarea>
                                     <div class="form-group">
                                         <textarea name="comment_content" class="form-control comment_field" rows="3" placeholder=<?php echo "$comment_content_data"?>></textarea>
                                     </div>
-                                    <button type="submit" name="create_comment" class="btn btn-primary">Submit</button>
+                                    <button type="submit" name="update_comment" class="btn btn-primary">Update comment</button>
                                 </form>
                             </div>
+
 
                             <p class='content_comment'><?php echo "$comment_content_data"?></p>
 
@@ -131,14 +138,34 @@
 
                 </div>
                 <?php }?>
-                <ul class="pager page_changer col-md-2">
-                    <li class="previous">
-                        <a href="#">&larr; Older</a>
-                    </li>
-                    <li class="next">
-                        <a href="#">Newer &rarr;</a>
-                    </li>
-                </ul>
+                <?php
+                // CHECKING HOW MANY COMMENT EACH POST HAVE AND IF MORE THAN 0 DISPLAY WIDGET TO CHANGE COMMENTS
+                if(isset($_GET["p_id"])){
+                    $post_id = $_GET["p_id"];
+                    $query = "SELECT * from comments where comment_post_id = '{$post_id}'";
+                    $query_select_comments = mysqli_query($connection, $query);
+                    $comments_count = mysqli_num_rows($query_select_comments);
+                    if( $comments_count>=6) {
+                        ?>
+                    <ul class="pager page_changer col-md-2">
+                        <li class="previous">
+                            <a href="#">&larr; Older</a>
+                        </li>
+                        <li class="next">
+                            <a href="#">Newer &rarr;</a>
+                        </li>
+                    </ul>
+
+
+
+
+
+
+
+
+                <?php }}?>
+
+
 
 
 
@@ -223,41 +250,16 @@
 
 
             </div>
+
             <div class="well col-md-6 ">
-                <h4>Leave a Comment:</h4>
-                <form method="POST" role="form">
-                    <div class="form-group">
-                        <textarea name="comment_content" class="form-control comment_field" rows="3" placeholder="<?php echo $comment_content_field ?>"></textarea>
-                    </div>
-                    <button type="submit" name="create_comment" class="btn btn-primary">Submit</button>
-                </form>
+                    <h4>Leave a Comment:</h4>
+                    <form method="POST" role="form">
+                        <div class="form-group">
+                            <textarea name="comment_content" class="form-control comment_field" rows="3" placeholder="<?php echo $comment_content_field ?>"></textarea>
+                        </div>
+                        <button type="submit" name="create_comment" class="btn btn-primary">Submit</button>
+                    </form>
             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -271,6 +273,24 @@
 
 
     </div>
+    <?php
+        if(isset($_POST["update_comment"])) {
+
+            $comment_id = $_POST["comment_id"];
+            // echo $comment_id;
+
+
+            $updates_content_comment = $_POST["comment_content"];
+
+            $query_update = "UPDATE comments SET comment_content='{$updates_content_comment}' where comment_id = '{$comment_id}'";
+            $update_comment = mysqli_query($connection, $query_update);
+
+
+            header("location:post.php?p_id=$post_id");
+        }
+
+    ?>
+
 
 
     <!-- DELETE COMMENT -->

@@ -194,9 +194,20 @@ textarea {
 .unapproved_img_post {
     filter: brightness(0.3);
 }
-.edit_comment {
-    width: 100px;
+.edit_comment_menu {
 
+
+
+    transform: translate(200px, 30px);
+}
+.comment_id {
+    display: none;
+}
+.name_date_plate, .edit_comment {
+    width: 300px;
+
+}
+.edit_comment {
     text-align: right;
 }
 .edit_comment_textarea {
