@@ -4,6 +4,97 @@
 <?php include "includes/head.php";?>
 
 <body>
+    <?php
+        // hard logic with comments below using session to initialize default values and then increment them by 6 to display 6 records
+        // set up minimal page limit to 0
+
+        if ($_SESSION['comments_page']<=1) {
+            $_SESSION['comments_page']=1;
+        }
+        if ($_SESSION['comments_page']==1) {
+            $DISPLAY_COMMENTS_RANGE_FROM = $_SESSION['comments_page_range_from']=0;
+
+
+            $DISPLAY_COMMENTS_RANGE_TO = $_SESSION['comments_page_range_to']=6;
+
+
+        }
+
+
+        // COUNTER PAGE BY USING POST BUTTONS AND INCREMENT OR DECREMENT SESSION PAGE
+        if(isset($_POST['newer_page'])) {
+            if ($_SESSION['comments_page']<1) {
+                $_SESSION['comments_page']=1;
+            }
+
+            if ($_SESSION['comments_page']==1) {
+                $DISPLAY_COMMENTS_RANGE_FROM = $_SESSION['comments_page_range_from']=0;
+
+
+                $DISPLAY_COMMENTS_RANGE_TO = $_SESSION['comments_page_range_to']=6;
+
+
+            }
+            else {
+                $_SESSION['comments_page']--;
+                $DISPLAY_COMMENTS_RANGE_FROM = $_SESSION['comments_page_range_from']-=6;
+
+
+            }
+
+
+        }
+
+
+
+
+        if(isset($_POST['older_page'])) {
+            $_SESSION['comments_page']++;
+            $DISPLAY_COMMENTS_RANGE_FROM = $_SESSION['comments_page_range_from']+=6;
+            $DISPLAY_COMMENTS_RANGE_TO = $_SESSION['comments_page_range_to']+=6;
+            echo "$DISPLAY_COMMENTS_RANGE_FROM . $DISPLAY_COMMENTS_RANGE_TO";
+
+        }
+
+
+
+        if(isset($_GET["p_id"])) {
+            $post_id = $_GET["p_id"];
+            if(isset($_POST["update_comment"])) {
+
+                $comment_id = $_POST["comment_id"];
+                // echo $comment_id;
+
+
+                $updates_content_comment = $_POST["comment_content"];
+
+                $query_update = "UPDATE comments SET comment_content='{$updates_content_comment}' where comment_id = '{$comment_id}'";
+                $update_comment = mysqli_query($connection, $query_update);
+
+
+                header("location:post.php?p_id=$post_id");
+            }
+        }
+
+
+
+
+
+        if(isset($_GET["p_id"])) {
+            $post_id = $_GET["p_id"];
+
+
+            if(isset( $_GET["delete_comment"])) {
+                $comment_deleted =$_GET["delete_comment"];
+                $query = "DELETE from comments WHERE comment_id={$comment_deleted}";
+                $delete_comment = mysqli_query($connection, $query);
+                header("location:post.php?p_id=$post_id");
+            }
+        }
+
+
+
+    ?>
 
     <!-- Navigation -->
     <?php include "includes/nav.php" ?>
@@ -20,6 +111,7 @@
 
 
                 <?php
+
                 if(isset($_GET["p_id"])) {
                     $post_id = $_GET["p_id"];
 
@@ -62,12 +154,21 @@
 
                 <?php }  } ?>
 
-
+                <!-- // $query = "SELECT * from comments where comment_post_id={$post_id} AND comment_status = 'approved' ORDER BY comment_id DESC"; -->
 
                 <!-- SELECT COMMENTS -->
                 <!-- comment approved or comment_author_role="Admin" display comment -->
                 <?php
-                    $query = "SELECT * from comments where comment_post_id={$post_id} AND comment_status = 'approved' ORDER BY comment_id DESC";
+                    // RESET COMMENTS TO PAGE 1 AFTER ADDING COMMENT
+                    if(!isset($DISPLAY_COMMENTS_RANGE_FROM)) {
+
+                        $DISPLAY_COMMENTS_RANGE_FROM=0;
+                        $_SESSION['comments_page']=1;
+
+                    }
+                    // SELECT ONLY 6 RECORDS FROM COMMENTS
+                    $query = "SELECT * FROM comments where comment_post_id = '{$post_id}' AND comment_status = 'approved' LIMIT  6 OFFSET $DISPLAY_COMMENTS_RANGE_FROM";
+
                     $query_select_comments = mysqli_query($connection, $query);
                     while($row = mysqli_fetch_array($query_select_comments)) {
                         $comment_author_data = $row["comment_author"];
@@ -139,22 +240,34 @@
                 </div>
                 <?php }?>
                 <?php
+
+
+
                 // CHECKING HOW MANY COMMENT EACH POST HAVE AND IF MORE THAN 0 DISPLAY WIDGET TO CHANGE COMMENTS
                 if(isset($_GET["p_id"])){
                     $post_id = $_GET["p_id"];
                     $query = "SELECT * from comments where comment_post_id = '{$post_id}'";
                     $query_select_comments = mysqli_query($connection, $query);
                     $comments_count = mysqli_num_rows($query_select_comments);
+
+                    $page_number = $_SESSION['comments_page'];
+
                     if( $comments_count>=6) {
                         ?>
-                    <ul class="pager page_changer col-md-2">
-                        <li class="previous">
-                            <a href="#">&larr; Older</a>
-                        </li>
-                        <li class="next">
-                            <a href="#">Newer &rarr;</a>
-                        </li>
-                    </ul>
+
+                    <form action="" method="post">
+                        <ul class="pager page_changer col-md-2">
+                            <li class="previous">
+                                <button name="newer_page">Page <?php echo  $page_number?></button>
+                            </li>
+                            <li class="next">
+                                <button name="older_page">Page <?php echo  $page_number+1?></button>
+                            </li>
+                        </ul>
+
+                    </form>
+
+
 
 
 
@@ -273,35 +386,7 @@
 
 
     </div>
-    <?php
-        if(isset($_POST["update_comment"])) {
 
-            $comment_id = $_POST["comment_id"];
-            // echo $comment_id;
-
-
-            $updates_content_comment = $_POST["comment_content"];
-
-            $query_update = "UPDATE comments SET comment_content='{$updates_content_comment}' where comment_id = '{$comment_id}'";
-            $update_comment = mysqli_query($connection, $query_update);
-
-
-            header("location:post.php?p_id=$post_id");
-        }
-
-    ?>
-
-
-
-    <!-- DELETE COMMENT -->
-    <?php
-    if(isset( $_GET["delete_comment"])) {
-        $comment_deleted =$_GET["delete_comment"];
-        $query = "DELETE from comments WHERE comment_id={$comment_deleted}";
-        $delete_comment = mysqli_query($connection, $query);
-        header("location:post.php?p_id=$post_id");
-    }
-    ?>
     <!-- DELETE POST -->
     <?php
     if(isset( $_GET["delete_post"])) {
