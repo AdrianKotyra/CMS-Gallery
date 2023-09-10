@@ -54,6 +54,9 @@
                 <a href="./admin/post.php"><i class="fa fa-fw fa-user"></i> <?php echo "<p>Unapproved posts .$sum_unapproved</p>"?></a>
             </li>
             <li>
+                <a class="show_messages_button"><i class="fa fa-fw fa-user"></i> <?php echo "<p>Unreaded messages 0</p>"?></a>
+            </li>
+            <li>
 
                 <a href="index.php?source=posts&profile=view"><i class="fa fa-fw fa-user"></i> Profile</a>
             </li>

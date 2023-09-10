@@ -5,6 +5,7 @@
 
 <body>
 
+
     <?php
     // RESET COMMENT PAGE
     $_SESSION['comments_page']=1;

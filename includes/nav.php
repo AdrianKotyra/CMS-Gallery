@@ -226,6 +226,12 @@
     <div class="nav-profile-container">
 
       <div class="profile-box-components">
+
+        <div class="profile-box-component"  >
+        <img class="send_msg" src="../icons/send.png" alt="">
+        </div>
+
+
         <div class="profile-box-component"  >
           <?php
             // checking if user is admin or normal user in order to display proper notifiation sign

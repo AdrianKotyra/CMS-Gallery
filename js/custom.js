@@ -1,3 +1,49 @@
+const displayMessengerShow = document.querySelector(".show_messages_button");
+const window_show_message = document.querySelector(".container_messenger_show_window");
+function showMessages() {
+    if (window_show_message.style.display == "none") {
+        window_show_message.style.display = "block";
+        window_send_message.style.display = "none";
+    } else {
+        window_show_message.style.display == "block";
+        window_show_message.style.display = "none";
+    }
+}
+showMessages()
+displayMessengerShow.addEventListener("click", showMessages);
+
+
+
+
+
+
+const displayMessengerSendButton = document.querySelector(".send_msg");
+const window_send_message = document.querySelector(".container_messenger_send_window");
+
+
+function  display_sender() {
+    if (window_send_message.style.display == "none") {
+        window_send_message.style.display = "block";
+        window_show_message.style.display = "none";
+
+    } else {
+        window_send_message.style.display == "block";
+        window_send_message.style.display = "none";
+    }
+}
+display_sender()
+displayMessengerSendButton.addEventListener("click", display_sender)
+
+
+
+
+
+
+
+
+
+
+
 const nav_mobile = document.querySelector(".nav_mobile");
 const nav_mobile_literal = `
     <a class="nav-link " href="index.php?source=posts">HOME</a>
