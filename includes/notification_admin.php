@@ -35,40 +35,41 @@
 
 
 
+    <div class="profile-box-component"  >
 
-
-    <div class="dropdown" style="cursor:pointer";>
-        <div href="#" class="dropdown-toggle notification_cont" data-toggle="dropdown">
-        <p class="notification_text">
-            <?php echo "$sum_unapproved"?>
-        </p>
-
-
-
+        <div class="dropdown" style="cursor:pointer";>
+            <div href="#" class="dropdown-toggle notification_cont" data-toggle="dropdown">
+            <p class="notification_text">
+                <?php echo "$sum_unapproved"?>
+            </p>
 
 
 
-       </i><img class="notification_img" width="40px" height="40px"src="./icons/email.png" alt=""></b></div>
-        <ul class="dropdown-menu">
-            <li>
-                <a href="./admin/post.php"><i class="fa fa-fw fa-user"></i> <?php echo "<p>Unapproved posts .$sum_unapproved</p>"?></a>
-            </li>
-            <li>
-                <a class="show_messages_button"><i class="fa fa-fw fa-user"></i> <?php echo "<p>Unreaded messages 0</p>"?></a>
-            </li>
-            <li>
-
-                <a href="index.php?source=posts&profile=view"><i class="fa fa-fw fa-user"></i> Profile</a>
-            </li>
 
 
 
-            <li>
-                <a href="index.php?logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
-                <?php logout_user_main()?>
-            </li>
+        </i><img class="notification_img" width="40px" height="40px"src="./icons/email.png" alt=""></b></div>
+            <ul class="dropdown-menu">
+                <li>
+                    <a href="./admin/post.php"><i class="fa fa-fw fa-user"></i> <?php echo "<p>Unapproved posts .$sum_unapproved</p>"?></a>
+                </li>
+                <li>
+                    <a class="show_messages_button"><i class="fa fa-fw fa-user"></i> <?php echo countMessages()?></a>
+                </li>
+                <li>
 
-        </ul>
+                    <a href="index.php?source=posts&profile=view"><i class="fa fa-fw fa-user"></i> Profile</a>
+                </li>
+
+
+
+                <li>
+                    <a href="index.php?logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                    <?php logout_user_main()?>
+                </li>
+
+            </ul>
+        </div>
     </div>
 
 

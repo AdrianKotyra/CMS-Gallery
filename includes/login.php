@@ -35,6 +35,7 @@
         $_SESSION["fetched_firstname"] =  $fetched_firstname;
         $_SESSION["fetched_last_name"] =  $fetched_last_name;
         $_SESSION["fetched_user_role"] =  $fetched_user_role;
+        countMessages();
 
 
 

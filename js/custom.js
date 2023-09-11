@@ -9,7 +9,7 @@ function showMessages() {
         window_show_message.style.display = "none";
     }
 }
-showMessages()
+
 displayMessengerShow.addEventListener("click", showMessages);
 
 
@@ -31,7 +31,7 @@ function  display_sender() {
         window_send_message.style.display = "none";
     }
 }
-display_sender()
+
 displayMessengerSendButton.addEventListener("click", display_sender)
 
 
@@ -151,3 +151,5 @@ function keepScrollPostion() {
     };
 }
 keepScrollPostion()
+showMessages()
+display_sender()

@@ -11,7 +11,8 @@ function start_session_default() {
 
 function display_login() {
     if ($_SESSION["fetched_password"] !==  "" && $_SESSION["fetched_login"] !== "") {
-        echo $_SESSION["fetched_login"];
+        $user_name = $_SESSION["fetched_login"];
+        echo "<p class='login_name' style='color:white; margin:0'>$user_name</p>";
 
     }
 }
@@ -29,7 +30,15 @@ function logout_user_main() {
 
 }
 
-
+function countMessages() {
+    global $connection;
+    $post_msg_sender = $_SESSION["fetched_login"];
+    $query = "SELECT * FROM messages WHERE msg_reciever = '{$post_msg_sender}'";
+    $select_msgs_query = mysqli_query($connection, $query);
+    $count_messages = mysqli_num_rows($select_msgs_query);
+    $_SESSION["messages_count"] = $count_messages;
+    return  "Unreaded messages " . strval($count_messages-1);
+}
 
 
 ?>

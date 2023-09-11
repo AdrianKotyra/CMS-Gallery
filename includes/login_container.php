@@ -8,7 +8,7 @@ if (isset($_SESSION['fetched_password']) && !empty($_SESSION['fetched_login'])) 
 
 
     <div class="dropdown" style="cursor:pointer";>
-        <div href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?php display_login()?><b class="caret"></b></div>
+        <div href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?php display_login()?></div>
         <ul class="dropdown-menu">
             <?php
                 $fetched_login = $_SESSION["fetched_login"];
