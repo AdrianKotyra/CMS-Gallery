@@ -40,7 +40,7 @@
         <div class="dropdown" style="cursor:pointer";>
             <div href="#" class="dropdown-toggle notification_cont" data-toggle="dropdown">
             <p class="notification_text">
-                <?php echo "$sum_unapproved"?>
+                <?php echo countNotifications()?>
             </p>
 
 
@@ -54,7 +54,7 @@
                     <a href="./admin/post.php"><i class="fa fa-fw fa-user"></i> <?php echo "<p>Unapproved posts .$sum_unapproved</p>"?></a>
                 </li>
                 <li>
-                    <a class="show_messages_button"><i class="fa fa-fw fa-user"></i> <?php echo countMessages()?></a>
+                    <a class="show_messages_button"><i class="fa fa-fw fa-user"></i> <?php echo "Unreaded messages " .countMessages()?></a>
                 </li>
                 <li>
 

@@ -37,8 +37,29 @@ function countMessages() {
     $select_msgs_query = mysqli_query($connection, $query);
     $count_messages = mysqli_num_rows($select_msgs_query);
     $_SESSION["messages_count"] = $count_messages;
-    return  "Unreaded messages " . strval($count_messages-1);
+    return  $count_messages;
 }
+
+function countNotifications() {
+    global $connection;
+    if ($_SESSION["fetched_user_role"]=="Admin") {
+        $query = "SELECT SUM(posts_unapproved_count) from posts";
+        $select_user_query = mysqli_query($connection, $query);
+        while($row = mysqli_fetch_array($select_user_query)) {
+            $sum_unapproved = $row['SUM(posts_unapproved_count)'];
+
+        }
+
+        $count_notifications = countMessages() +  $sum_unapproved;
+
+        return  $count_notifications;
+
+    }
+    else return countMessages();
+
+    }
+
+
 
 
 ?>
