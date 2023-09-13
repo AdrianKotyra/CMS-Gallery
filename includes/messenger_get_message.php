@@ -5,7 +5,7 @@
 
 <br>
 <div class="container_messenger_show_window col-md-3">
-    <img class="cross_exit_window_chat_user " id="get_message" src="../icons/cross.png" alt="">
+    <img class="cross_exit_window_chat_user_get_message" id="get_message" src="../icons/cross.png" alt="">
     <form action="" method="post">
         <div class="row">
             <div class="">
@@ -65,15 +65,7 @@
 
                         </ul>
                     </div>
-                    <div class="card-footer">
-                        <div class="input-group">
-                            <input id="btn-input" type="text" class="form-control input-sm" name="msg_content_form" placeholder="Type your message here..." />
-                            <span class="input-group-btn">
-                                <button class="btn btn-primary" id="btn-chat" name="send_msg">Send</button>
 
-                            </span>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

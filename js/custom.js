@@ -1,3 +1,27 @@
+
+
+
+
+
+const windowMessagesButtonClose = document.querySelector(".cross_exit_window_chat_user_get_message");
+function closeMessageWindow() {
+    if (window_show_message.style.display == "none") {
+        window_show_message.style.display = "block";
+        window_send_message.style.display = "none";
+    } else {
+        window_show_message.style.display == "block";
+        window_show_message.style.display = "none";
+    }
+}
+
+
+windowMessagesButtonClose.addEventListener("click", closeMessageWindow);
+
+
+
+
+
+
 const displayMessengerShow = document.querySelector(".show_messages_button");
 const window_show_message = document.querySelector(".container_messenger_show_window");
 function showMessages() {

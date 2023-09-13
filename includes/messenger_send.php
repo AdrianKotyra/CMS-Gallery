@@ -9,7 +9,7 @@
 
     if(isset($_POST["send_msg"])) {
 
-        $post_date         = date('d-m-y');
+        $post_date         = date('Y-m-d H:i:s');;
         $post_content_msg = $_POST["msg_content_form"];
         $post_msg_sender = $_SESSION["fetched_login"];
         $post_reciever_msg = $_POST["msg_user_form"];
@@ -22,6 +22,7 @@
         $query .= "VALUES('{$post_content_msg}','{$post_msg_sender}','{$post_reciever_msg}','{$post_date}')";
 
         $send_msg_query = mysqli_query($connection, $query);
+        header("Location:index.php?source=posts");
     }
 
 
@@ -30,7 +31,7 @@
 
 ?>
 <br>
-<div class="container_messenger_send_window">
+<div class="container_messenger_send_window col-md-3">
     <form action="" method="post">
         <div class="row">
             <div class="">
