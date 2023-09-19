@@ -1,6 +1,7 @@
 <?php
 
   if(isset($_POST["submit_registration"])) {
+    global $connection;
     $login_name =$_POST["username"];
     $first_name =$_POST["Firstname"];
     $second_name =$_POST["Lastname"];
@@ -48,17 +49,20 @@
       $login_name =mysqli_real_escape_string($connection, $login_name);
       $email_name =mysqli_real_escape_string($connection, $email_name);
       $password_name =mysqli_real_escape_string($connection, $password_name);
-
+      $user_role = "user";
       $query = "SELECT randSalt from users";
 
       $query_select_randSalt = mysqli_query($connection, $query);
       $row=mysqli_fetch_array($query_select_randSalt);
       $randSalt =  $row["randSalt"];
 
+
+      $password_crypted = crypt($password_name, $randSalt);
+
       $default_profile_img = "avatar-default.png";
 
-      $query_new_user = "INSERT INTO users(user_namee, user_password, user_firstname, user_lastname, user_email, user_image) ";
-      $query_new_user.= "VALUES('{$login_name}','{$password_name}','{$first_name}','{$second_name}','{$email_name}','{$default_profile_img}')";
+      $query_new_user = "INSERT INTO users(user_namee, user_password, user_firstname, user_lastname, user_email, user_image, user_role) ";
+      $query_new_user.= "VALUES('{$login_name}','{$password_crypted}','{$first_name}','{$second_name}','{$email_name}','{$default_profile_img}','{$user_role}')";
       $query_create_new_user_registration = mysqli_query($connection, $query_new_user);
     }
 

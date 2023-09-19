@@ -6,6 +6,8 @@
 
 <?php
     if(isset($_POST["login"])) {
+        $original_psw =  $_POST["password"];
+        $_SESSION["fetched_password_original"] =$original_psw;
        $password =  $_POST["password"];
        $login =  $_POST["username"];
 
@@ -24,12 +26,15 @@
             $fetched_user_role = $row["user_role"];
 
         }
+        // REVERSING CRYPTED PASSWORD IN ORDER TO LOG IN BY USER USING CREATED ORIGIN PASSWORD
+        $password=crypt($password, $fetched_password);
+
 
        if($login !==$fetched_login||$password!==$fetched_password) {
         header("Location:../index.php?source=register_form");
        }
        else if ($login ==$fetched_login&&$password==$fetched_password) {
-        $_SESSION["fetched_password"] =  $fetched_password;
+        $_SESSION["fetched_password"] =  $password;
         $_SESSION["fetched_login"] =  $fetched_login;
         $_SESSION["fetched_id"] =  $fetched_id;
         $_SESSION["fetched_firstname"] =  $fetched_firstname;

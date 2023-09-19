@@ -132,7 +132,7 @@
         $select_all_unapproved_comments = mysqli_query($connection, $query);
         $unapproved_comments_counts = mysqli_num_rows($select_all_unapproved_comments);
         // SELECT All SUBSCRIBERS
-        $query = "SELECT * FROM users where user_role= 'Subscriber'";
+        $query = "SELECT * FROM users where user_role= 'User'";
         $select_all_Subscribers = mysqli_query($connection, $query);
         $subscribers_counts = mysqli_num_rows($select_all_Subscribers);
 
@@ -148,7 +148,7 @@
             var data = google.visualization.arrayToDataTable([
             ['Data', 'Count'],
             <?php
-                $tables = ["Active posts", "Unpublished posts", "Comments", "Unapproved comments", "Users", "Subscribers", "Categories"];
+                $tables = ["Active posts", "Unpublished posts", "Comments", "Unapproved comments", "Accounts", "Users", "Categories"];
                 $tables_count = [$post_counts, $unpublished_post_counts, $comments_counts, $unapproved_comments_counts, $users_counts, $subscribers_counts, $cats_counts];
 
                 for ($i=0; $i<count($tables); $i++ ) {

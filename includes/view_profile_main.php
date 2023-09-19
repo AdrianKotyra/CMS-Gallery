@@ -43,7 +43,9 @@ SELECT USER BY USING FETCHED NAME FROM INDEX LOGIN FORM -->
     $post_image          =  $_FILES['image']['name'];
     $post_image_temp     =  $_FILES['image']['tmp_name'];
     $user_role           =  $_POST['user_role'];
-
+    // setting up new session user password
+    $_SESSION["fetched_password_original"] =$user_password;
+    $user_password = crypt($user_password, $_SESSION["fetched_password"]);
 
     if(empty($post_image)) {
 
@@ -84,7 +86,9 @@ SELECT USER BY USING FETCHED NAME FROM INDEX LOGIN FORM -->
     $query = "SELECT * FROM users WHERE user_namee = '{$user_name}'";
     $select_user_query = mysqli_query($connection, $query);
     while($row = mysqli_fetch_array($select_user_query)) {
+
         $fetched_password = $row["user_password"];
+
         $fetched_login = $row["user_namee"];
         $fetched_id = $row["user_id"];
         $fetched_firstname = $row["user_firstname"];
@@ -111,7 +115,7 @@ SELECT USER BY USING FETCHED NAME FROM INDEX LOGIN FORM -->
 
     <div class="form-group">
         <label for="user_password">User Password</label>
-        <input type="password" class="form-control" name="user_password" value=<?php echo "$user_password"?>>
+        <input type="password" class="form-control" name="user_password" value=<?php echo  $_SESSION["fetched_password_original"]?>>
     </div>
 
 

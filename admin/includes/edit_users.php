@@ -105,27 +105,7 @@
 
 
 ?>
-<!-- UPDATE SESSION LOGIN DETAILS -->
-<?php
-    $query = "SELECT * FROM users WHERE user_namee = '{$user_name}'";
-    $select_user_query = mysqli_query($connection, $query);
-    while($row = mysqli_fetch_array($select_user_query)) {
-        $fetched_password = $row["user_password"];
-        $fetched_login = $row["user_namee"];
-        $fetched_id = $row["user_id"];
-        $fetched_firstname = $row["user_firstname"];
-        $fetched_last_name = $row["user_lastname"];
-        $fetched_user_role = $row["user_role"];
-
-        $_SESSION["fetched_password"] =  $fetched_password;
-        $_SESSION["fetched_login"] =  $fetched_login;
-        $_SESSION["fetched_firstname"] =  $fetched_firstname;
-        $_SESSION["fetched_last_name"] =  $fetched_last_name;
-        $_SESSION["fetched_user_role"] =  $fetched_user_role;
-
-    }
-
-?>
+<!--  -->
 
 
 <form action="" method="post" enctype="multipart/form-data">
@@ -173,8 +153,17 @@
     <div class="form-group">
        <label for="user_role">User Role</label>
        <select name="user_role" id="">
-            <option value='Admin'>Admin</option>
-            <option value='Subscriber'>Subscriber</option>
+            <?php if($user_role=="Admin") {
+                echo "<option value='$user_role'>$user_role</option>";
+                echo "<option value='User'>User</option>";
+                }
+                else {
+                    echo "<option value='$user_role'>$user_role</option>";
+                    echo "<option value='Admin'>Admin</option>";
+                }
+            ?>
+
+
         </select>
 
     </div>
