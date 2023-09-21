@@ -50,6 +50,9 @@
 
 
   <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-  <?php include "admin_footer.php" ?>
+  <script src="js/jquery.js"></script>
+
+  <!-- Bootstrap Core JavaScript -->
+  <script src="js/bootstrap.min.js"></script>
 
 </head>

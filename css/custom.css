@@ -3,7 +3,9 @@ a:hover {
     text-decoration: none;
 }
 
-
+.container {
+    padding-top: 100px;
+}
 .chat
 {
     list-style: none;
@@ -78,6 +80,7 @@ a:hover {
     display: none;
 
 }
+
 .cross_exit_window_chat_user, .cross_exit_window_chat_user_get_message {
     position: absolute;
     top: 0;

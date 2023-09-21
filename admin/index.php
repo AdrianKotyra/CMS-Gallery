@@ -5,7 +5,7 @@
 
 
 <body>
-   
+
     <div id="wrapper">
 
         <!-- Navigation -->
@@ -40,7 +40,7 @@
     </div>
     <!-- /#wrapper -->
 
-
+    <?php include("includes/admin_footer.php")?>
 
 </body>
 

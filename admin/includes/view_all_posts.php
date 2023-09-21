@@ -18,11 +18,30 @@
 
 
             <div class= "col-xs-3">
-                <input type="submit" name= "submit" class="btn btn-success" value="apply">
+                <input class = "btn btn-primary applyButton" value="apply">
                 <a class="btn btn-primary" href="post.php?source=add_posts">Add New</a>
-
+                <input value="apply" name= "submit" type="submit"  class = "btn btn-primary applyButton2" value="apply">
 
             </div>
+            <script>
+                // CREATING MULTI LISTERNERS USING FOR LOOP TO ADD IT TO MANY BUTTONS
+                const applyButton = document.querySelector(".applyButton");
+
+                applyButton.addEventListener("click", function() {
+                confirmationWindow("delete")})
+
+                const submitFormDeleteManyPosts = document.querySelector(".applyButton2");
+                const yesButtonToCloseConfWindow = document.querySelector(".confYes");
+                function acceptFormManyDeletion() {
+                    yesButtonToCloseConfWindow.addEventListener("click", function() {
+                        submitFormDeleteManyPosts.click()
+                    })
+                }
+
+
+
+
+            </script>
 
             <tr>
                 <th><input type='checkbox' id='all_posts' name='all_posts' value='all_posts'></th>
@@ -37,14 +56,33 @@
                 <th>Comment counts</th>
                 <th>Date</th>
                 <th>Edit</th>
-                <th>Delete</th>
+
                 <th>view</th>
             </tr>
         </thead>
         <tbody>
 
             <?php select_and_display_categories_posts();?>
+            <?php  // DELETE posts
+
+                if(isset($_GET["delete_post"])) {
+
+                    $post_to_be_deleted = $_GET["delete_post"];
+                    $query = "DELETE from posts WHERE post_id={$post_to_be_deleted}";
+                    $delete_post = mysqli_query($connection, $query);
+                    header("Location:post.php");
+
+                }
+            ?>
+
+
+
+
+
+
+
             <?php delete_post_by_selection();?>
+
             <?php publish_post_by_selection();?>
             <?php unpublish_post_by_selection();?>
 

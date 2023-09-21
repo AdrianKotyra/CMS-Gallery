@@ -5,6 +5,8 @@
 
 <body>
 
+
+
     <div id="wrapper">
 
         <!-- Navigation -->
@@ -80,7 +82,7 @@
     <!-- /#wrapper -->
 
 
-
+    <?php include("includes/admin_footer.php")?>
 </body>
 
 </html>

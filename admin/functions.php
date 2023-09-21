@@ -1,3 +1,6 @@
+
+
+
 <?php
 
 function insert_categories() {
@@ -241,16 +244,16 @@ function delete_post_by_selection() {
 
 }
 
-function delete_post_from_user() {
-    global $connection;
-    if(isset($_GET["delete"])) {
-        $post_delete_id = $_GET["delete"];
+// function delete_post_from_user() {
+//     global $connection;
+//     if(isset($_GET["delete"])) {
+//         $post_delete_id = $_GET["delete"];
 
-        $query = "DELETE from posts WHERE post_id={$post_delete_id}";
-        $delete_post = mysqli_query($connection, $query);
-        header("location:post.php");
-    }
-}
+//         $query = "DELETE from posts WHERE post_id={$post_delete_id}";
+//         $delete_post = mysqli_query($connection, $query);
+//         header("location:post.php");
+//     }
+// }
 
 
 
@@ -305,26 +308,26 @@ function select_and_display_categories_posts() {
 
         echo "<td>$post_comment_count</td>";
 
-
         echo "<td>$post_date</td>";
         echo "<td><a href='post.php?source=edit_posts&post_id={$post_id}'>EDIT</a></td>";
-        echo "<td><a href='post.php?delete_post={$post_id}'>DELETE</a></td>";
+
+        // echo "<script> alert('{$post_id}')</script>";
+
+        echo "<script> const data_post_id={$post_id}</script>";
 
         echo "<td><a href='../post.php?p_id=$post_id'>View</a></td>";
         echo"</tr>";
 
-        // DELETE posts
-        if(isset($_GET["delete_post"])) {
-            $post_to_be_deleted = $_GET["delete_post"];
-            $query = "DELETE from posts WHERE post_id={$post_to_be_deleted}";
-            $delete_post = mysqli_query($connection, $query);
-            header("location:post.php");
-        }
+
 
 
 
     }
 }
+
+
+
+
 
  // DELETE comments
 function delete_comments() {
@@ -441,3 +444,5 @@ function select_and_display_users() {
 
 
 ?>
+
+

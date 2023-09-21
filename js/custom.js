@@ -4,10 +4,6 @@
 
 
 
-
-
-
-
 const displayMessengerSendButton = document.querySelector(".send_msg");
 const window_send_message = document.querySelector(".container_messenger_send_window");
 
@@ -162,3 +158,7 @@ displayMessengerShow.addEventListener("click", showMessages);
 
 
 showMessages()
+
+
+// -------- DISPLAY CONFIRMATION WINDOW --------
+
