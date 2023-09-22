@@ -17,7 +17,7 @@ $(document).ready(function() {
 
 // CREATE OBJECT LITERAL CONFIRMATION WINDOW
 
-function confirmationWindow(text, id) {
+function confirmationWindow(text) {
 
     const windowObjectLiteral = `
     <div class="confirmationWindow">
@@ -41,6 +41,8 @@ function confirmationWindow(text, id) {
 
     </div>
     `
+
+
     const body = document.querySelector("body");
     body.insertAdjacentHTML("afterbegin", windowObjectLiteral)
 

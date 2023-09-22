@@ -4,7 +4,7 @@
 
     <table class="table table-bordered table-hover">
         <div id="bulkOptionContainer"class="select_container col-xs-3">
-            <select class="form-control" name="select_post" id="">
+            <select class="form-control" name="select_post" id="select_post">
                 <option value="">Select options</option>
                 <option value="delete_post">Delete</option>
                 <option value="publish_post">Publish</option>
@@ -14,6 +14,7 @@
 
 
         </div>
+
         <thead>
 
 
@@ -24,19 +25,45 @@
 
             </div>
             <script>
-                // CREATING MULTI LISTERNERS USING FOR LOOP TO ADD IT TO MANY BUTTONS
-                const applyButton = document.querySelector(".applyButton");
 
-                applyButton.addEventListener("click", function() {
-                confirmationWindow("delete")})
 
-                const submitFormDeleteManyPosts = document.querySelector(".applyButton2");
-                const yesButtonToCloseConfWindow = document.querySelector(".confYes");
-                function acceptFormManyDeletion() {
-                    yesButtonToCloseConfWindow.addEventListener("click", function() {
-                        submitFormDeleteManyPosts.click()
-                    })
+                function checkSelectedOption() {
+                    // Get the select element by its id
+                    var selectElement = document.getElementById("select_post");
+                    const applyButton = document.querySelector(".applyButton");
+                    const submitFormDeleteManyPosts = document.querySelector(".applyButton2");
+
+                    // Get the selected option's value
+                    var selectedValue = selectElement.value;
+
+                    // Remove the event listener for other options
+                    applyButton.removeEventListener("click", handleConfirmation);
+
+                    // Compare the selected value with "delete_post"
+                    if (selectedValue === "delete_post") {
+                        // Add the event listener for "Delete" option
+                        applyButton.addEventListener("click", handleConfirmation);
+
+                        // Add event listener for accepting form deletion
+                        const yesButtonToCloseConfWindow = document.querySelector(".confYes");
+                        function acceptFormManyDeletion() {
+                            yesButtonToCloseConfWindow.addEventListener("click", function() {
+                                submitFormDeleteManyPosts.click();
+                            });
+                        }
+                    }
                 }
+
+                // Define the confirmation window handling function
+                function handleConfirmation() {
+                    confirmationWindow("delete");
+                }
+
+                // Attach the onchange event handler to the select element
+                var selectElement = document.getElementById("select_post");
+                selectElement.onchange = checkSelectedOption;
+
+
 
 
 
