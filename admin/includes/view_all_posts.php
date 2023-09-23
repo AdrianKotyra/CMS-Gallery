@@ -1,3 +1,4 @@
+<script><?php include "./js/custom.js"?> </script>
 
 <form action="" method="POST">
 
@@ -24,51 +25,6 @@
                 <input value="apply" name= "submit" type="submit"  class = "btn btn-primary applyButton2" value="apply">
 
             </div>
-            <script>
-
-
-                function checkSelectedOption() {
-                    // Get the select element by its id
-                    var selectElement = document.getElementById("select_post");
-                    const applyButton = document.querySelector(".applyButton");
-                    const submitFormDeleteManyPosts = document.querySelector(".applyButton2");
-
-                    // Get the selected option's value
-                    var selectedValue = selectElement.value;
-
-                    // Remove the event listener for other options
-                    applyButton.removeEventListener("click", handleConfirmation);
-
-                    // Compare the selected value with "delete_post"
-                    if (selectedValue === "delete_post") {
-                        // Add the event listener for "Delete" option
-                        applyButton.addEventListener("click", handleConfirmation);
-
-                        // Add event listener for accepting form deletion
-                        const yesButtonToCloseConfWindow = document.querySelector(".confYes");
-                        function acceptFormManyDeletion() {
-                            yesButtonToCloseConfWindow.addEventListener("click", function() {
-                                submitFormDeleteManyPosts.click();
-                            });
-                        }
-                    }
-                }
-
-                // Define the confirmation window handling function
-                function handleConfirmation() {
-                    confirmationWindow("delete");
-                }
-
-                // Attach the onchange event handler to the select element
-                var selectElement = document.getElementById("select_post");
-                selectElement.onchange = checkSelectedOption;
-
-
-
-
-
-
-            </script>
 
             <tr>
                 <th><input type='checkbox' id='all_posts' name='all_posts' value='all_posts'></th>
@@ -90,17 +46,7 @@
         <tbody>
 
             <?php select_and_display_categories_posts();?>
-            <?php  // DELETE posts
 
-                if(isset($_GET["delete_post"])) {
-
-                    $post_to_be_deleted = $_GET["delete_post"];
-                    $query = "DELETE from posts WHERE post_id={$post_to_be_deleted}";
-                    $delete_post = mysqli_query($connection, $query);
-                    header("Location:post.php");
-
-                }
-            ?>
 
 
 
@@ -118,3 +64,10 @@
 
 
 </form>
+
+
+
+<script>
+    actionItemsBySelection()
+</script>
+
