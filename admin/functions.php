@@ -178,6 +178,8 @@ function unpublish_post_by_selection() {
     global $connection;
 
     if(isset($_POST["checkBoxArray"]) && $_POST['select_post'] == 'unpublish_post') {
+
+
         $post_user =   $_SESSION["fetched_login"];
         $query = "SELECT * FROM users where user_namee = '{$post_user}'";
         $query_update = "UPDATE posts SET posts_unapproved_count={posts_unapproved_count+1} where post_author = '{$post_user}'";

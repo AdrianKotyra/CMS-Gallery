@@ -1,4 +1,185 @@
 
+function submitWindowTimed(text) {
+    setTimeout(function () {
+    submitWindow(text) },500)
+
+}
+
+function submitWindow() {
+
+    let windowSubmitLiteral = `
+    <div class="confirmationWindow">
+    <div class="confirmationWindowContainer col-md-6">
+        <img class="crossConfWindow" src="../icons/cross.png" alt="">
+        <div class="textAndButtons">
+            <p>${text}</p>
+            <div class="buttonsContainer">
+                <a class="btn btn-primary confNo okCenterConfWindow">OK</a>
+            </div>
+        </div>
+    </div>
+
+    </div>
+    `;
+    const body = document.querySelector("body");
+    body.insertAdjacentHTML("afterbegin", windowSubmitLiteral)
+
+    // CREATE OBJECT LITERAL CONFIRMATION WINDOW CROSS TO CLOSE IT
+    function closeConfimationWindow() {
+        const ConfWidowContent = document.querySelector(".confirmationWindow");
+        if(ConfWidowContent) {
+            ConfWidowContent.remove()
+        }
+
+
+    }
+
+    const crossToCloseConfWindow = document.querySelector(".crossConfWindow");
+    crossToCloseConfWindow.addEventListener("click", function() {
+
+        closeConfimationWindow()
+    })
+
+    const NoButtonToCloseConfWindow = document.querySelector(".confNo");
+    NoButtonToCloseConfWindow.addEventListener("click", function() {
+        closeConfimationWindow()
+    })
+    // CLOSE WINDOW IN TIME
+    setTimeout(function () {
+        const ConfWidowContent = document.querySelector(".confirmationWindow");
+
+       if(ConfWidowContent) {
+            ConfWidowContent.remove()
+        }
+
+    }, 5000);
+}
+
+
+// CONFIRMATION WINDOW ADD POST
+
+
+// run the function to display confirmation window
+
+
+function actionItemsBySelectionPost(text) {
+    // INIT VARS MADE IN ORDER TO COMPARE WITH USERS CHANGES AND DISPALY PROPER WINDOW
+    let postTitleInit = document.querySelector(".post_title_input");
+    let postTitleValueInit = postTitleInit.value;
+    let postContentInit = document.querySelector(".post_content_input");
+    let postContentValueInit = postContentInit.value;
+
+    function confirmationWindowPost() {
+        let postTitle = document.querySelector(".post_title_input");
+        let postTitleValue = postTitle.value;
+        let postContent = document.querySelector(".post_content_input");
+        let postContentValue = postContent.value;
+
+        let windowObjectLiteral = `
+        <div class="confirmationWindow">
+        <div class="confirmationWindowContainer col-md-6">
+            <img class="crossConfWindow" src="../icons/cross.png" alt="">
+            <div class="textAndButtons">
+                <p>Are you sure you want to ${text} post?</p>
+                <div class="buttonsContainer">
+                    <a class="btn btn-primary confNo">No</a>
+                    <a value="apply" name= "submit" type="submit" class="btn btn-primary confYes">Yes</a>
+                </div>
+            </div>
+        </div>
+
+        </div>
+        `;
+        let windowObjectLiteralNoChanges = `
+        <div class="confirmationWindow">
+        <div class="confirmationWindowContainer col-md-6">
+            <img class="crossConfWindow" src="../icons/cross.png" alt="">
+            <div class="textAndButtons">
+                <p>You need to make changes in order to ${text} post</p>
+                <div class="buttonsContainer">
+                    <a class="btn btn-primary confNo okCenterConfWindow">OK</a>
+                </div>
+            </div>
+        </div>
+        </div>
+        `;
+
+        // CHECKING IF ANY CHANGES TO INIT INPUTS BEEN MADE
+        if(postTitleValue==postTitleValueInit && postContentValue ==postContentValueInit) {
+            windowObjectLiteral =windowObjectLiteralNoChanges
+        }
+
+
+        const body = document.querySelector("body");
+        body.insertAdjacentHTML("afterbegin", windowObjectLiteral)
+
+        // CREATE OBJECT LITERAL CONFIRMATION WINDOW CROSS TO CLOSE IT
+        function closeConfimationWindow() {
+            const ConfWidowContent = document.querySelector(".confirmationWindow");
+            ConfWidowContent.remove()
+
+        }
+
+
+        const crossToCloseConfWindow = document.querySelector(".crossConfWindow");
+        crossToCloseConfWindow.addEventListener("click", function() {
+            closeConfimationWindow()
+        })
+
+        const NoButtonToCloseConfWindow = document.querySelector(".confNo");
+        NoButtonToCloseConfWindow.addEventListener("click", function() {
+            closeConfimationWindow()
+        })
+
+        // deleting slected posts by using dom delement in modal window which is equal to php form submit button
+        const submitFormDeleteManyPosts = document.querySelector(".publishPostButton");
+        const yesButtonToCloseConfWindow = document.querySelector(".confYes");
+
+        yesButtonToCloseConfWindow.addEventListener("click", function() {
+            submitFormDeleteManyPosts.click()
+        })
+
+
+    }
+
+
+
+    const applyButton = document.querySelector(".publishPostButtonAction");
+    function checkSelectedOption() {
+
+        let postTitle = document.querySelector(".post_title_input");
+        let postTitleValue = postTitle.value;
+        let postContent = document.querySelector(".post_content_input");
+        let postContentValue = postContent.value;
+
+        // Get the select element by its id
+        const submitFormaddingPosts = document.querySelector(".publishPostButton");
+
+
+        function applyChanges() {
+            const yesButtonToCloseConfWindow = document.querySelector(".confYes");
+            function acceptFormManyDeletion() {
+                yesButtonToCloseConfWindow.addEventListener("click", function() {
+                    submitFormaddingPosts.click();
+                });
+            }
+        }
+
+        if(postTitleValue!=="" &&postContentValue !=="") {
+
+            confirmationWindowPost();
+            applyChanges();
+
+        }
+
+    }
+
+
+    applyButton.addEventListener("click", function() {
+        checkSelectedOption()
+    })
+
+}
 
 
 

@@ -2,7 +2,6 @@
 
 <form action="" method="POST">
 
-
     <table class="table table-bordered table-hover">
         <div id="bulkOptionContainer"class="select_container col-xs-3">
             <select class="form-control" name="select_post" id="select_post">

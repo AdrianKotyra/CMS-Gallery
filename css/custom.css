@@ -1,4 +1,55 @@
+/* CONFIRMATION WINDOW CSS*/
+.confirmationWindow {
+    font-size: 1.5rem;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color:rgba(0, 0, 0, 0.625);
+    z-index: 9999999999999999999;
 
+}
+.confirmationWindowContainer {
+    position: relative;
+    background-color: white;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height:50vh;
+}
+.okCenterConfWindow {
+    text-align: center;
+    margin: auto;
+}
+.delete_post_button {
+    cursor: pointer;
+}
+.applyButton2 {
+    visibility: hidden;
+}
+.buttonsContainer * {
+    cursor: pointer;
+}
+.confirmationWindowContainer img{
+    width: 40px;
+    height: 40px;
+    right: 0;
+    position: absolute;
+    cursor: pointer;
+}
+.buttonsContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.confirmationWindowContainer .textAndButtons {
+    position: absolute;
+    font-weight: 700;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
+/* -------------------------------------- */
 a:hover {
     text-decoration: none;
 }
@@ -50,6 +101,9 @@ a:hover {
     display: flex;
     flex-direction: row;
 
+}
+.publishPostButton {
+    visibility: hidden;
 }
 .container_messenger_send_window {
     position: fixed;

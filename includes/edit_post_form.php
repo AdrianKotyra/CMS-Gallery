@@ -1,5 +1,5 @@
 
-
+<script><?php include "./js/custom.js"?> </script>
 
 <!-- SELECT POSTS ABD DISPLAY IN FORM -->
 <?php
@@ -45,9 +45,9 @@
 
 
     if(isset($_POST["edit_post"])) {
-        echo '<h2 class="text-center">Post has been updated</h2>';
+        echo '<script> submitWindowTimed() </script>';
         $post_author         = $_SESSION['fetched_login'];
-        $post_title          =  $_POST['post_title'];
+        $post_title          =  $_POST['post_title_input'];
         $post_status         =  $_POST['Post_Status'];
         $post_image          =  $_FILES['image']['name'];
         $post_image_temp     =  $_FILES['image']['tmp_name'];
@@ -113,7 +113,7 @@
 
     <div class="form-group">
         <label for="post_title">Post Title</label>
-        <input type="text" class="form-control" name="post_title" value=<?php echo "$post_title"?>>
+        <input type="text" class="form-control post_title_input" name="post_title_input" value=<?php echo "$post_title"?> required>
     </div>
 
 
@@ -182,19 +182,28 @@
 
     <div class="form-group">
         <label for="post_content">Post Content</label>
-        <textarea class="form-control" name="post_content" id="" cols="30" rows="10">  <?php echo "$post_content"?></textarea>
+        <textarea class="form-control post_content_input" name="post_content" id="" cols="30" rows="10" required>  <?php echo "$post_content"?></textarea>
     </div>
+
+
 
 
 
     <div class="form-group">
-        <input class="btn btn-primary" type="submit" name="edit_post" value="Edit Post">
+        <input class="btn btn-primary publishPostButtonAction" value="Edit Post">
     </div>
 
+    <div class="form-group">
+        <input class="btn btn-primary publishPostButton" type="submit" name="edit_post" value="Edit Post">
+    </div>
 
 
 
 
 </form>
 
+
+<script>
+    actionItemsBySelectionPost("edit");
+</script>
 

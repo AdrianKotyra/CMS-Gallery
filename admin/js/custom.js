@@ -102,6 +102,7 @@ function actionItemsBySelection() {
         const submitFormDeleteManyPosts = document.querySelector(".applyButton2");
         const checkboxFromSelect = document.querySelector(".checkBoxes");
 
+
         function applyChanges() {
             const yesButtonToCloseConfWindow = document.querySelector(".confYes");
             function acceptFormManyDeletion() {
@@ -240,5 +241,61 @@ function actionItemsBySelectionPost() {
         checkSelectedOption()
     })
 
+}
+
+function submitWindowTimed(text) {
+    setTimeout(function () {
+    submitWindow(text) },500)
+
+}
+
+function submitWindow(text) {
+
+    let windowSubmitLiteral = `
+    <div class="confirmationWindow">
+    <div class="confirmationWindowContainer col-md-6">
+        <img class="crossConfWindow" src="../icons/cross.png" alt="">
+        <div class="textAndButtons">
+            <p>${text}</p>
+            <div class="buttonsContainer">
+                <a class="btn btn-primary confNo okCenterConfWindow">OK</a>
+            </div>
+        </div>
+    </div>
+
+    </div>
+    `;
+    const body = document.querySelector("body");
+    body.insertAdjacentHTML("afterbegin", windowSubmitLiteral)
+
+    // CREATE OBJECT LITERAL CONFIRMATION WINDOW CROSS TO CLOSE IT
+    function closeConfimationWindow() {
+        const ConfWidowContent = document.querySelector(".confirmationWindow");
+        if(ConfWidowContent) {
+            ConfWidowContent.remove()
+        }
+
+
+    }
+
+    const crossToCloseConfWindow = document.querySelector(".crossConfWindow");
+    crossToCloseConfWindow.addEventListener("click", function() {
+
+        closeConfimationWindow()
+    })
+
+    const NoButtonToCloseConfWindow = document.querySelector(".confNo");
+    NoButtonToCloseConfWindow.addEventListener("click", function() {
+        closeConfimationWindow()
+    })
+    // CLOSE WINDOW IN TIME
+    setTimeout(function () {
+        const ConfWidowContent = document.querySelector(".confirmationWindow");
+
+       if(ConfWidowContent) {
+            ConfWidowContent.remove()
+        }
+
+    }, 5000);
 }
 
