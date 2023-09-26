@@ -68,5 +68,6 @@
 
 <script>
     actionItemsBySelection()
+
 </script>
 

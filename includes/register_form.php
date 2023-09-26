@@ -1,3 +1,5 @@
+<script><?php include "./js/custom.js"?> </script>
+
 <?php
 
   if(isset($_POST["submit_registration"])) {
@@ -44,7 +46,7 @@
 
 
 
-      echo "<h3>User has been created</h3>";
+      echo '<script> submitWindowTimed("User has been created successfully") </script>';
       // encrypt info
       $login_name =mysqli_real_escape_string($connection, $login_name);
       $email_name =mysqli_real_escape_string($connection, $email_name);

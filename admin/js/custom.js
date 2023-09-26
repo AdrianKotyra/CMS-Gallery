@@ -64,6 +64,7 @@ function confirmationWindow(text) {
         closeConfimationWindow()
     })
 
+
     // deleting slected posts by using dom delement in modal window which is equal to php form submit button
     const submitFormDeleteManyPosts = document.querySelector(".applyButton2");
     const yesButtonToCloseConfWindow = document.querySelector(".confYes");
@@ -101,7 +102,8 @@ function actionItemsBySelection() {
 
         const submitFormDeleteManyPosts = document.querySelector(".applyButton2");
         const checkboxFromSelect = document.querySelector(".checkBoxes");
-
+            // Get all checkboxes by their class
+        const checkboxes = document.querySelectorAll(".checkBoxes");
 
         function applyChanges() {
             const yesButtonToCloseConfWindow = document.querySelector(".confYes");
@@ -111,21 +113,34 @@ function actionItemsBySelection() {
                 });
             }
         }
-        if (selectedValueOption === "delete_post" && checkboxFromSelect.checked) {
+          // Flag to check if at least one checkbox is checked
+        let isChecked = false;
 
-            confirmationWindow("delete");
-            applyChanges()
-        }
-        if (selectedValueOption === "publish_post" && checkboxFromSelect.checked) {
+        checkboxes.forEach(function(checkbox) {
+            // Loop through each checkbox
+            if (checkbox.checked) {
+                isChecked = true;
+            }
+        });
+        if(isChecked) {
+            if (selectedValueOption === "delete_post") {
 
-            confirmationWindow("publish");
-            applyChanges()
-        }
-        if (selectedValueOption === "unpublish_post" && checkboxFromSelect.checked) {
+                confirmationWindow("delete");
 
-            confirmationWindow("Unpublish");
-            const yesButtonToCloseConfWindow = document.querySelector(".confYes");
-            applyChanges()
+                applyChanges()
+            }
+            if (selectedValueOption === "publish_post") {
+
+                confirmationWindow("publish");
+
+                applyChanges()
+            }
+            if (selectedValueOption === "unpublish_post") {
+
+                confirmationWindow("Unpublish");
+
+                applyChanges()
+            }
         }
 
     }

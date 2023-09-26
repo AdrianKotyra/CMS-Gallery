@@ -45,7 +45,7 @@
 
 
     if(isset($_POST["edit_post"])) {
-        echo '<script> submitWindowTimed() </script>';
+        echo '<script> submitWindowTimed("Post has been edited") </script>';
         $post_author         = $_SESSION['fetched_login'];
         $post_title          =  $_POST['post_title_input'];
         $post_status         =  $_POST['Post_Status'];
@@ -85,16 +85,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
     }
 
 
@@ -113,7 +103,7 @@
 
     <div class="form-group">
         <label for="post_title">Post Title</label>
-        <input type="text" class="form-control post_title_input" name="post_title_input" value=<?php echo "$post_title"?> required>
+        <input type="text" class="form-control post_title_input" name="post_title_input" value=<?php echo "$post_title"?> >
     </div>
 
 

@@ -16,6 +16,9 @@
     transform: translate(-50%, -50%);
     height:50vh;
 }
+.edit_drop p {
+    color: black;
+}
 .okCenterConfWindow {
     text-align: center;
     margin: auto;

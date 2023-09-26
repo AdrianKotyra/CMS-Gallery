@@ -5,7 +5,7 @@
 if(isset($_POST['create_post'])) {
 
 
-    echo '<script> submitWindowTimed() </script>';
+    echo '<script> submitWindowTimed("Post has been added successfully") </script>';
 
     $post_user =   $_SESSION["fetched_login"];
 
