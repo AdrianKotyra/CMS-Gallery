@@ -8,6 +8,9 @@
     z-index: 9999999999999999999;
 
 }
+.all_users_content {
+    padding-top: 60px;
+}
 .confirmationWindowContainer {
     position: relative;
     background-color: white;
@@ -382,10 +385,17 @@ a:hover {
     margin: auto;
 }
 .user_picture {
-    width: 200px;
-    height: 200px;
+    width: 100px;
+    height: 100px;
     object-fit: cover;
     border-radius: 50%;
+
+
+}
+.user_search_profiles {
+    margin-top: 50px;
+    position: sticky;
+    top:20px;
 
 
 }
@@ -396,6 +406,7 @@ a:hover {
     border-radius: 50%;
 }
 .user_content {
+
 
 }
 .row-user {
@@ -410,10 +421,11 @@ a:hover {
 }
 .user_col {
     width: 100%;
-
+   justify-content: center;
 
     display: flex;
     flex-direction: row;
+
 }
 .user_info {
     margin-left: 30px;
@@ -514,11 +526,11 @@ textarea {
 @media only screen and (max-width: 600px) {
 
     .user_col {
-       flex-direction: column;
+
     }
     .user_info {
         margin-top: 10px;
-        margin-left: 0px;
+        margin-left: 40px;
 
     }
     .user_desc {

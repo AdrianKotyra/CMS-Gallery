@@ -142,7 +142,15 @@
                         </p>
                         <p><span class="glyphicon glyphicon-time"></span> Posted on <?php echo $post_date ?></p>
                         <hr>
-                        <img class="img-responsive post_img" src="img/<?php echo $post_image;?>" alt="">
+                         <!-- IF THERE IS NOT IMAGE DO NOT DISPLAY IT -->
+                        <?php
+                            if($post_image!=="") {
+                                echo "<img class='img-responsive posts_img' src='img/$post_image'";
+
+
+                            }
+                        ?>
+
                         <hr>
 
                         <p><?php echo $post_content ?></p>

@@ -11,6 +11,7 @@
 
 
     <?php
+
     // RESET COMMENT PAGE
     $_SESSION['comments_page']=1;
 
@@ -47,7 +48,7 @@
                         break;
 
                         case 'view_users' ;
-                        include "includes/all_users_view.php";
+                        header("Location:all_users_view.php");
                         break;
 
 

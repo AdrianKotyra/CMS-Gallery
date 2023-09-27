@@ -5,7 +5,14 @@
 if(isset($_POST['create_post'])) {
 
 
-    echo '<script> submitWindowTimed("Post has been added successfully") </script>';
+    echo '
+    <script>
+        submitWindowTimed("Post has been added successfully")
+        setTimeout(() => {
+        window.location.href = "./index.php?source=posts";
+        }, 2000);
+    </script>';
+
 
     $post_user =   $_SESSION["fetched_login"];
 

@@ -23,12 +23,7 @@
         ?>
 
 
-    <!-- <h1 class="page-header">
-    Page Heading
-        <small>Secondary Text</small>
-    </h1> -->
 
-    <!-- First Blog Post -->
 
     <h2>
         <a href="post.php?p_id=<?php echo $post_id?>"><?php echo $post_title ?></a>
@@ -39,6 +34,7 @@
     <p><span class="glyphicon glyphicon-time"></span> Posted on <?php echo $post_date ?></p>
     <hr>
     <a href="post.php?p_id=<?php echo $post_id?>" >
+   
     <img class="img-responsive posts_img" src="img/<?php echo $post_image;?>" alt="">
     </a>
 

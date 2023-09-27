@@ -52,15 +52,18 @@
                 <div href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>   <button class="btn btn-success">Edit Post</button><b class="caret"></b></div>
                 <ul class="dropdown-menu">
                 <li><a class='nav-link' href='./edit_post_user.php?post_id=<?php echo $post_id?>'><p>Edit Post</p> </a> </li>
-                <li><a class='nav-link publishPostButtonAction'><p>Delete Post</p></a> </li>
+                <!-- create link with data-post-id to pass every indivudal id to js function -->
+                <li><a class='nav-link publishPostButtonAction' data-post-id='<?php echo $post_id; ?>'><p>Delete Post</p></a></li>
+
                 <!-- INVISIBLE BUTTON TO BE CLICKED BY FAKE JS BUTTON to make changes -->
-                <li><a class='applyButton2' href='./post.php?p_id=<?php echo $post_id?>&delete_post=post'>Delete Post </a> </li>
+
                 <!-- INVOKING DELETE SCRIPT IF BUTTON IS CLICKED -->
 
 
 
                 </ul>
             </div>
+
 
             </div>
 
@@ -69,7 +72,15 @@
 
     <hr>
     <a href="post.php?p_id=<?php echo $post_id?>" >
-    <img class="img-responsive posts_img" src="img/<?php echo $post_image;?>" alt="">
+    <!-- IF THERE IS NOT IMAGE DO NOT DISPLAY IT -->
+    <?php
+        if($post_image!=="") {
+            echo "<img class='img-responsive posts_img' src='img/$post_image'";
+
+
+        }
+    ?>
+
     </a>
 
     <hr>
@@ -85,12 +96,91 @@
 <?php }  }?>
 <!--
 CREATING SCRIPT TO DELETE EACH POST INDIVIDUALLY BASED ON ITS POST ID LINK GET -->
-<script>
-    const deleteButtons = document.querySelectorAll(".publishPostButtonAction");
 
-    deleteButtons.forEach(button => {
+<script>
+
+    document.querySelectorAll(".publishPostButtonAction").forEach(button => {
         button.addEventListener('click', function() {
-            confirmationWindow("delete");
+            // Get the post_id from the data attribute
+            const post_id = this.getAttribute('data-post-id');
+
+            // Display the confirmation window and pass post_id as an argument
+            confirmationWindowPosts("delete", post_id);
         });
     });
+</script>
+
+
+
+<script>
+function confirmationWindowPosts(text, post_id) {
+
+const windowObjectLiteral = `
+<div class="confirmationWindow">
+<div class="confirmationWindowContainer col-md-6">
+    <img class="crossConfWindow" src="../icons/cross.png" alt="">
+    <div class="textAndButtons">
+        <p>Are you sure you want to ${text} selected items?</p>
+        <div class="buttonsContainer">
+
+
+            <a class="btn btn-primary confNo">No</a>
+
+            <a value="apply" name= "submit" type="submit" class="btn btn-primary confYes">Yes</a>
+
+
+        </div>
+    </div>
+
+
+</div>
+
+</div>
+`
+
+
+const body = document.querySelector("body");
+body.insertAdjacentHTML("afterbegin", windowObjectLiteral)
+
+// CREATE OBJECT LITERAL CONFIRMATION WINDOW CROSS TO CLOSE IT
+function closeConfimationWindow() {
+    const ConfWidowContent = document.querySelector(".confirmationWindow");
+    ConfWidowContent.remove()
+
+}
+
+
+const crossToCloseConfWindow = document.querySelector(".crossConfWindow");
+crossToCloseConfWindow.addEventListener("click", function() {
+    closeConfimationWindow()
+})
+
+const NoButtonToCloseConfWindow = document.querySelector(".confNo");
+NoButtonToCloseConfWindow.addEventListener("click", function() {
+    closeConfimationWindow()
+})
+
+
+// deleting slected posts by using dom delement in modal window which is equal to php form submit button
+
+// selecting corresponding post using passing variable post_id from link data-post-id
+const confYesButton = document.querySelector(".confYes");
+    confYesButton.addEventListener("click", function() {
+        // Find the applyButton2 for the corresponding post_id
+
+        closeConfimationWindow()
+        submitWindowTimed("post has been deleted");
+        setTimeout(() => {
+            window.location.href = './post.php?p_id=<?php echo $post_id?>&delete_post=post';
+        }, 2000);
+
+
+
+
+    });
+
+
+}
+
+
 </script>
