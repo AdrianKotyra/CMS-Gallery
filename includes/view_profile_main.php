@@ -1,4 +1,4 @@
-
+<script><?php include "./js/custom.js"?> </script>
 <!--
 SELECT USER BY USING FETCHED NAME FROM INDEX LOGIN FORM -->
 <?php
@@ -8,13 +8,13 @@ SELECT USER BY USING FETCHED NAME FROM INDEX LOGIN FORM -->
     $query_select_user = mysqli_query($connection, $query);
     while($row = mysqli_fetch_array($query_select_user)) {
         $user_id = $row["user_id"];
-        $user_name = $row["user_namee"];
-        $user_password = $row["user_password"];
-        $user_firstname = $row["user_firstname"];
-        $user_lastname = $row["user_lastname"];
-        $user_email = $row["user_email"];
-        $user_image = $row["user_image"];
-        $user_role = $row["user_role"];
+        $user_name_fetched = $row["user_namee"];
+        $user_password_fetched = $row["user_password"];
+        $user_firstname_fetched = $row["user_firstname"];
+        $user_lastname_fetched = $row["user_lastname"];
+        $user_email_fetched = $row["user_email"];
+        $user_image_fetched = $row["user_image"];
+
         $user_randSalt = $row["randSalt"];
         $user_status = $row["user_status"];
     }
@@ -42,7 +42,7 @@ SELECT USER BY USING FETCHED NAME FROM INDEX LOGIN FORM -->
     $user_email        =  $_POST['user_email'];
     $post_image          =  $_FILES['image']['name'];
     $post_image_temp     =  $_FILES['image']['tmp_name'];
-    $user_role           =  $_POST['user_role'];
+
     // setting up new session user password
     $_SESSION["fetched_password_original"] =$user_password;
     $user_password = crypt($user_password, $_SESSION["fetched_password"]);
@@ -58,22 +58,41 @@ SELECT USER BY USING FETCHED NAME FROM INDEX LOGIN FORM -->
 
         }
     }
+    if($user_name_fetched==$user_name&&$user_password_fetched== $user_password&&$user_firstname_fetched==$user_firstname&&
+    $user_firstname_fetched==$user_firstname&&$user_email_fetched==$user_email&&$user_image_fetched==$post_image)
+    {
 
-    $query_update = "UPDATE users SET ";
-    $query_update .="user_namee  = '{$user_name}', ";
-    $query_update .="user_password = '{$user_password}', ";
-    $query_update .="user_firstname = '{$user_firstname}', ";
-    $query_update .="user_lastname = '{$user_lastname}', ";
-    $query_update .="user_email   = '{$user_email}', ";
-    $query_update .="user_role= '{$user_role}', ";
-    $query_update .="user_image  = '{$post_image}' ";
-    $query_update .= "WHERE user_id = {$user_id} ";
 
-    $update_user= mysqli_query($connection,$query_update);
+        echo
+        '<script>
+            submitWindowTimed("You need to provide changes to your details")
+        </script>';
 
-    move_uploaded_file($post_image_temp, "./img/$post_image");
 
-    echo "<h2 class='text-center'> User have been updated</h2>";
+    }
+    else {
+        $query_update = "UPDATE users SET ";
+        $query_update .="user_namee  = '{$user_name}', ";
+        $query_update .="user_password = '{$user_password}', ";
+        $query_update .="user_firstname = '{$user_firstname}', ";
+        $query_update .="user_lastname = '{$user_lastname}', ";
+        $query_update .="user_email   = '{$user_email}', ";
+        $query_update .="user_image  = '{$post_image}' ";
+        $query_update .= "WHERE user_id = {$user_id} ";
+
+        $update_user= mysqli_query($connection,$query_update);
+
+        move_uploaded_file($post_image_temp, "./img/$post_image");
+
+        echo
+        '<script>
+            submitWindowTimed("User details successfully updated")
+            setTimeout(() => {
+            window.location.href = "./index.php?source=posts";}, 2000);
+        </script>';
+    }
+
+
 }
 
 
@@ -83,7 +102,7 @@ SELECT USER BY USING FETCHED NAME FROM INDEX LOGIN FORM -->
 
 <!-- UPDATE SESSION LOGIN DETAILS -->
 <?php
-    $query = "SELECT * FROM users WHERE user_namee = '{$user_name}'";
+    $query = "SELECT * FROM users WHERE user_namee = '{$user_name_fetched}'";
     $select_user_query = mysqli_query($connection, $query);
     while($row = mysqli_fetch_array($select_user_query)) {
 
@@ -93,13 +112,13 @@ SELECT USER BY USING FETCHED NAME FROM INDEX LOGIN FORM -->
         $fetched_id = $row["user_id"];
         $fetched_firstname = $row["user_firstname"];
         $fetched_last_name = $row["user_lastname"];
-        $fetched_user_role = $row["user_role"];
+
 
         $_SESSION["fetched_password"] =  $fetched_password;
         $_SESSION["fetched_login"] =  $fetched_login;
         $_SESSION["fetched_firstname"] =  $fetched_firstname;
         $_SESSION["fetched_last_name"] =  $fetched_last_name;
-        $_SESSION["fetched_user_role"] =  $fetched_user_role;
+
 
     }
 ?>
@@ -109,7 +128,7 @@ SELECT USER BY USING FETCHED NAME FROM INDEX LOGIN FORM -->
 
     <div class="form-group">
         <label for="user_name">User Name</label>
-        <input type="text" class="form-control" name="user_name" value=<?php echo "$user_name"?>>
+        <input type="text" class="form-control" name="user_name" value=<?php echo "$user_name_fetched"?>>
     </div>
 
 
@@ -121,23 +140,23 @@ SELECT USER BY USING FETCHED NAME FROM INDEX LOGIN FORM -->
 
     <div class="form-group">
         <label for="user_firstname">User Firstname</label>
-        <input type="text" class="form-control" name="user_firstname" value=<?php echo "$user_firstname"?>>
+        <input type="text" class="form-control" name="user_firstname" value=<?php echo "$user_firstname_fetched"?>>
     </div>
 
     <div class="sticky_pointer">
         <div class="form-group">
             <label for="user_lastname">User Lastname</label>
-            <input type="text" class="form-control" name="user_lastname" value=<?php echo "$user_lastname"?>>
+            <input type="text" class="form-control" name="user_lastname" value=<?php echo "$user_lastname_fetched"?>>
         </div>
 
         <div class="form-group">
             <label for="user_email">User Email</label>
-            <input type="text" class="form-control" name="user_email" value=<?php echo "$user_email"?>>
+            <input type="text" class="form-control" name="user_email" value=<?php echo "$user_email_fetched"?>>
         </div>
 
         <div class="form-group">
 
-            <img width=200 src="./img/<?php echo"$user_image" ?>" alt="">
+            <img width=200 src="./img/<?php echo"$user_image_fetched" ?>" alt="">
         </div>
 
         <div class="form-group">
@@ -146,17 +165,10 @@ SELECT USER BY USING FETCHED NAME FROM INDEX LOGIN FORM -->
         </div>
 
 
-        <div class="form-group">
-        <label for="user_role">User Role</label>
-        <select name="user_role" id="">
-                <option value='Admin'>Admin</option>
-                <option value='Subscriber'>Subscriber</option>
-            </select>
 
-        </div>
 
         <div class="form-group">
-            <input class="btn btn-primary" type="submit" name="edit_user" value="Update User">
+            <input class="btn btn-primary" type="submit" name="edit_user" value="Update User" >
         </div>
 
     </div>

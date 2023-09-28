@@ -29,15 +29,18 @@
 
 
 
+        <div class="search_prof_cont">
+            <div class="col-md-12 user_search_profiles">
+                <?php include "includes/user_search.php"?>
+            </div>
 
-        <div class="col-md-4 user_search_profiles">
-            <?php include "includes/user_search.php"?>
         </div>
 
 
 
 
-            <div class="col-md-12 all_users_content">
+
+        <div class="col-md-12 all_users_content">
 
 
 

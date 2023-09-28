@@ -1,4 +1,13 @@
 
+
+
+function preventDefaultFunction() {
+    event.preventDefault();
+    // Add your custom logic here if needed
+}
+
+
+
 function submitWindowTimed(text) {
     setTimeout(function () {
     submitWindow(text) },500)

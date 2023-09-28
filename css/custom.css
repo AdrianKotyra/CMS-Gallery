@@ -392,12 +392,22 @@ a:hover {
 
 
 }
+.sidebar_sticky_class {
+    position: sticky;
+    top:60px;
+
+}
 .user_search_profiles {
     margin-top: 50px;
     position: sticky;
     top:20px;
 
 
+}
+.search_prof_cont {
+
+    display: table;
+    margin: auto;
 }
 .posts_images {
     width: 100px;

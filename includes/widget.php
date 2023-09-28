@@ -1,4 +1,4 @@
 <div class="well">
-    <h4>Side Widget Well</h4>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus laudantium odit aliquam repellat tempore quos aspernatur vero.</p>
+    <h4>Welcome to my CMS</h4>
+    <p>This is the project I been working on to practise my PHP skills. To see Admin panel login in using admin/admin Thanks.</p>
 </div>

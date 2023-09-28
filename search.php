@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<?php session_start()?>
 <?php include "includes/head.php";?>
-
+<script><?php include "./js/custom.js"?> </script>
 <body>
 
     <!-- Navigation -->
@@ -15,14 +15,15 @@
 
             <!-- Blog Entries Column -->
             <div class="col-md-8">
+
             <?php
 
 
 
-                if(isset($_POST['submit'])){
 
-                $search = $_POST['search'];
 
+
+                $search =  $_SESSION["search_result"];
 
                 $query = "SELECT * FROM posts WHERE post_title LIKE '%$search%' ";
                 $search_query = mysqli_query($connection, $query);
@@ -37,10 +38,18 @@
 
                 if($count == 0) {
 
-                    echo "<h1> NO RESULT</h1>";
+                    echo '
+                    <script>
+                        submitWindowTimed("No Results")
+
+                    </script>';
 
                 } else {
+                    echo '
+                    <script>
+                        submitWindowTimed("Result Found")
 
+                    </script>';
                 while($row = mysqli_fetch_assoc($search_query)) {
                 $post_id = $row['post_id'];
                 $post_title = $row['post_title'];
@@ -74,8 +83,7 @@
                 <?php }
 
 
-                }}
-
+                }
 
 
 
@@ -87,6 +95,7 @@
 
 
             </div>
+
             <?php include "includes/sidebar.php" ?>
 
         </div>

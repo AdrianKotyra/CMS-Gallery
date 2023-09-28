@@ -8,21 +8,13 @@
     ?>
 
     <?php
-        if(!empty($_SESSION["fetched_login"]) && isset($_GET["source"])=="posts") {
+        if(!empty($_SESSION["fetched_login"])) {
             include "blog_search.php";
 
         }
 
     ?>
 
-    <?php
-        if(isset($_GET["category"])) {
-            $category = $_GET["category"];
-            include "blog_search.php";
-
-        }
-
-    ?>
 
     <?php
         if(isset($_GET["source"])) {
