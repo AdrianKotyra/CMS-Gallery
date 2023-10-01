@@ -61,8 +61,10 @@ if (isset($_GET["source"]) && isset($_GET["user_chat"])) {
                             if (isset($_GET["source"]) && isset($_GET["user_chat"])) {
                                 $user_chat_with = $_GET["user_chat"];
                                 $query = "SELECT * FROM users WHERE user_id='{$user_chat_with}'";
-
+                                // RESET NUMBER OF MESSAGES FOR USER SENDER
+                                $messages_from_user =0;
                                 $select_user = mysqli_query($connection, $query);
+
                             }
                             while ($row = mysqli_fetch_array($select_user)) {
                                 $user_id = $row["user_id"];
@@ -72,7 +74,7 @@ if (isset($_GET["source"]) && isset($_GET["user_chat"])) {
                                 $user_image = $row["user_image"];
                                 $user_role = $row["user_role"];
                                 // SELECT MESSAGES SENT TO LOGGED USER;
-                                $query = "SELECT * FROM messages WHERE (msg_sender = '{$user_name}' AND msg_reciever = '{$user_logged_in}') OR (msg_sender = '{$user_logged_in}' AND msg_reciever = '{$user_name}') ORDER BY msg_date DESC";
+                                $query = "SELECT * FROM messages WHERE (msg_sender = '{$user_name}' AND msg_reciever = '{$user_logged_in}') OR (msg_sender = '{$user_logged_in}' AND msg_reciever = '{$user_name}') ORDER BY msg_date DESC LIMIT 20";
                                 $select_msgs_query = mysqli_query($connection, $query);
                                 while ($row = mysqli_fetch_assoc($select_msgs_query)) {
                                     $user_msg_content = $row["msg_content"];
@@ -83,7 +85,7 @@ if (isset($_GET["source"]) && isset($_GET["user_chat"])) {
                                     <li class="<?php echo ($msg_sender == $user_logged_in) ? 'right' : 'left'; ?> clearfix">
                                         <span class="chat-img">
 
-                                            <img class="user_chat_img" src='<?php echo ($msg_sender === $user_logged_in) ? "./img/$user_img_logged" : "./img/$user_image"; ?>'>
+                                            <img class="user_chat_img_opened" src='<?php echo ($msg_sender === $user_logged_in) ? "./img/$user_img_logged" : "./img/$user_image"; ?>'>
                                         </span>
 
                                         <div class="chat-body clearfix">
@@ -135,7 +137,7 @@ if (isset($_GET["source"]) && isset($_GET["user_chat"])) {
         $query .= "VALUES('{$post_content_msg}','{$post_msg_sender}','{$post_reciever_msg}','{$post_date}')";
 
         $send_msg_query = mysqli_query($connection, $query);
-
+        header("Location:index.php?source=posts");
     }
 }
 ?>
@@ -146,3 +148,10 @@ if (isset($_GET["source"]) && isset($_GET["user_chat"])) {
 
 
 </div>
+<!-- UPDATE MESSAGES STATUS TO READ WHEN OPENED -->
+<?php
+    if (isset($_GET["source"]) && isset($_GET["user_chat"])) {
+
+    $update_msg_status = "UPDATE messages SET msg_status = 'Readed' WHERE (msg_sender = '{$user_name}' AND msg_reciever = '{$user_logged_in}')";
+    mysqli_query($connection, $update_msg_status);
+}

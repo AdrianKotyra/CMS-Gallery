@@ -35,9 +35,10 @@
                                     $user_id = $user_row["user_id"];
 
                                     // Count the messages from this user
-                                    $count_query = "SELECT COUNT(*) AS message_count FROM messages WHERE msg_sender = '{$user_msg_sender}' AND msg_reciever = '{$post_msg_sender}'";
+                                    $count_query = "SELECT COUNT(*) AS message_count FROM messages WHERE msg_sender = '{$user_msg_sender}' AND msg_reciever = '{$post_msg_sender}'AND msg_status = 'Unreaded'";
                                     $count_result = mysqli_query($connection, $count_query);
                                     $message_count = mysqli_fetch_assoc($count_result)["message_count"];
+                                    $messages_from_user =  $message_count;
 
                                     // Display user information and message count
                                     ?>
@@ -49,7 +50,7 @@
                                                 <p class="user_chat_name"><?php echo $user_name ?></p>
                                             </div>
 
-                                            <p class="user_chat_message_button" src="" alt=""><?php echo $message_count ?></p>
+                                            <p class="user_chat_message_button" src="" alt=""><?php echo $messages_from_user ?></p>
 
 
                                         </div>

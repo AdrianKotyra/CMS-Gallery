@@ -33,7 +33,7 @@ function logout_user_main() {
 function countMessages() {
     global $connection;
     $post_msg_sender = $_SESSION["fetched_login"];
-    $query = "SELECT * FROM messages WHERE msg_reciever = '{$post_msg_sender}'";
+    $query = "SELECT * FROM messages WHERE msg_reciever = '{$post_msg_sender}' AND msg_status = 'Unreaded'";
     $select_msgs_query = mysqli_query($connection, $query);
     $count_messages = mysqli_num_rows($select_msgs_query);
     $_SESSION["messages_count"] = $count_messages;

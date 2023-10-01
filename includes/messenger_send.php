@@ -13,13 +13,13 @@
         $post_content_msg = $_POST["msg_content_form"];
         $post_msg_sender = $_SESSION["fetched_login"];
         $post_reciever_msg = $_POST["msg_user_form"];
+        $msg_status = "Unreaded";
 
 
 
+        $query = "INSERT INTO messages(msg_content, msg_sender, msg_reciever, msg_date, msg_status) ";
 
-        $query = "INSERT INTO messages(msg_content, msg_sender, msg_reciever, msg_date) ";
-
-        $query .= "VALUES('{$post_content_msg}','{$post_msg_sender}','{$post_reciever_msg}','{$post_date}')";
+        $query .= "VALUES('{$post_content_msg}','{$post_msg_sender}','{$post_reciever_msg}','{$post_date}','{$msg_status}')";
 
         $send_msg_query = mysqli_query($connection, $query);
         header("Location:index.php?source=posts");
@@ -31,7 +31,8 @@
 
 ?>
 <br>
-<div class="container_messenger_send_window col-md-3">
+<div class="col-md-3 container_messenger_send_window">
+    <img class="cross_exit_window_chat_user_get_message" id="send_message" src="../icons/cross.png" alt="">
     <form action="" method="post">
         <div class="row">
             <div class="">

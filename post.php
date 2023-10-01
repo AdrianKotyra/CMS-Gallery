@@ -172,7 +172,7 @@
                          <!-- IF THERE IS NOT IMAGE DO NOT DISPLAY IT -->
                         <?php
                             if($post_image!=="") {
-                                echo "<img class='img-responsive posts_img' src='img/$post_image'";
+                                echo "<img class='img-responsive posts_img_post' src='img/$post_image'";
 
 
                             }

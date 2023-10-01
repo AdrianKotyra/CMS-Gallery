@@ -192,10 +192,13 @@
 
 
         <?php if (!empty($_SESSION['fetched_login'])) {
-            include "message_sender.php";
+          ?>
+            <div class="profile-box-component"  >
+            <img class="send_msg" src="../icons/send.png" alt="">
+            </div>
 
 
-        }?>
+          <?php } ?>
 
         <?php
           // checking if user is admin or normal user in order to display proper notifiation sign
