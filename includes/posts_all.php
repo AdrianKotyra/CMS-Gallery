@@ -34,7 +34,7 @@
     <p><span class="glyphicon glyphicon-time"></span> Posted on <?php echo $post_date ?></p>
     <hr>
     <a href="post.php?p_id=<?php echo $post_id?>" >
-   
+
     <img class="img-responsive posts_img" src="img/<?php echo $post_image;?>" alt="">
     </a>
 

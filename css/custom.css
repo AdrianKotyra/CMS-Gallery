@@ -429,6 +429,12 @@ a:hover {
 
 
 }
+#user_col_sub {
+    justify-content: left !important;
+}
+#user_row_sub {
+    padding: 0 !important;
+}
 .user_col {
     width: 100%;
    justify-content: center;
@@ -451,6 +457,14 @@ a:hover {
 }
 textarea {
     resize: none;
+}
+#image_sub_user {
+    max-width: 100% !important;
+}
+#image_user_from_post {
+    border-radius: 10px !important;
+    width: 300px !important;
+    height: 300px !important;
 }
 .posts_img {
     max-width: 100%; /* Set the maximum width to the container width */

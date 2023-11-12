@@ -24,7 +24,7 @@
         $query = "SELECT * FROM `posts` WHERE post_author = '{$fetched_login}'";
         $select_posts_LOGGED_user = mysqli_query($connection, $query);
         while ($row = mysqli_fetch_assoc($select_posts_LOGGED_user)) {
-            $post_author = $row["post_author"];
+            $post_author_logged = $row["post_author"];
         }
 
         ?>
@@ -44,7 +44,7 @@
 
         // DISPLAYING EDIT AND DELETE POST IF USER IS THE CREATOR BY CHECKING SESSION LOGIN IF ITS EQUAL BY POST AUTHOR
 
-        if ($fetched_login===$post_author) {
+        if ($fetched_login===$post_author_logged) {
             ?>
 
             <div class="nav-link">
