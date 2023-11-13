@@ -1,7 +1,7 @@
 
     <div class="well">
         <h4>Post Search</h4>
-        <form action="index.php?source=posts" method="post">
+        <form action="index.php?source=posts&page=1" method="post">
             <div class="input-group">
                 <input name="search" type="text" class="form-control" placeholder="search post title">
                 <span class="input-group-btn">

@@ -43,7 +43,7 @@
                                     // Display user information and message count
                                     ?>
 
-                                    <a href="index.php?source=posts&user_chat=<?php echo $user_id?>">
+                                    <a href="index.php?source=posts&page=1&user_chat=<?php echo $user_id?>">
                                         <div class="user_chat_component">
                                             <div class="user_name_img">
                                                 <img class="user_chat_img" src='<?php echo "./img/$user_image" ?>' alt="">

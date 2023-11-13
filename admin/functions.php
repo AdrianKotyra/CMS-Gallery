@@ -262,11 +262,9 @@ function delete_post_by_selection() {
 
 
 
-
-
 function select_and_display_categories_posts() {
     global $connection;
-    $query = "SELECT * from posts";
+    $query = "SELECT * from posts ORDER BY post_id DESC";
     $select_categories_query = mysqli_query($connection, $query);
     while($row = mysqli_fetch_assoc($select_categories_query)) {
         $post_id = $row["post_id"];
@@ -279,6 +277,7 @@ function select_and_display_categories_posts() {
         $post_tags = $row["post_tags"];
         $post_status = $row["post_status"];
         $post_comment_count = $row["post_comment_count"];
+        $post_views = $row["post_views"];
 
 
 
@@ -318,6 +317,13 @@ function select_and_display_categories_posts() {
         echo "<script> const data_post_id={$post_id}</script>";
 
         echo "<td><a href='../post.php?p_id=$post_id'>View</a></td>";
+        if($post_views==null) {
+            echo "<td>none</td>";
+        }
+        else {
+            echo "<td>$post_views</td>";
+        }
+
         echo"</tr>";
 
 

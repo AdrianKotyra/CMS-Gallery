@@ -15,7 +15,7 @@
   if(isset($_SESSION["fetched_user_role"])) {
     $_SESSION["fetched_user_role"];
     if($_SESSION["fetched_user_role"]!=="Admin") {
-        header("Location: ../index.php?source=posts");
+        header("Location: ../index.php?source=posts&page=1");
     }
 
   }

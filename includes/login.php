@@ -45,7 +45,7 @@
 
 
         header("Location:login_search_widget_component.php");
-        header("Location:../index.php?source=posts");
+        header("Location:../index.php?source=posts&page=1");
        }
 
 

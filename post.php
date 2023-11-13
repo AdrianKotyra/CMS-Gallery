@@ -114,7 +114,9 @@
 
                 if(isset($_GET["p_id"])) {
                     $post_id = $_GET["p_id"];
-
+                    // update post views when user is entering webpage post
+                    $query_update = "UPDATE posts SET post_views={post_views+1} where post_id = '{$post_id}'";
+                    $update_post_views = mysqli_query($connection, $query_update);
 
 
 

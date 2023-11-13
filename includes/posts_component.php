@@ -1,8 +1,28 @@
 <script><?php include "./js/custom.js"?> </script>
 <?php
 
+    if(isset($_GET['page'])) {
+        $page = $_GET['page'];
 
-    $query = "SELECT * FROM posts ORDER BY post_id DESC";
+    }
+    if(!isset($_GET['page'])) {
+
+        $page = "";
+
+    }
+    if($page === "" || $page === 1 ) {
+        $page1 = 0;
+    }
+    else {
+        $page_1 = ($page *5) -5;
+    }
+
+
+
+
+
+
+    $query = "SELECT * FROM posts ORDER BY post_id DESC LIMIT $page_1, 5";
     $select_posts = mysqli_query($connection, $query);
     while($row = mysqli_fetch_assoc($select_posts)) {
         $post_id = $row["post_id"];
@@ -44,7 +64,7 @@
 
         // DISPLAYING EDIT AND DELETE POST IF USER IS THE CREATOR BY CHECKING SESSION LOGIN IF ITS EQUAL BY POST AUTHOR
 
-        if ($fetched_login===$post_author_logged) {
+        if ($post_author===$post_author_logged) {
             ?>
 
             <div class="nav-link">
@@ -90,8 +110,32 @@
 
 
 
+<?php }  } ?>
+<ul class="pager">
+    <?php
+        $query_posts = "SELECT * from posts";
 
-<?php }  }?>
+        $query_selects_all_posts = mysqli_query($connection, $query_posts);
+        $post_count_sum = mysqli_num_rows($query_selects_all_posts);
+        $post_count_sum = ceil($post_count_sum/5);
+        for($i=1; $i<=$post_count_sum; $i++) {
+            if ($i ==($_GET["page"])) {
+                $active_page = "active_page";
+            }
+            else {
+                $active_page = "inactive_page";
+            }
+            echo "<li> <a class=$active_page href='index.php?source=posts&page=$i'>$i</a></li>";
+
+        }
+
+
+
+?>
+
+</ul>
+
+
 <!--
 CREATING SCRIPT TO DELETE EACH POST INDIVIDUALLY BASED ON ITS POST ID LINK GET -->
 
@@ -100,12 +144,12 @@ CREATING SCRIPT TO DELETE EACH POST INDIVIDUALLY BASED ON ITS POST ID LINK GET -
     document.querySelectorAll(".publishPostButtonAction").forEach(button => {
         button.addEventListener('click', function() {
             // Get the post_id from the data attribute
-            const post_id = this.getAttribute('data-post-id');
+            const post_id = this.getAttribute('data-post-id')
 
             // Display the confirmation window and pass post_id as an argument
-            confirmationWindowPosts("delete", post_id);
-        });
-    });
+            confirmationWindowPosts("delete", post_id)
+        })
+    })
 </script>
 
 

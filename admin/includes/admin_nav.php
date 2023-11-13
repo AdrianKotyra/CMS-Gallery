@@ -17,7 +17,7 @@
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
-                <li><a href="../index.php?source=posts">HOME</a></li>
+                <li><a href="../index.php?source=posts&page=1">HOME</a></li>
 
 
                 <li class="dropdown">

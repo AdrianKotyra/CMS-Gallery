@@ -9,6 +9,7 @@
                 <option value="delete_post">Delete</option>
                 <option value="publish_post">Publish</option>
                 <option value="unpublish_post">Unpublish</option>
+                <!-- <option value="clone_post">clone post</option> -->
             </select>
 
 
@@ -26,6 +27,7 @@
             </div>
 
             <tr>
+
                 <th><input type='checkbox' id='all_posts' name='all_posts' value='all_posts'></th>
                 <th>Id</th>
                 <th>Author</th>
@@ -38,8 +40,8 @@
                 <th>Comment counts</th>
                 <th>Date</th>
                 <th>Edit</th>
-
                 <th>view</th>
+                <th>view counts</th>
             </tr>
         </thead>
         <tbody>

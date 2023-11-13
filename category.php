@@ -10,8 +10,20 @@
 
     <!-- Page Content -->
     <div class="container">
+    <?php
+        if(isset($_GET["category"])) {
+            $category_id = $_GET["category"];
 
-        <div class="row">
+            $query_cat = "SELECT * FROM `categories` where category_id = {$category_id}";
+            $select_cat = mysqli_query($connection, $query_cat);
+            while($row = mysqli_fetch_assoc($select_cat)) {
+                $category_name = $row["category_title"];
+                echo "<h1 class='cat_title'>$category_name</h1>";
+            }
+    }
+
+    ?>
+<div class="row">
 
             <!-- Blog Entries Column -->
             <div class="col-md-8">
@@ -30,7 +42,10 @@
                             $post_content = substr($row["post_content"],0, 50);
                             $post_image =  $row["post_image"]
 
+
+
                             ?>
+
 
 
 
@@ -77,7 +92,7 @@
 
 
 
-              
+
 
             </div>
             <?php include "includes/sidebar.php" ?>

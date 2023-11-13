@@ -22,7 +22,7 @@
         $query .= "VALUES('{$post_content_msg}','{$post_msg_sender}','{$post_reciever_msg}','{$post_date}','{$msg_status}')";
 
         $send_msg_query = mysqli_query($connection, $query);
-        header("Location:index.php?source=posts");
+        header("Location:index.php?source=posts&page=1");
     }
 
 

@@ -58,7 +58,7 @@
                 </li>
                 <li>
 
-                    <a href="index.php?source=posts&profile=view"><i class="fa fa-fw fa-user"></i> Profile</a>
+                    <a href="index.php?source=posts&page=1&profile=view"><i class="fa fa-fw fa-user"></i> Profile</a>
                 </li>
 
 

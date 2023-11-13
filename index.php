@@ -37,6 +37,7 @@
                     }
                     else {
                         $source = "";
+
                     }
                     switch($source) {
                         case 'view_profile' ;
@@ -84,7 +85,7 @@
 
             </div>
 
-            <?php include "includes/sidebar.php"; ?>
+            <?php include "includes/sidebar.php" ?>
 
         </div>
         <!-- /.row -->
@@ -95,9 +96,9 @@
 
     </div>
     <!-- /.container -->
-                    
 
-    <?php include "includes/footer.php";
+
+    <?php include "includes/footer.php"
     ?>
 
 

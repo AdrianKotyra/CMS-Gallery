@@ -261,7 +261,7 @@ function actionItemsBySelectionPost(text) {
 
 const nav_mobile = document.querySelector(".nav_mobile");
 const nav_mobile_literal = `
-    <a class="nav-link " href="index.php?source=posts">HOME</a>
+    <a class="nav-link " href="index.php?source=posts&page=1">HOME</a>
     <a class="nav-link " href='index.php?source=register'>Sign Up</a>
 
 
@@ -290,10 +290,10 @@ const navMobileDisplayOn = function() {
 
     }
     else {
-        nav_mobile.style.animation="navMenuSlideDownBackwards 0.3s forwards";
+        nav_mobile.style.animation="navMenuSlideDownBackwards 0.3s forwards"
         setTimeout(() => {
 
-            nav_mobile.style.display="none";
+            nav_mobile.style.display="none"
         }, 111);
 
     }
@@ -308,19 +308,19 @@ hambIcone.addEventListener("click", navMobileDisplayOn);
 
 
 
-const catContainer = document.querySelector(".cat_container");
-const catButton = document.querySelector(".catButton");
+const catContainer = document.querySelector(".cat_container")
+const catButton = document.querySelector(".catButton")
 const navMobileCategoriesOn = function() {
     if (catContainer.style.display=="none") {
-        catContainer.style.animation="navMenuSlideDown 0.3s forwards";
-        catContainer.style.display="flex";
+        catContainer.style.animation="navMenuSlideDown 0.3s forwards"
+        catContainer.style.display="flex"
         setTimeout(() => {
-            catContainer.style.animation="";
+            catContainer.style.animation=""
         }, 1);
 
     }
     else {
-        catContainer.style.animation="navMenuSlideDownBackwards 0.3s forwards";
+        catContainer.style.animation="navMenuSlideDownBackwards 0.3s forwards"
         setTimeout(() => {
 
             catContainer.style.display="none";
@@ -337,8 +337,8 @@ catButton.addEventListener("click", navMobileCategoriesOn);
 
 function displayEditComments(event) {
     const commentContainer = event.target.closest(".media");
-    const editCommentField = commentContainer.querySelector(".edit_comment_textarea");
-    const contentComment = commentContainer.querySelector(".content_comment");
+    const editCommentField = commentContainer.querySelector(".edit_comment_textarea")
+    const contentComment = commentContainer.querySelector(".content_comment")
 
     if (editCommentField.style.display === "none" || editCommentField.style.display === "") {
         editCommentField.style.display = "block";
@@ -349,10 +349,10 @@ function displayEditComments(event) {
     }
 }
 
-const selectEditCommentButtons = document.querySelectorAll(".edit_comment_button");
+const selectEditCommentButtons = document.querySelectorAll(".edit_comment_button")
 
 for (let i = 0; i < selectEditCommentButtons.length; i++) {
-    selectEditCommentButtons[i].addEventListener("click", displayEditComments);
+    selectEditCommentButtons[i].addEventListener("click", displayEditComments)
 }
 
 // function keepScrollPostion() {

@@ -9,7 +9,7 @@ if(isset($_POST['create_post'])) {
     <script>
         submitWindowTimed("Post has been added successfully")
         setTimeout(() => {
-        window.location.href = "./index.php?source=posts";
+        window.location.href = "./index.php?source=posts&page=1";
         }, 2000);
     </script>';
 

@@ -141,6 +141,12 @@ function actionItemsBySelection() {
 
                 applyChanges()
             }
+            if (selectedValueOption === "clone_post") {
+
+                confirmationWindow("Clone");
+
+                applyChanges()
+            }
         }
 
     }

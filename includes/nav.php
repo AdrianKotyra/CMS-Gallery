@@ -65,7 +65,7 @@
 
       <!-- ----NAV WIDE SCREEN---- -->
       <div class="nav-links-box">
-        <a class="nav-link " href="index.php?source=posts">HOME
+        <a class="nav-link " href="index.php?source=posts&page=1">HOME
           <?php
             if (!empty($_SESSION['fetched_login'])) {
               $fetched_login = $_SESSION["fetched_login"];
