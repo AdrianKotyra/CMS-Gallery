@@ -1,4 +1,5 @@
-<?php session_start(); ?>
+<?php ob_start(); ?>
+
 <?php include "dataBase.php";?>
 <?php include "functions_main.php";?>
 
@@ -6,6 +7,7 @@
 
 <?php
     if(isset($_POST["login"])) {
+        global $connection;
         $original_psw =  $_POST["password"];
         $_SESSION["fetched_password_original"] =$original_psw;
        $password =  $_POST["password"];
@@ -27,7 +29,7 @@
 
         }
         // REVERSING CRYPTED PASSWORD IN ORDER TO LOG IN BY USER USING CREATED ORIGIN PASSWORD
-        $password=crypt($password, $fetched_password);
+
 
 
        if($login !==$fetched_login||$password!==$fetched_password) {

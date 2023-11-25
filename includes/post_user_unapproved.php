@@ -31,9 +31,12 @@
     <p><span class="glyphicon glyphicon-time"></span> Posted on <?php echo $post_date ?></p>
     <hr>
     <a href="post.php?p_id=<?php echo $post_id?>" >
-        <div class="unapproved_post">
-            <div class="unapproved_text">Waiting for approval</div>
-            <img class="img-responsive posts_img unapproved_img_post" src="img/<?php echo $post_image;?>" alt="">
+        <div class="unapproved_post_obj">
+            <div class="unapproved_post">
+                <div class="unapproved_text">Waiting for approval</div>
+                <img class="img-responsive posts_img unapproved_img_post" src="img/<?php echo $post_image;?>" alt="">
+            </div>
+
         </div>
 
     </a>

@@ -1,4 +1,5 @@
-
+<?php session_start();?>
+<?php ob_start(); ?>
 <!--
 SELECT USER BY USING FETCHED NAME FROM INDEX LOGIN FORM -->
 <?php

@@ -1,3 +1,5 @@
+<?php session_start();?>
+<?php ob_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -51,54 +53,54 @@
 
                 ?>
 
-                <div class="col-md-8 user_content">
-                    <div class="user_col ">
-                        <img class="img-fluid user_picture" src="img/<?php echo $user_img;?>">
-                        <div class="user_info">
-                            <p><b>Nickname:</b> <br><?php echo $user_name;?></p>
-                            <p><b>Name:</b><br><?php echo $user_firstname;?></p>
-                            <p><b>Lastname:</b><br><?php echo $user_lastname;?></p>
-                            <p><b>Email:</b><br><?php echo $user_email;?></p>
-                        </div>
+    <div class="row row-user" id="user_row_sub">
 
-
-                    </div>
-
-                    <div class="user_col">
-                        <p class="user_desc">
-                            <?php echo $user_desc;?>
-                        </p>
-
-                    </div>
-
+        <div class="col-md-8 user_content">
+            <div class="user_col " id="user_col_sub">
+                <img class="img-fluid user_picture"id="image_user_from_post" src="img/<?php echo $user_img;?>">
+                <div class="user_info">
+                    <p><b>Nickname:</b> <br><?php echo $user_name;?></p>
+                    <p><b>Name:</b><br><?php echo $user_firstname;?></p>
+                    <p><b>Lastname:</b><br><?php echo $user_lastname;?></p>
+                    <p><b>Email:</b><br><?php echo $user_email;?></p>
+                    <a href="display_user_from_posts.php?user=<?php echo $user_name?>&posts">
+                    <button class="btn btn-success">Show posts</button>
+                    </a>
 
                 </div>
 
 
-                <?php }
+            </div>
 
-
-                }
-
-
-
-                }
-
-
-                ?>
-
-
-
-
-
-
-
-
-
-
+            <div class="user_col">
+                <p class="user_desc">
+                    <?php echo $user_desc;?>
+                </p>
 
             </div>
-            <?php include "includes/sidebar.php" ?>
+
+
+
+        </div>
+
+
+    </div>
+
+
+    <?php }
+
+    }
+
+
+    }
+
+    ?>
+
+
+
+
+        </div>
+        <?php include "includes/sidebar.php" ?>
 
         </div>
         <!-- /.row -->

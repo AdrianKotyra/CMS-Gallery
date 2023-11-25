@@ -4,7 +4,6 @@
 
 
 
-
 <nav>
   <div class="nav-container">
     <div class="nav-links">
@@ -194,7 +193,7 @@
         <?php if (!empty($_SESSION['fetched_login'])) {
           ?>
             <div class="profile-box-component"  >
-            <img class="send_msg" src="../icons/send.png" alt="">
+            <img class="send_msg" src="./icons/send.png" alt="">
             </div>
 
 

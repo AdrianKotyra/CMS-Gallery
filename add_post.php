@@ -1,6 +1,5 @@
-
-
-
+<?php session_start();?>
+<?php ob_start(); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,10 +8,8 @@
 
 <body>
 
-
-
     <!-- Navigation -->
-    <?php include "includes/nav.php" ?>
+    <?php include "./includes/nav.php" ?>
 
     <!-- Page Content -->
     <div class="container">
@@ -24,7 +21,7 @@
 
 
             <?php if(!empty($_SESSION['fetched_password']) && !empty($_SESSION['fetched_login'])) {
-                    include "includes/add_post_form_user..php";
+                    include "./includes/add_post_form_user..php";
 
                     }
 

@@ -5,7 +5,7 @@
 
 <br>
 <div class="container_messenger_show_window col-md-3">
-    <img class="cross_exit_window_chat_user_get_message" id="get_message" src="../icons/cross.png" alt="">
+    <img class="cross_exit_window_chat_user_get_message" id="get_message" src="./icons/cross.png" alt="">
     <form action="" method="post">
         <div class="row">
             <div class="">

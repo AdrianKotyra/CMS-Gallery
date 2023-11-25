@@ -32,7 +32,7 @@
 ?>
 <br>
 <div class="col-md-3 container_messenger_send_window">
-    <img class="cross_exit_window_chat_user_get_message" id="send_message" src="../icons/cross.png" alt="">
+    <img class="cross_exit_window_chat_user_get_message" id="send_message" src="./icons/cross.png" alt="">
     <form action="" method="post">
         <div class="row">
             <div class="">

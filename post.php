@@ -1,9 +1,42 @@
+<?php session_start();?>
+<?php ob_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <?php include "includes/head.php";?>
 
 <body>
+
+    <?php
+        if(isset($_POST['liked'])) {
+            $user_id = $_SESSION["fetched_id"];
+            global $connection;
+            $post_id = $_POST['post_id'];
+            $query = "SELECT * FROM posts WHERE post_id=$post_id";
+            $allPosts = mysqli_query($connection, $query);
+            $allPostsList = mysqli_fetch_array($allPosts);
+            $likes = $allPostsList["likes"];
+
+            $query_check_user = "SELECT * from likes where user_id_likes=$user_id and post_id_likes = $post_id";
+            $allpostuserLikes = mysqli_query($connection, $query_check_user);
+
+            if(mysqli_num_rows($allpostuserLikes)==1) {
+
+                mysqli_query($connection, "UPDATE posts SET likes=$likes-1 WHERE post_id = $post_id");
+            }
+            else {
+
+                mysqli_query($connection, "UPDATE posts SET likes=$likes+1 WHERE post_id = $post_id");
+                mysqli_query($connection, "DELETE from likes where user_id_likes=$user_id and post_id_likes = $post_id");
+
+            }
+
+
+            mysqli_query($connection, "INSERT INTO likes(user_id_likes, post_id_likes) VALUES ($user_id, $post_id)");
+
+        }
+
+    ?>
     <?php
         // hard logic with comments below using session to initialize default values and then increment them by 6 to display 6 records
         // set up minimal page limit to 0
@@ -115,7 +148,7 @@
                 if(isset($_GET["p_id"])) {
                     $post_id = $_GET["p_id"];
                     // update post views when user is entering webpage post
-                    $query_update = "UPDATE posts SET post_views={post_views+1} where post_id = '{$post_id}'";
+                    $query_update = "UPDATE posts SET post_views=post_views+1 where post_id = '{$post_id}'";
                     $update_post_views = mysqli_query($connection, $query_update);
 
 
@@ -128,7 +161,8 @@
                         $post_date = $row["post_date"];
                         $post_content = $row["post_content"];
                         $post_image = $row["post_image"];
-
+                        $post_views = $row["post_views"];
+                        $post_likes = $row["likes"];
                         ?>
 
 
@@ -179,8 +213,15 @@
 
                             }
                         ?>
+                        </div>
 
-                        <hr>
+                        <div class="main_post_likes_view_cont">
+
+                            <p class=views_main>Views: <?php echo $post_views  ?></p>
+                            <p class=views_main>Likes: <?php echo $post_likes  ?></p>
+                            <img class="like_btn inactive_btn_like"src="./icons/like.png" alt="">
+                        </div>
+
 
                         <p><?php echo $post_content ?></p>
 
@@ -432,7 +473,7 @@
 
         $query = "DELETE from posts WHERE post_id={$post_deleted}";
         $delete_post = mysqli_query($connection, $query);
-        header("location:index.php?source=posts");
+        header("location:index.php?source=posts&page=1");
     }}
     ?>
     <?php include "includes/footer.php";
@@ -531,3 +572,69 @@ const confYesButton = document.querySelector(".confYes");
 
 
 </script>
+
+
+
+<script>
+    $(document).ready(function(){
+
+        <?php $post_id = $_GET["p_id"];?>;
+        var postId = <?php echo $post_id;?>;
+        var user_id = 31;
+        $(".like_btn").click(function(){
+            $.ajax({
+                url: "post.php?p_id=<?php echo $post_id;?>",
+                type: "post",
+                data: {
+                    liked: 1,
+                    post_id : postId,
+                    user_id: user_id
+
+                }
+            });
+        });
+
+    });
+
+
+
+
+
+</script>
+<script>
+    function active_like_button(){
+        buttonLike.classList.remove("inactive_btn_like");
+        buttonLike.classList.add("active_btn_like");
+    }
+    function inactive_like_button(){
+        buttonLike.classList.remove("active_btn_like");
+        buttonLike.classList.add("inactive_btn_like");
+    }
+    // ---UPDATE LIKE BUTTON---
+    const buttonLike = document.querySelector(".like_btn");
+    buttonLike.addEventListener("click", function(){
+
+        if (buttonLike.classList.contains("inactive_btn_like")) {
+        buttonLike.classList.add("active_btn_like");
+        buttonLike.classList.remove("inactive_btn_like");
+        } else {
+        buttonLike.classList.remove("active_btn_like");
+        buttonLike.classList.add("inactive_btn_like");
+        }
+
+    })
+
+
+</script>
+<?php
+    if(isset($_GET["p_id"])) {
+    global $connection;
+    $user_id = $_SESSION["fetched_id"];
+    $post_id = $_GET['p_id'];
+    $query_check_user = "SELECT * from likes where user_id_likes=$user_id and post_id_likes = $post_id";
+    $allpostuserLikes = mysqli_query($connection, $query_check_user);
+    if(mysqli_num_rows($allpostuserLikes)>=1) {
+    echo "<script> inactive_like_button() </script>";
+    }
+}
+?>

@@ -455,6 +455,58 @@ a:hover {
     margin-left: 30px;
 
 }
+.btn_posts {
+    display: block;
+}
+.main_post_likes_view_cont {
+    display: flex;
+    flex-direction: row;
+}
+.likes_container img {
+    width: 50px;
+    height: 50px;
+}
+.active_btn_like {
+    transition: 0.3s;
+    filter: brightness(1);
+}
+.inactive_btn_like {
+    transition: 0.3s;
+    opacity: 60%;
+}
+.like_btn {
+    transition: 0.3s;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+}
+.views_main {
+    font-weight: 700;
+    font-size: 1.6rem;
+    padding: 20px;
+    color: #0169DA;
+}
+.read_likes_container {
+    display: block;
+    margin: 0 auto 0 0;
+    cursor: pointer;
+    float: right;
+}
+.likes_container {
+    display: flex;
+    justify-content: right;
+   align-items: center;
+}
+.likes_container p{
+    font-size: 1.7rem;
+    font-weight: 700;
+}
+
+
+.image_container_post {
+    display: block !important;
+
+}
 .active_page {
     background-color: #337ab7 !important;
     color: white !important;
@@ -479,8 +531,9 @@ textarea {
     height: 300px !important;
 }
 .posts_img {
-    max-width: 100%; /* Set the maximum width to the container width */
+    width: 100%; /* Set the maximum width to the container width */
     height: 600px;
+    object-fit: cover;
 
 
 }
@@ -511,6 +564,9 @@ textarea {
 }
 .comment_field {
     resize: none;
+}
+.unapproved_post_obj {
+    width: 100%;
 }
 .unapproved_post {
     width: 100%;

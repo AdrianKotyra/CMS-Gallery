@@ -146,7 +146,7 @@
       $randSalt =  $row["randSalt"];
 
 
-      $password_crypted = crypt($password_name, $randSalt);
+      $password_crypted = $password_name;
 
       $default_profile_img = "avatar-default.png";
 

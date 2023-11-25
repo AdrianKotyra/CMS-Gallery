@@ -1,4 +1,5 @@
 <script><?php include "./js/custom.js"?> </script>
+
 <?php
 
     if(isset($_GET['page'])) {
@@ -21,7 +22,7 @@
 
 
 
-
+    if(isset($_GET['page'])) {
     $query = "SELECT * FROM posts ORDER BY post_id DESC LIMIT $page_1, 5";
     $select_posts = mysqli_query($connection, $query);
     while($row = mysqli_fetch_assoc($select_posts)) {
@@ -32,7 +33,8 @@
         $post_content = substr($row["post_content"],0, 50);
         $post_image =  $row["post_image"];
         $post_status =  $row["post_status"];
-
+        $post_views = $row["post_views"];
+        $post_likes = $row["likes"];
         if($post_status !== "published") {
             echo "";
         }
@@ -86,24 +88,28 @@
             </div>
 
 
-        <?php } ?>
+        <?php } } ?>
 
     <hr>
-    <a href="post.php?p_id=<?php echo $post_id?>" >
-    <!-- IF THERE IS NOT IMAGE DO NOT DISPLAY IT -->
-    <?php
-        if($post_image!=="") {
-            echo "<img class='img-responsive posts_img' src='img/$post_image'";
+    <a class="image_container_post" href="post.php?p_id=<?php echo $post_id?>" >
+        <!-- IF THERE IS NOT IMAGE DO NOT DISPLAY IT -->
+        <?php
+            if($post_image!=="") {
+                echo "<img class='img-responsive posts_img' src='img/$post_image'";
 
 
-        }
-    ?>
+            }
+        ?>
 
-    </a>
+    </a> </a>
+    <div class="main_post_likes_view_cont">
+        <p class=views_main>Views: <?php echo $post_views  ?></p>
+        <p class=views_main>Likes: <?php echo $post_likes  ?></p>
+    </div>
 
-    <hr>
-    <p><?php echo $post_content ?></p>
-    <a class="btn btn-primary" href="post.php?p_id=<?php echo $post_id?>">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+    <p class="content_posts"><?php echo $post_content ?></p>
+
+
 
     <hr>
 
@@ -113,6 +119,7 @@
 <?php }  } ?>
 <ul class="pager">
     <?php
+        if(isset($_GET['page'])) {
         $query_posts = "SELECT * from posts";
 
         $query_selects_all_posts = mysqli_query($connection, $query_posts);
@@ -128,6 +135,7 @@
             echo "<li> <a class=$active_page href='index.php?source=posts&page=$i'>$i</a></li>";
 
         }
+    }
 
 
 
@@ -212,8 +220,9 @@ const confYesButton = document.querySelector(".confYes");
 
         closeConfimationWindow()
         submitWindowTimed("post has been deleted");
+
         setTimeout(() => {
-            window.location.href = './post.php?p_id=<?php echo $post_id?>&delete_post=post';
+            window.location.href = `./post.php?p_id=${post_id}&delete_post=post`
         }, 2000);
 
 
@@ -226,3 +235,4 @@ const confYesButton = document.querySelector(".confYes");
 
 
 </script>
+

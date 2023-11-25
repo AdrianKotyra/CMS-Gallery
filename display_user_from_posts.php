@@ -1,4 +1,5 @@
-
+<?php session_start();?>
+<?php ob_start(); ?>
 <!-- ------FETCHING DATA USERS FROM SQL------ -->
 
 

@@ -1,6 +1,8 @@
+<?php session_start();?>
+<?php ob_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
-<?php session_start()?>
+
 <?php include "includes/head.php";?>
 <script><?php include "./js/custom.js"?> </script>
 <body>

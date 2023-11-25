@@ -1,3 +1,5 @@
+<?php session_start();?>
+<?php ob_start(); ?>
 <?php
     if(isset($_POST["update"])) {
         $cat_id = $_GET["update_cat"];

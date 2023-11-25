@@ -7,7 +7,10 @@ function start_session_default() {
     $_SESSION["fetched_login"] =  "";
 
 }
-
+function escape($string) {
+    global $connection;
+   return mysqli_real_escape_string($connection, trim(strip_tags($string)));
+}
 
 function display_login() {
     if ($_SESSION["fetched_password"] !==  "" && $_SESSION["fetched_login"] !== "") {

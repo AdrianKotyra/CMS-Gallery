@@ -45,7 +45,7 @@ SELECT USER BY USING FETCHED NAME FROM INDEX LOGIN FORM -->
 
     // setting up new session user password
     $_SESSION["fetched_password_original"] =$user_password;
-    $user_password = crypt($user_password, $_SESSION["fetched_password"]);
+
 
     if(empty($post_image)) {
 
