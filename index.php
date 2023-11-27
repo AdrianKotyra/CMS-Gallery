@@ -47,6 +47,10 @@
                         include "includes/view_profile_main.php";
                         break;
 
+                        case 'profile_views' ;
+                        include "includes/profile_views.php";
+                        break;
+
                         case 'posts' ;
                         include "includes/posts_validation.php";
                         break;

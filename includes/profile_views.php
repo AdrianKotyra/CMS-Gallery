@@ -1,10 +1,9 @@
-<?php session_start();?>
-<?php ob_start(); ?>
+
 <!-- ------FETCHING DATA USERS FROM SQL------ -->
 <!DOCTYPE html>
 <html lang="en">
 
-<?php include "includes/head.php";?>
+
 
 <body>
 
@@ -21,27 +20,35 @@
     ?>
 
     <!-- Navigation -->
-    <?php include "includes/nav.php" ?>
+
+    <h1 class="views_head">
+                <?php echo $_SESSION['fetched_login']. "s". "<br> recent views"?>
+
+    </h1>
 
 
     <!-- Page Content -->
     <div class="content_users">
 
+        <p><b>Total Views:</b>
+        <?php
+            global $connection;
+            $fetched_id = $row["user_id"];
+            $query = "SELECT * FROM profile_views where profile_view_id = $fetched_id";
 
+            $select_user = mysqli_query($connection, $query);
+            $view_counts = mysqli_num_rows($select_user);
+            echo $view_counts
+        ?>
 
-
-        <div class="search_prof_cont">
-            <div class="col-md-12 user_search_profiles">
-                <?php include "includes/user_search.php"?>
-            </div>
-
-        </div>
 
 
 
 
 
         <div class="col-md-12 all_users_content">
+
+
 
 
 
@@ -83,12 +90,23 @@
                 ?>
                 <?php
                     global $connection;
-                        $query = "SELECT * FROM users";
+                        $fetched_id = $row["user_id"];
+                        $query = "SELECT * FROM profile_views where profile_view_id = $fetched_id ORDER BY id DESC LIMIT 9 " ;
 
                         $select_user = mysqli_query($connection, $query);
+                        $view_counts = mysqli_num_rows($select_user);
 
                         while($row = mysqli_fetch_array($select_user)) {
                             $user_id = $row["user_id"];
+                            $view_date = $row["view_date"];
+
+                        $query_select_all_users = "SELECT * FROM users WHERE user_id = $user_id LIMIT 9" ;
+
+
+                        $select_users = mysqli_query($connection, $query_select_all_users);
+
+
+                        while($row = mysqli_fetch_array($select_users)) {
                             $user_name = $row["user_namee"];
                             $user_img = $row["user_image"];
                             $user_email = $row["user_email"];
@@ -97,19 +115,19 @@
                             $user_desc = $row["user_desc"];
 
 
+
+
                     ?>
 
+                        <a class="row-user col-lg-4 col-sm-6 col-s-12 mx-auto" href="profile.php?user=<?php echo $user_id;?>">
+                            <div >
 
-                        <div class="row-user col-lg-3 col-sm-6 col-xs-12 mx-auto">
-                            <a href="profile.php?user=<?php echo $user_id;?>">
                                 <div class="user_content ">
                                     <div class="user_col ">
-                                        <img class="img-fluid user_picture" src="img/<?php echo $user_img;?>">
+                                        <img class="img-fluid user_picture" src="img/<?php echo $user_img?>">
                                         <div class="user_info">
                                             <p><b>Nickname:</b> <br><?php echo $user_name;?></p>
-                                            <p><b>Name:</b><br><?php echo $user_firstname;?></p>
-                                            <p><b>Lastname:</b><br><?php echo $user_lastname;?></p>
-                                            <p><b>Email:</b><br><?php echo $user_email;?></p>
+                                            <p><span class="glyphicon glyphicon-time"></span> Vieved on <?php echo $view_date ?></p>
                                         </div>
 
 
@@ -117,24 +135,22 @@
 
                                     <div class="user_col">
                                         <p class="user_desc">
-                                            <?php echo $user_desc;?>
+                                            <?php echo $user_desc?>
                                         </p>
 
                                     </div>
 
 
                                 </div>
-                            </a>
+
+
+                            </div>
+
+                        </a>
 
 
 
-                        </div>
-
-
-
-
-
-                    <?php } ?>
+                    <?php }}?>
 
 
 
@@ -169,6 +185,8 @@
     ?>
 
 
+    <?php include "includes/footer.php"
+    ?>
 
 </body>
 

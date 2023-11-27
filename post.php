@@ -163,6 +163,12 @@
                         $post_image = $row["post_image"];
                         $post_views = $row["post_views"];
                         $post_likes = $row["likes"];
+
+                        $query_select_id_post_author = "SELECT * FROM users WHERE user_namee = '{$post_author}'";
+                        $query_select_id_post_author_query = mysqli_query($connection, $query_select_id_post_author);
+                        while ($row = mysqli_fetch_assoc($query_select_id_post_author_query)) {
+                        $author_id = $row["user_id"];
+                        }
                         ?>
 
 
@@ -174,7 +180,7 @@
                             <a href="#"><?php echo $post_title ?></a>
                         </h2>
                         <p class="lead">
-                            by <a href="display_user_from_posts.php?user=<?php echo $post_author ?>"><?php echo $post_author ?></a>
+                            by <a href="display_user_from_posts.php?user=<?php echo $author_id ?>"><?php echo $post_author ?></a>
                         </p>
                         <p><span class="glyphicon glyphicon-time"></span> Posted on <?php echo $post_date ?></p>
                         <?php
@@ -633,8 +639,13 @@ const confYesButton = document.querySelector(".confYes");
     $post_id = $_GET['p_id'];
     $query_check_user = "SELECT * from likes where user_id_likes=$user_id and post_id_likes = $post_id";
     $allpostuserLikes = mysqli_query($connection, $query_check_user);
-    if(mysqli_num_rows($allpostuserLikes)>=1) {
+    echo mysqli_num_rows($allpostuserLikes);
+    if(mysqli_num_rows($allpostuserLikes)>=2) {
     echo "<script> inactive_like_button() </script>";
+
+    }
+    else {
+        echo "<script> active_like_button() </script>";
     }
 }
 ?>

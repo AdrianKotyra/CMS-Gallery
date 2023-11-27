@@ -47,8 +47,13 @@
         $select_posts_LOGGED_user = mysqli_query($connection, $query);
         while ($row = mysqli_fetch_assoc($select_posts_LOGGED_user)) {
             $post_author_logged = $row["post_author"];
-        }
 
+        }
+        $query_select_id_post_author = "SELECT * FROM users WHERE user_namee = '{$post_author}'";
+        $query_select_id_post_author_query = mysqli_query($connection, $query_select_id_post_author);
+        while ($row = mysqli_fetch_assoc($query_select_id_post_author_query)) {
+        $author_id = $row["user_id"];
+        }
         ?>
 
 
@@ -58,7 +63,7 @@
             <a href="post.php?p_id=<?php echo $post_id?>"><?php echo $post_title ?></a>
         </h2>
         <p class="lead">
-            by <a href="display_user_from_posts.php?user=<?php echo $post_author?>"><?php echo $post_author ?></a>
+            by <a href="display_user_from_posts.php?user=<?php echo $author_id?>"><?php echo $post_author ?></a>
         </p>
         <p><span class="glyphicon glyphicon-time"></span> Posted on <?php echo $post_date ?></p>
 

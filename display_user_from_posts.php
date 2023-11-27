@@ -3,7 +3,7 @@
 <!-- ------FETCHING DATA USERS FROM SQL------ -->
 
 
-<
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,13 +26,26 @@
 
             <?php
             if(isset($_GET["user"])){
-                $user_name_fetched = $_GET["user"];
+                $user_id_fetched = $_GET["user"];
+
+
+
+
+
+                $query = "SELECT * FROM users WHERE user_id = $user_id_fetched ";
+                $search_query = mysqli_query($connection, $query);
+                $view_date = date("Y-m-d H:i:s");
+
+                $fetched_id = $row["user_id"];
+                $query_input_views = "INSERT INTO profile_views(user_id, view_date, profile_view_id) VALUE('{$fetched_id}','{$view_date}','{$user_id_fetched}')";
+                $view_query = mysqli_query($connection, $query_input_views);
             }
-            $query = "SELECT * FROM users where user_namee='{$user_name_fetched}'";
+            $query = "SELECT * FROM users where user_id='{$user_id_fetched}'";
 
             $select_user = mysqli_query($connection, $query);
 
             while($row = mysqli_fetch_array($select_user)) {
+                $user_id = $row["user_id"];
                 $user_name = $row["user_namee"];
                 $user_img = $row["user_image"];
                 $user_email = $row["user_email"];
@@ -55,7 +68,7 @@
                             <p><b>Name:</b><br><?php echo $user_firstname;?></p>
                             <p><b>Lastname:</b><br><?php echo $user_lastname;?></p>
                             <p><b>Email:</b><br><?php echo $user_email;?></p>
-                            <a href="display_user_from_posts.php?user=<?php echo $user_name?>&posts">
+                            <a href="display_user_from_posts.php?user=<?php echo $user_id?>&posts">
                             <button class="btn btn-success">Show posts</button>
                             </a>
 
@@ -78,9 +91,10 @@
 
             </div>
             <?php
-              if(isset($_GET["user"]) == $user_name && isset($_GET["posts"]) ) {
-                    $user = $_GET["user"];
-                    $query = "SELECT * FROM posts where post_author= '{$user}'ORDER BY post_id DESC";
+                
+              if(isset($_GET["user"]) && isset($_GET["posts"]) ) {
+
+                    $query = "SELECT * FROM posts where post_author= '{$user_name}'ORDER BY post_id DESC";
                     $select_posts = mysqli_query($connection, $query);
                     while($row = mysqli_fetch_assoc($select_posts)) {
                         $post_id = $row["post_id"];

@@ -22,6 +22,7 @@
                 echo "<a class='nav-link' href='admin/index.php'>ADMIN</a>";
               }
 
+
             }
           }
 
@@ -76,6 +77,7 @@
                 if ($fetched_status==="Admin") {
                   echo "<a class='nav-link' href='admin/index.php'>ADMIN</a>";
                 }
+
 
               }
             }

@@ -8,8 +8,14 @@
     z-index: 9999999999999999999;
 
 }
+.views_head {
+    text-align: center;
+}
 .all_users_content {
     padding-top: 60px;
+}
+.last_views {
+    text-align: center;
 }
 .confirmationWindowContainer {
     position: relative;
