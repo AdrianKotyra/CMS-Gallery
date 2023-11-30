@@ -35,10 +35,7 @@
         <!-- Page Features -->
         <div class="row text-center">
         <?php
-            if(isset($_GET["category"])) {
-            $cat_id = $_GET["category"];
-            get_product_by_category($cat_id);
-            }
+            get_products_shopping()
         ?>
 
 

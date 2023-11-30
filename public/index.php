@@ -6,7 +6,6 @@
 <body>
 
 
-    <?php include("../resources/templates/frontend/header.php") ?>
 
     <!-- Page Content -->
     <div class="container">

@@ -14,7 +14,7 @@
 
 
     <?php if(isset($_GET["product"]));
-        $product_id= $_GET["product"];
+        $product_id= escape_string($_GET["product"]);
         get_product_by_id($product_id)
     ?>
     <div role="tabpanel" class="tab-pane" id="profile">

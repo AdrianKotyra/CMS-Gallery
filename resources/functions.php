@@ -35,7 +35,7 @@ function get_product_by_id($product_id_arg) {
         $product_title = $row["product_title"];
         $product_description = $row["product_description"];
         $product_image = $row["product_image"];
-
+        $product_short_description = $row["product_short_description"];
 
         $product = <<<DELIMETER
         <div class="row">
@@ -67,7 +67,7 @@ function get_product_by_id($product_id_arg) {
             </p>
         </div>
 
-
+        <p>$product_short_description</p>
 
 
         <form action="">
@@ -197,38 +197,60 @@ function get_product_by_category($category) {
 
 
         $product = <<<DELIMETER
-        <div class="col-sm-4 col-lg-4 col-md-4">
-            <div class="thumbnail">
-                <a href="item.php?product=$product_id">  <img src="$product_image" alt=""></a>
-
-                <div class="caption">
-                    <h4 class="pull-right">$$product_price</h4>
-                    <h4><a href="item.php?product=$product_id">$product_title</a>
-                    </h4>
-                    <p>$product_description</p>
-                    <a class="btn btn-primary"href="">Add to cart</a>
-                </div>
-
-
-                <!-- <div class="ratings">
-                    <p class="pull-right">15 reviews</p>
-                    <p>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                    </p>
-                </div> -->
+        <div class="col-md-3 col-sm-6 hero-feature">
+        <div class="thumbnail">
+            <a href="item.php?product=$product_id"> <img src="$product_image" alt=""></a>
+            <div class="caption">
+                <h3>$product_title</h3>
+                <p>$product_description</p>
+                <p>
+                    <a href="#" class="btn btn-primary">Buy Now!</a> <a href="item.php?product=$product_id" class="btn btn-default">More Info</a>
+                </p>
             </div>
         </div>
-
+        </div>
         DELIMETER;
         echo $product;
     }
 
 
 }
+
+function get_products_shopping() {
+    $query = query("SELECT * FROM products");
+
+
+
+
+    while ($row = mysqli_fetch_array($query)) {
+        $product_id=  $row["product_id"];
+        $product_price=  $row["product_price"];
+        $product_title = $row["product_title"];
+        $product_description = $row["product_description"];
+        $product_image = $row["product_image"];
+
+
+        $product = <<<DELIMETER
+        <div class="col-md-3 col-sm-6 hero-feature">
+        <div class="thumbnail">
+            <a href="item.php?product=$product_id"> <img src="$product_image" alt=""></a>
+            <div class="caption">
+                <h3>$product_title</h3>
+                <p>$product_description</p>
+                <p>
+                    <a href="#" class="btn btn-primary">Buy Now!</a> <a href="item.php?product=$product_id" class="btn btn-default">More Info</a>
+                </p>
+            </div>
+        </div>
+        </div>
+        DELIMETER;
+        echo $product;
+    }
+
+
+}
+
+
 
 
 
