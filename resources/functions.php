@@ -216,6 +216,60 @@ function get_product_by_category($category) {
 
 }
 
+function set_msg($msg) {
+    if(!empty($msg)) {
+        $_SESSION["msg"] = $msg;
+
+    }
+    else {
+        $msg = "";
+    }
+}
+
+function display_msg() {
+    if(isset($_SESSION["msg"])) {
+        echo $_SESSION["msg"];
+        unset($_SESSION["msg"]);
+    }
+
+}
+function contact_form(){
+    if(isset($_POST['submit'])) {
+        $to = "adriankotyra@yahoo.com";
+        $username =   $_POST['username'];
+        $email =  $_POST['email'];
+        $subject =  $_POST['subject'];
+        $msg = $_POST['msg'];
+        $header = "From: {$username}, $email";
+        $result = mail($to, $subject,  $msg, $header);
+        if(!$result) {
+            set_msg("Error");
+        }
+        else {
+            set_msg("Message has been sent");
+        }
+
+    }
+}
+function login_user() {
+    if(isset($_POST['submit'])) {
+        $username =escape_string($_POST["username"]);
+        $password =escape_string($_POST["password"]);
+
+
+        $query = query("SELECT * FROM users where user_namee = '{$username}' AND user_password = '{$password}'");
+
+        $user_count = mysqli_num_rows($query);
+        if($user_count==0) {
+            set_msg("Wrong password or Login");
+            redirect("login.php");
+
+        }
+        else {
+            redirect("admin");
+        }
+        }
+}
 function get_products_shopping() {
     $query = query("SELECT * FROM products");
 
