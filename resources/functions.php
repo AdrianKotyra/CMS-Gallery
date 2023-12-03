@@ -72,7 +72,7 @@ function get_product_by_id($product_id_arg) {
 
         <form action="">
             <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="ADD TO CART">
+                <a href="cart.php?add=$product_id"class="btn btn-primary">ADD TO CART</a>
             </div>
         </form>
 
@@ -145,7 +145,7 @@ function get_product() {
                     <h4><a href="item.php?product=$product_id">$product_title</a>
                     </h4>
                     <p>$product_description</p>
-                    <a class="btn btn-primary"href="">Add to cart</a>
+                    <a class="btn btn-primary"href="cart.php?add=$product_id">Add to cart</a>
                 </div>
 
 

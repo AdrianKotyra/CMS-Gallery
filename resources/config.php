@@ -1,5 +1,7 @@
 <?php
-
+    ob_start();
+    session_start();
+    // session_destroy();
     defined("DS") ? null :define("DS", DIRECTORY_SEPARATOR);
 
     defined("TEMPLATE_FRONT") ? NULL : define("TEMPLATE_FRONTEND", __DIR__ . DS . "templates/frontend");
