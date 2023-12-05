@@ -30,6 +30,7 @@ function get_product_by_id($product_id_arg) {
 
 
     while ($row = mysqli_fetch_array($query)) {
+        $product_list = [];
         $product_id=  $row["product_id"];
         $product_price=  $row["product_price"];
         $product_title = $row["product_title"];
@@ -215,7 +216,79 @@ function get_product_by_category($category) {
 
 
 }
+function cart_totals(){
+    if(isset($_GET["add"])){
+        $_SESSION["product_cart"] = $_GET["add"];
+    }
+    $prod_id_cart = $_SESSION["product_cart"];
+    $quantity =  $_SESSION["product_".$prod_id_cart];
+    $query = query("SELECT * from products WHERE product_id=$prod_id_cart");
+    while($row = mysqli_fetch_array($query)) {
+    $product_title = $row["product_title"];
+    $product_price = $row["product_price"];
+    }
+    $total_product_price = $product_price*$quantity;
+    $cart_totals = <<<DELIMETER
+    "<div class="col-xs-4 pull-right ">
+    <h2>Cart Totals</h2>
 
+    <table class="table table-bordered" cellspacing="0">
+
+    <tr class="cart-subtotal">
+    <th>Items:$product_title</th>
+    <td><span class="amount">$quantity</span></td>
+    </tr>
+    <tr class="shipping">
+    <th>Shipping and Handling</th>
+    <td>Free Shipping</td>
+    </tr>
+
+    <tr class="order-total">
+    <th>Order Total</th>
+    <td><strong><span class="amount">$total_product_price</span></strong> </td>
+    </tr>
+
+
+    </tbody>
+
+    </table>
+    <a href="#" class="btn btn-primary">Buy Now!</a>
+    </div>"
+    DELIMETER;
+
+    echo $cart_totals;
+}
+function display_products_checkout() {
+
+    if(isset($_GET["add"])){
+        $_SESSION["product_cart"] = $_GET["add"];
+    }
+    $prod_id_cart = $_SESSION["product_cart"];
+    $quantity =  $_SESSION["product_".$prod_id_cart];
+    $query = query("SELECT * from products WHERE product_id=$prod_id_cart");
+    while($row = mysqli_fetch_array($query)) {
+    $product_title = $row["product_title"];
+    $product_price = $row["product_price"];
+    }
+    $product_subtotal = $quantity*$product_price;
+    $products_table =<<<DELIMETER
+    <td>$product_title</td>
+    <td>$product_price</td>
+    <td> $quantity</td>
+    <td> $product_subtotal</td>
+    <td>
+    <a class= "btn btn-success" href="cart.php?add={$_SESSION["product_cart"]}"><span class="glyphicon glyphicon-plus"> </span> </a>
+    <a class= "btn btn-warning" href="cart.php?remove={$_SESSION["product_cart"]}"><span class="glyphicon glyphicon-minus"> </span></a>
+    <a class= "btn btn-warning"  href="cart.php?delete={$_SESSION["product_cart"]}"><span class="glyphicon glyphicon-remove"> </span></a>
+    </td>
+
+    DELIMETER;
+    echo $products_table;
+
+
+
+
+}
 function set_msg($msg) {
     if(!empty($msg)) {
         $_SESSION["msg"] = $msg;
@@ -266,6 +339,9 @@ function login_user() {
 
         }
         else {
+            $_SESSION["username_login"] = $username;
+            set_msg("Welcome to Admin $username");
+
             redirect("admin");
         }
         }
