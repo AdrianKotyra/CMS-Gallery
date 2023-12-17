@@ -16,10 +16,10 @@
                 echo $row["first_name"]. "<br>";
             }
 
-            $find_user_query = Users::find_user_by_id(1);
-            while($row = mysqli_fetch_array($find_user_query)) {
-                echo $row["first_name"]. "<br>";
-            }
+            $find_user_query = Users::find_user_by_id(2);
+            $run = Users::RunOnstart($find_user_query);
+            echo $run->username;
+
 
 
 
