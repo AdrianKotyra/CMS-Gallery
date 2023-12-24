@@ -10,26 +10,13 @@
         </h1>
         <?php
 
+            // $user = new Users;
+            // $user->username = "exampleName";
+            // $user->password = "examplepassword";
+            // $user->firstname = "examplefirstname";
+            // $user->lastname = "examplelastname";
 
-            // $all_user_query = Users::find_all_users();
-            // while($row = mysqli_fetch_array($all_user_query)) {
-            //     echo $row["first_name"]. "<br>";
-            // }
-
-            $find_user_query = Users::find_user_by_id(2);
-            echo $find_user_query->username;
-
-            // $run = Users::RunOnstart($find_user_query);
-            // echo $run->username;
-
-            // $all_user_query = Users::find_all_users();
-            // foreach($all_user_query as $user) {
-            //     echo $user->username . "<br>";
-            // }
-
-
-
-
+            // $user->create();
 
         ?>
         <ol class="breadcrumb">
