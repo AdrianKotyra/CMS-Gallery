@@ -10,6 +10,8 @@
         </h1>
         <?php
 
+            $user = Users::find_user_by_id(3);
+            $user->delete();
             // $user = new Users;
             // $user->username = "exampleName";
             // $user->password = "examplepassword";

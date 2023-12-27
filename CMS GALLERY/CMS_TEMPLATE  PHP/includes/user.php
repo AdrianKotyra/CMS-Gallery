@@ -4,8 +4,8 @@
         public $id;
         public $username;
         public $password;
-        public $firstname;
-        public $lastname;
+        public $first_name;
+        public $last_name;
         public static function find_all_users() {
             global $database;
             $query = "SELECT * FROM users";
@@ -28,32 +28,21 @@
             // }
         }
 
-        public static function RunOnstart($find_user_query) {
-            $Object = new self;
-
-            // $Object->id = $find_user_query["id"];
-            // $Object->username = $find_user_query["username"];
-            // $Object->password = $find_user_query["password"];
-            // $Object->firstname = $find_user_query["first_name"];
-            // $Object->lastname = $find_user_query['last_name'];
-
-
-            foreach ($find_user_query as $property => $value) {
-                if($Object->has_the_attribute($property)) {
-                    $Object->$property = $value;
-                }
-
-
+        public static function instantiate($reccord) {
+            $object = new self();
+            foreach ($reccord as $attribute => $value) {
+              if ($object->has_the_attribute($attribute)) {
+                $object->$attribute = $value;
+              }
             }
-
-            return $Object;
+            return $object;
         }
         public static function create_query($query) {
             global $database;
             $result = $database->query_array($query);
             $the_object_array = array();
             while($row = mysqli_fetch_array($result)) {
-                $the_object_array[] = self::RunOnstart($row);
+                $the_object_array[] = self::instantiate($row);
             }
             return $the_object_array;
 
@@ -82,8 +71,8 @@
             $sql .= "VALUES ('";
             $sql .= $database->escape_string($this->username) . "', '";
             $sql .= $database->escape_string($this->password) . "', '";
-            $sql .= $database->escape_string($this->firstname) . "', '";
-            $sql .= $database->escape_string($this->lastname) . "')";
+            $sql .= $database->escape_string($this->first_name) . "', '";
+            $sql .= $database->escape_string($this->last_name) . "')";
 
             if($database ->query_array($sql)) {
                 $this->id = $database->the_insert_id();
@@ -95,6 +84,31 @@
 
 
         }
+        public function update() {
+            global $database;
+            $sql = "UPDATE users SET ";
+            $sql .= "username= '" . $database->escape_string($this->username) . "', ";
+            $sql .= "password= '" . $database->escape_string($this->password) . "', ";
+            $sql .= "first_name= '" . $database->escape_string($this->first_name) . "', ";
+            $sql .= "last_name= '" . $database->escape_string($this->last_name) . "' ";
+            $sql .= " WHERE id= " . $database->escape_string($this->id);
+
+            $database->query_array($sql);
+
+            return (mysqli_affected_rows($database->connection) ==1)? true : false;
+        }
+
+        public function delete() {
+            global $database;
+            $id_user_prop = $database->escape_string($this->id);
+            $sql = "DELETE from users WHERE id= $id_user_prop";
+
+
+            $database->query_array($sql);
+
+            return (mysqli_affected_rows($database->connection) ==1)? true : false;
+        }
+
 
 
 
