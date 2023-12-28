@@ -1,6 +1,7 @@
 <?php
     require_once("config.php");
     class Users {
+        protected static $db_table = "users";
         public $id;
         public $username;
         public $password;
@@ -65,9 +66,15 @@
 
         }
 
+        protected function properties() {
+            return get_object_vars($this);
+        }
+
         public function create() {
+            $properties = $this->properties();
+
             global $database;
-            $sql = "INSERT INTO users (username, password, first_name, last_name)";
+            $sql = "INSERT INTO " .self::$db_table . "(". implode("," ,array_keys($properties))   .")"   ;
             $sql .= "VALUES ('";
             $sql .= $database->escape_string($this->username) . "', '";
             $sql .= $database->escape_string($this->password) . "', '";
@@ -84,9 +91,12 @@
 
 
         }
+        public function save() {
+            return isset($this->id)? $this->update() : $this->create();
+        }
         public function update() {
             global $database;
-            $sql = "UPDATE users SET ";
+            $sql = "UPDATE " .self::$db_table . " SET ";
             $sql .= "username= '" . $database->escape_string($this->username) . "', ";
             $sql .= "password= '" . $database->escape_string($this->password) . "', ";
             $sql .= "first_name= '" . $database->escape_string($this->first_name) . "', ";
@@ -101,7 +111,7 @@
         public function delete() {
             global $database;
             $id_user_prop = $database->escape_string($this->id);
-            $sql = "DELETE from users WHERE id= $id_user_prop";
+            $sql = "DELETE from " .self::$db_table . " WHERE id= $id_user_prop";
 
 
             $database->query_array($sql);

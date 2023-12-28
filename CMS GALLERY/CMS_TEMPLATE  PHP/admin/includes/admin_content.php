@@ -10,8 +10,8 @@
         </h1>
         <?php
 
-            $user = Users::find_user_by_id(3);
-            $user->delete();
+            // $user = Users::find_user_by_id(3);
+            // $user->delete();
             // $user = new Users;
             // $user->username = "exampleName";
             // $user->password = "examplepassword";
@@ -19,6 +19,13 @@
             // $user->lastname = "examplelastname";
 
             // $user->create();
+
+            // $user = Users::find_user_by_id(2);
+            // $user->username="Whatever";
+            // $user->save();
+
+
+
 
         ?>
         <ol class="breadcrumb">
