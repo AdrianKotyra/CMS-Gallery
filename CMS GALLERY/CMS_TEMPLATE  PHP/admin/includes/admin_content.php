@@ -12,19 +12,19 @@
 
             // $user = Users::find_user_by_id(3);
             // $user->delete();
-            // $user = new Users;
-            // $user->username = "exampleName";
-            // $user->password = "examplepassword";
-            // $user->firstname = "examplefirstname";
-            // $user->lastname = "examplelastname";
 
-            // $user->create();
 
             // $user = Users::find_user_by_id(2);
-            // $user->username="Whatever";
+            // $user->username="Whatever111122222222";
             // $user->save();
 
+            // $user = new Users;
+            // $user->username = "fsdfdf";
+            // $user->password = "fsdfsdfsdfsdf";
+            // $user->first_name = "adrian";
+            // $user->last_name = "kot";
 
+            // $user->create();
 
 
         ?>
