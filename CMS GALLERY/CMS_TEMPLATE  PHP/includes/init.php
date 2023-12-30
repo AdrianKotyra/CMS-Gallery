@@ -1,7 +1,9 @@
 <?php
-    include("functions.php");
-    include("config.php");
-    include("data_base.php");
-    include("user.php");
-    include("session.php");
+    require_once("session.php");
+    require_once("functions.php");
+    require_once("config.php");
+    require_once("data_base.php");
+    require_once("db_object.php");
+    require_once("user.php");
+
 ?>
