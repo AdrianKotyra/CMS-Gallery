@@ -10,6 +10,11 @@
         </h1>
         <?php
 
+            // $users = users::find_all();
+            // foreach($users as $user) {
+            //     echo $user->username . "<br>";
+            // }
+
             // $user = Users::find_user_by_id(3);
             // $user->delete();
 
@@ -18,13 +23,24 @@
             // $user->username="Whatever111122222222";
             // $user->save();
 
-            // $user = new Users;
-            // $user->username = "fsdfdf";
+
+
+
             // $user->password = "fsdfsdfsdfsdf";
             // $user->first_name = "adrian";
             // $user->last_name = "kot";
 
             // $user->create();
+
+            // $photos = Photo::find_all();
+            // foreach($photos as $photo) {
+            //     echo $photo->title;
+            // };
+            // $photo = new Photo();
+            // $photo->title = "title photo";
+
+
+            // $photo->save();
 
 
         ?>
@@ -41,4 +57,3 @@
 <!-- /.row -->
 
 </div>
-<!-- /.container-fluid -->
