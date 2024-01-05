@@ -35,9 +35,9 @@
                 return false;
             } else {
                 $this->filename = basename($file['name']);
-                $this->tmp_path = basename($file['tmp_name']);
-                $this->type = basename($file['type']);
-                $this->size = basename($file['size']);
+                $this->tmp_path = $file['tmp_name'];
+                $this->type = $file['type'];
+                $this->size = $file['size'];
             }
 
         }

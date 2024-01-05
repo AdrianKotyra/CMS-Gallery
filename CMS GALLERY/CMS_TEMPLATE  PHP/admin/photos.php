@@ -16,14 +16,61 @@
                         Photos
                         <small>Subheading</small>
                     </h1>
-                    <ol class="breadcrumb">
-                        <li>
-                            <i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
-                        </li>
-                        <li class="active">
-                            <i class="fa fa-file"></i> Blank Page
-                        </li>
-                    </ol>
+
+                    <div class="col-md-12">
+                        <table class="table table-hover">
+                            <?php $photos = photo::find_all();
+                            ?>
+                            <thead>
+                                <tr>
+                                    <th>Photo</th>
+                                    <th>Id</th>
+                                    <th>title</th>
+                                    <th>description</th>
+                                    <th>File Name</th>
+                                    <th>type</th>
+                                    <th>size</th>
+                                </tr>
+
+
+                            </thead>
+                            <tbody>
+                                <?php
+
+                                    foreach ($photos as $photo) :
+
+                                ?>
+
+
+
+
+                                <tr>
+                                    <td><img src="http://placehold.it/62x62" alt=""></td>
+                                    <td><?php  echo $photo->id ?></td>
+                                    <td><?php  echo $photo->title ?></td>
+                                    <td><?php  echo $photo->description ?></td>
+                                    <td><?php  echo $photo->filename ?></td>
+                                    <td><?php  echo $photo->type ?></td>
+                                    <td><?php  echo $photo->size ?></td>
+
+
+
+                                </tr>
+                                <?php endforeach; ?>
+
+
+                            </tbody>
+
+
+
+
+                        </table>
+
+
+
+
+                    </div>
+
                 </div>
             </div>
             <!-- /.row -->

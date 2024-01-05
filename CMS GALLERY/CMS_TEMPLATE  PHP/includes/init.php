@@ -1,7 +1,7 @@
 <?php
     defined('DS') ?  null : define('DS' , DIRECTORY_SEPARATOR);
-    defined('SITE_ROOT') ?  null : define('SITE_ROOT', DS . 'laragon' . DS .'www' . DS . 'CMS GALLERY' . DS . 'CMS_TEMPLATE  PHP');
-    defined('INCLUDES_PATHS') ?  null : define('INCLUDES_PATHS', SITE_ROOT .DS. 'admin'. DS . 'includes');
+    defined('SITE_ROOT') ?  null : define('SITE_ROOT', 'C:'.  DS . 'laragon' . DS .'www' . DS . 'CMS GALLERY' . DS . 'CMS_TEMPLATE  PHP');
+    defined('INCLUDES_PATHS') ?  null : define('INCLUDES_PATHS', SITE_ROOT . DS . 'admin'. DS . 'includes');
 
     require_once("session.php");
     require_once("functions.php");
