@@ -45,7 +45,15 @@
 
 
                                 <tr>
-                                    <td><img src="http://placehold.it/62x62" alt=""></td>
+                                    <td><img width="120" height="120"src="<?php echo $photo->picture_path()?>" alt="">
+                                        <div class="pictures_link">
+                                            <a href="delete_photo.php/?id=<?php echo $photo->id?>">Delete</a>
+                                            <a href="">Edit</a>
+                                            <a href="">View</a>
+
+                                        </div>
+
+                                    </td>
                                     <td><?php  echo $photo->id ?></td>
                                     <td><?php  echo $photo->title ?></td>
                                     <td><?php  echo $photo->description ?></td>

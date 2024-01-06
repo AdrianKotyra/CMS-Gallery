@@ -76,6 +76,21 @@
 
             }
         }
+        public function picture_path() {
+            return $this->upload_directory.DS.$this->filename;
+
+        }
+        public function delete_photo() {
+            if($this->delete()) {
+                $target_path = SITE_ROOT.DS. 'admin'.DS. $this->picture_path();
+                return unlink($target_path)? true : false;  //delete the file predfined function
+
+            }
+            else {
+            return false;
+            }
+        }
+
 
     }
 

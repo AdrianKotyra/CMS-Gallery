@@ -132,9 +132,9 @@ class db_object {
 
     }
 
-    public static function find_by_id($user_id) {
+    public static function find_by_id($id) {
         global $database;
-        $the_result_array = static::create_query("SELECT * FROM " . static::$db_table . " WHERE ID=$user_id");
+        $the_result_array = static::create_query("SELECT * FROM " . static::$db_table . " WHERE ID=$id");
         return !empty($the_result_array)? array_shift($the_result_array) :  false;
         // if(!empty($the_result_array)) {
         //     $the_first_item = array_shift($the_result_array);

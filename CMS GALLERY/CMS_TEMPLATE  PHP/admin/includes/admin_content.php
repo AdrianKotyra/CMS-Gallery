@@ -15,11 +15,11 @@
             //     echo $user->username . "<br>";
             // }
 
-            // $user = Users::find_user_by_id(3);
+            // $user = Users::find_by_id(3);
             // $user->delete();
 
 
-            // $user = Users::find_user_by_id(2);
+            // $user = Users::find_by_id(2);
             // $user->username="Whatever111122222222";
             // $user->save();
 
@@ -41,6 +41,7 @@
 
 
             // $photo->save();
+
 
 
         ?>
