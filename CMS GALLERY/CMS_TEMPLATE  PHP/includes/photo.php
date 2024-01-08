@@ -2,13 +2,15 @@
     require_once("config.php");
     class Photo extends db_object {
         protected static $db_table = "photos";
-        protected static $db_table_field = array('title', 'description', 'filename', 'type', 'size');
+        protected static $db_table_field = array('title', 'caption', 'description', 'filename', 'type', 'size', 'alternate_text');
         public $id;
         public $title;
+        public $caption;
         public $description;
         public $filename;
         public $type;
         public $size;
+        public $alternate_text;
         public $tmp_path;
 
 
