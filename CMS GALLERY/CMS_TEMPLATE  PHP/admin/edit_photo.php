@@ -48,6 +48,10 @@
                                 <input type="text" name="title" class="form-control" value="<?php echo $photo->title;?>">
                             </div>
                             <div class="form-group">
+                                <a class="thumbnail" href=""><img width="120" height="120"src="<?php echo $photo->picture_path();?>" alt=""></a>
+
+                            </div>
+                            <div class="form-group">
                                 <label for="caption">Caption</label>
                                 <input type="text" name="caption" class="form-control"  value="<?php echo $photo->caption;?>">
                             </div>
@@ -57,7 +61,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="description">Description</label>
-                                <textarea class="form-control" name="description" id="" cols="30" rows="10">
+                                <textarea class="form-control" name="description" id="summernote" cols="30" rows="10">
                                     <?php echo $photo->description;?>
 
                                 </textarea>
