@@ -52,6 +52,7 @@
                                         </div>
 
                                     </td>
+
                                     <td><?php  echo $user->id ?></td>
                                     <td><?php  echo $user->username ?></td>
                                     <td><?php  echo $user->first_name ?></td>
