@@ -18,12 +18,22 @@
                     $user->last_name = $_POST["last_name"];
                     $user->password = $_POST["user_password"];
 
+                    if(empty($_FILES["user_image"])) {
+                        $user->save();
+                        redirect("edit_users.php?id={$_GET["id"]}");
+                    } else {
+                        $user->set_file($_FILES["user_image"]);
+                        $user->save_user_and_image();
+                        $user->save();
+                        $message = "User has been updated.";
+                        redirect("edit_users.php?id={$user->id}");
+                    }
 
 
 
-                    $user->set_file($_FILES["user_image"]);
-                    $user->save_user_and_image();
-                    $message = "User has been updated.";
+
+
+
 
 
                 }
@@ -85,7 +95,9 @@
                             </div>
                             <div class="form-group">
 
-                                <input type="submit" name="update" class="btn btn-primary" value="Update">
+                                <input type="submit" name="update" class="btn btn-primary pull-left" value="Update">
+                                <a class="btn btn-primary pull-right alert-danger" href="delete_user.php?id=<?php echo $user->id?>">Delete</a>
+
                             </div>
 
                             <?php echo $message;?>

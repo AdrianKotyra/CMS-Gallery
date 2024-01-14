@@ -27,9 +27,7 @@
 
         }
         public function save_user_and_image() {
-            if($this->id) {
-                $this->update();
-            } else {
+
                 if(!empty($this->errors)) {
                     return false;
                 }
@@ -44,15 +42,13 @@
                 }
 
                 if(move_uploaded_file($this->tmp_path, $target_path)) {
-                    if($this->create()) {
-                        unset($this->tmp_path);
-                        return true;
-                    }
+
+                    unset($this->tmp_path);
+                    return true;
+
                 } else {
                     $this->errors[] = "The file directory probably does not have permission";
                     return false;
-                }
-
 
 
 
