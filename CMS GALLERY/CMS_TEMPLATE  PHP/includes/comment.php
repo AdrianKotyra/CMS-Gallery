@@ -27,9 +27,9 @@
 
             global $database;
 
-            $sql = "SELECT * from". self::$db_table;
-            $sql.=" WHERE photo_id=". $database->escape_string($photo_id);
-            $sql.=" ORDER BY photo_id ASC";
+            $sql = "SELECT * from ". self::$db_table;
+            $sql .=" WHERE photo_id = ". $database->escape_string($photo_id);
+            $sql .=" ORDER BY photo_id ASC";
             return self::create_query($sql);
         }
 
